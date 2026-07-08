@@ -1,2 +1,2 @@
 # Smart-Campus-Event-Planner
-SOEN 287 Deliverable 1
+SOEN 287 Project 1
