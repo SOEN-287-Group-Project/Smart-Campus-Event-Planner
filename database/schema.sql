@@ -39,5 +39,15 @@ CREATE TABLE event (
 
 CREATE TABLE registration (
 	registration_id VARCHAR(100) PRIMARY KEY,
-    
+    user_id VARCHAR(100),
+    event_id VARCHAR(100),
+    registration_date DATE,
+    status VARCHAR(100),
+    attended Enum('yes', 'no')
+);
+
+CREATE TABLE category(
+	category_id VARCHAR(100) PRIMARY KEY,
+    catergory_name VARCHAR(100),
+    description VARCHAR(100)
 );
