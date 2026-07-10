@@ -22,30 +22,22 @@ CREATE TABLE event (
     end_time TIME,
     location varchar(100),
     capacity INT,
-    status 
-		Enum(
+    status Enum(
 			'Academic workshops',
 			'Career events',
             'Club activities',
-        ),
+            'Sports events',
+            'Cultural events',
+            'Volunteering events',
+            'Social events',
+            'Guest lectures',
+            'Networking events',
+            'Other'),
     organizer_id varchar(100),
-                
-            
-            
-            Sports events
-            Cultural events
-            Volunteering events
-            Social events
-            Guest lectures
-            Networking events
-            Other
     created_on DATE
 );
 
-# Unique user ID
-# User full name
-# User email
-# Hashed password
-# student or admin
-# Account creation date
-# user_id full_name email password_hash role created_at 
+CREATE TABLE registration (
+	registration_id VARCHAR(100) PRIMARY KEY,
+    
+);
