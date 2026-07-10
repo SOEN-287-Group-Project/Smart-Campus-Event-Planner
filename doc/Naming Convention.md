@@ -2,7 +2,7 @@ Naming Convention for HTML Files.
 HTLM and CSS Classes or ID should ALWAYS use kebab-case formatting (some-class).
 JS classes or ID should ALWAYS start with js- (js-some-class)
 
-<img width="503" height="242" alt="Image" src="https://github.com/user-attachments/assets/6c13591e-1683-462f-a62b-756f5424c4fa" />
+<img width="1033" height="637" alt="Image" src="https://github.com/user-attachments/assets/6c13591e-1683-462f-a62b-756f5424c4fa" />
 
 
 Naming Convention for JS Files
