@@ -1,0 +1,16 @@
+/*
+ * This is the main CSS file for the Smart Campus Event Planner application.
+ * It imports additional CSS files for specific components and pages.
+ */
+
+/* Importing the CSS for Global Styles */
+@import "./global_styles.css";
+
+/* Importing the CSS for the header component */
+
+/* Importing the CSS for the footer component */
+
+
+
+/* Importing the CSS for the My Registrations page */ 
+@import "./my-registrations/my-registrations.css";
