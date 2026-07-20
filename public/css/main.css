@@ -14,3 +14,7 @@
 
 /* Importing the CSS for the My Registrations page */ 
 @import "./my-registrations/my-registrations.css";
+
+
+/**/
+@import "./Admin/styles2.css"

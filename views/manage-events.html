@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../public/css/main.css" />
+</head>
+
+<body>
+
+    <header><!--navigation bar-->
+        <div class="topbar">
+            <h1 >Admin Dashboard</h1>
+            <nav class = "nav-links">
+                <a href="Admin-dashboard.html" target="_self">Overview</a>
+                <a class="active" href="manage-events.html"  target="_self">Manage Events</a>
+                <a href="create-event.html" target="_self">Create Event</a>
+                <a href="analytics.html" target="_self">Analytics</a>
+            </nav>
+        </div>
+    </header>
+
+<h2 style="text-align: center;">Active Events</h2>
+<form>
+    <input type="Search" class="search-form" placeholder="Search events" />
+</form> 
+
+
+
+<div class="panel scroll-container">
+    <table class="event-table">
+        <thead>
+            <tr>
+                <th>Event Name</th>
+                <th>Date & Time</th>
+                <th>Category</th>
+                <th>Registrations</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Spring Tech Summit</td>
+                <td>Mar 15, 2026<br>10:00 AM</td>
+                <td>Workshop</td>
+                <td>185</td>
+                <td><button class="edit">Edit</button></td>
+            </tr>
+
+            <tr>
+                <td>Campus Networking Night</td>
+                <td>Apr 2, 2026<br>6:00 PM</td>
+                <td>Career</td>
+                <td>92</td>
+                <td><button class="edit">Edit</button></td>
+            </tr>
+
+            <tr>
+                <td>Volunteer Fair</td>
+                <td>Apr 10, 2026<br>9:00 AM</td>
+                <td>Social</td>
+                <td>143</td>
+                <td><button class="edit">Edit</button></td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+
+    
+
+</body>

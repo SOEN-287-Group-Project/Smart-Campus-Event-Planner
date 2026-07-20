@@ -1,37 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Create Event</title>
-    </head>
-    <body>
-        <h1>Create Event</h1>
-        <form>
-            <h3>New Event</h3>
-            <div> <label>Title</label>          <input type = "text"> </div>
-            <div> <label>Description</label>    <input type = "text"> </div>
-            <div> 
-                <label>Category</label>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../public/css/main.css" />
+</head>
+
+<body>
+
+    <header> <!--navigation bar-->
+            <div class="topbar">
+            <h1>Admin Dashboard</h1>
+            <nav class = "nav-links">
+                <a href="Admin-dashboard.html" target="_self">Overview</a>
+                <a href="manage-events.html"  target="_self">Manage Events</a>
+                <a class="active" href="create-event.html" target="_self">Create Event</a>
+                <a href="analytics.html" target="_self">Analytics</a>
+            </nav>
+        </div>
+    </header>
+
+    <div >
+
+        
+
+
+        <form class ="panel">
+            <label>
+                Event Name
+                <input type="text" placeholder="Enter event name" /><br>
+            </label>
+            
+            <label>
+                Description
+                <input type="text" placeholder="Event description" /><br>
+            </label>
+
+            <label>
+                Location
+                <input type="text" placeholder="Event location" /><br>
+            </label>
+
+            <label>
+                Organizer
+                <input type="text" placeholder="Organizer" /><br>
+            </label>
+
+            <label>
+                Capacity
+                <input type="number" min="1" placeholder="Enter event capacity" /><br>
+            </label>
+
+            <label>
+                Start Date
+                <input type="datetime-local" /><br>
+            </label>
+
+            <label>
+                End Date
+                <input type="datetime-local" /><br>
+            </label>
+
+            <label>
+                Category
                 <select>
-                    <option>Select category</option>
-                    <option>Academic Workshops</option>
-                    <option>Career Events</option>
-                    <option>Club activities</option>
-                    <option>Sports events</option>
-                    <option>Cultural events</option>
-                    <option>Volunteering events</option>
-                    <option>Social events</option>
-                    <option>Guest lectures</option>
-                    <option>Networking events</option>
-                    <option>Other</option>
+                    <option>All Events</option>
+                    <option>Academic</option>
+                    <option>Social</option>
+                    <option>Sports</option>
+                    <option>Cultural</option>
+                    <option>Career</option>
+                    <option>Workshop</option>
+                </select><br>
+            </label>
+
+            <label>
+                Status
+                <select>
+                    <option>Open</option>
+                    <option>Closed</option>
                 </select>
-            </div>
-            <div> <label>Date</label>           <input type = "date"> </div>
-            <div> <label>Start Time</label>     <input type = "time"> </div>
-            <div> <label>End Time</label>       <input type = "time"> </div>
-            <div> <label>Location</label>       <input type = ""> </div>
-            <div> <label>Capacity</label>       <input type = "text"> </div>
-            <div> <label>Organizer</label>      <input type = "text"> </div>
-            <div> <label>Status</label>         <input type = "text"> </div>
+            </label>
+            
+            <button type="submit" class="submit">Create Event</button>
         </form>
-    </body>
-</html>
+
+
+    </div>
+</body>
