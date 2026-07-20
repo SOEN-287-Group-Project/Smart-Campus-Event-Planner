@@ -24,13 +24,13 @@ header {
     color: white;
     border-radius: 0.875rem;
 }
-
+/*navigation*/
 .nav-links a {
     color: white;
     text-decoration: none;
     padding: 0.5rem 0.75rem;
     border-radius: 0.875rem;
-    transition: transform 0.2s ease, background 0.2s ease;
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .nav-links a:hover,
@@ -52,14 +52,43 @@ header {
     border-radius: 0.875rem;
 }
 
+.panel,
+.stat-card,
+.topbar {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/*main panels*/
 .panel {
     background: white;
     border-radius: 0.875rem;
     padding: 1.25rem;
-    box-shadow: 0 0.5rem 1.875remrgba(15, 23, 42, 0.08);
+    box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
 
 }
 
+/*charts*/
+.chart-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.chart-card {
+    position: relative;
+    height: 600px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    background: #fff;
+}
+
+.chart-card canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/*overview*/
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
@@ -90,12 +119,13 @@ header {
     font-weight: 600;
 }
 
+/*create event*/
 form.panel {
     display: grid;
     max-width: 700px;
     margin: auto;
     gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
 }
 
 .search-form {
@@ -115,6 +145,13 @@ select {
     box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
 }
 
+.submit {
+    padding: .9rem 1.2rem;
+    font-size: 1.2rem;
+    grid-column: 1 / -1;
+}
+
+/*all buttons*/
 button {
     border: none;
     border-radius: .875rem;
@@ -130,13 +167,8 @@ button:hover {
     box-shadow: 0 8px 18px rgba(37, 99, 235, 0.35);
 }
 
-.submit {
-    padding: .9rem 1.2rem;
-    font-size: 1.2rem;
-    grid-column: 1 / -1;
-}
-
-.edit {
+/*Manage events*/
+.edit {/*button*/
     padding: .6rem 1rem;
 }
 
@@ -173,10 +205,4 @@ button:hover {
   overflow-y: auto;    
   border: 1px solid #ccc;
   padding: 0;
-}
-
-.panel,
-.stat-card,
-.topbar {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
