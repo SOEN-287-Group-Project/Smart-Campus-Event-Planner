@@ -13,7 +13,7 @@ input.search-bar {
     padding: 20px 20px;
     border-radius: 20px;
 }
-
+/*Gives placeholder text transparency*/
 input.search-bar::placeholder {
     color: rgba(255, 255, 255, 0.501);
 }
@@ -31,16 +31,55 @@ button.filter-buttons{
     padding: 0.5rem 0;
     
 }
-
+/* Created a grid to make it easier to align 3 cards per row */
 .event-card-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 3rem;
-    margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* This creates 3 equal-width columns */
+  row-gap: 25px;
+  grid-auto-rows: 18em;
+  column-gap: 30px;
 }
 
+
 .event-card {
-    flex: 1 1 30%;
-    flex-direction: column;
-    outline: red solid 1px;
+    border-radius: 20px;
+    padding: 0.5rem 1rem 1rem;
+}
+
+.event-card-header {
+    background-color: rgb(185, 180, 180);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0.5rem 1rem;
+    height: 60%;
+    border-radius: 20px;
+
+}
+
+.event-card-category{
+    background-color: #928d94c1;
+    border-radius: 20px;
+    padding: 0.4rem 0.7rem;
+    
+}
+
+.event-card-status{
+    background-color: #08870df2;
+    border-radius: 20px;
+    padding: 0.4rem 0.7rem;
+}
+
+.event-card-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40%;
+}
+
+button.card-button {
+    background-color: blue;
+    height: 30%;
+    width: 50%;
+    padding: 0.4rem 0.7rem;
 }
