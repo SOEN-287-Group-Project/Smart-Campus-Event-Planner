@@ -1,0 +1,115 @@
+
+/* Makes all buttons scale and change background color when hovered*/
+button {
+    transition: scale 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+}
+
+/* Didn't add specific background color since its specific to idle color*/
+button:hover{
+    scale: 120%;
+}
+
+.search-bar-container {
+    display : flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin: 0 auto;
+    width: 90%;
+}
+input.search-bar {
+    width: 100%;
+    flex-grow: 1;
+    font-size: 20px;
+    border: none;
+    padding: 20px 20px;
+    border-radius: 20px;
+}
+
+input.search-bar:hover{
+    outline: rgba(19, 171, 247, 0.985);
+
+}
+/*Gives placeholder text transparency*/
+input.search-bar::placeholder {
+    color: rgba(255, 255, 255, 0.501);
+}
+
+.filter-buttons-container {
+    display: flex;
+    margin-top: 0.5rem;
+    gap: 1.5rem;
+}
+
+button.filter-buttons{
+    flex-grow: 1;
+    padding: 0.5rem 0;
+    box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
+}
+
+button.filter-buttons:hover{
+    background-color: #2563eb
+     
+}
+
+/* Created a grid to make it easier to align 3 cards per row */
+.event-card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* This creates 3 equal-width columns */
+  row-gap: 25px;
+  grid-auto-rows: 18em;
+  column-gap: 30px;
+}
+
+
+.event-card {
+    border-radius: 20px;
+    padding: 0.5rem 1rem 0.1rem;
+}
+
+.event-card-header {
+    background-color: rgb(185, 180, 180);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0.5rem 1rem;
+    height: 60%;
+    border-radius: 20px;
+
+}
+
+.event-card-category{
+    background-color: #928d94c1;
+    font-weight: bolder;
+    font-size: large;
+    border-radius: 20px;
+    padding: 0.4rem 0.7rem;
+    
+}
+
+.event-card-status{
+    background-color: #18d81ef2;
+    font-weight: bolder;
+    font-size: large;
+    border-radius: 20px;
+    padding: 0.4rem 0.7rem;
+}
+
+.event-card-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40%;
+}
+
+.register-button {
+    background-color: blue;
+    height: 30%;
+    width: 50%;
+    padding: 0.4rem 0.7rem;
+    margin-top: 1.5rem;
+}
