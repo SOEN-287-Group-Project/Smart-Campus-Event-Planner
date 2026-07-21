@@ -1,6 +1,6 @@
 
 
-const ctx = document.getElementById('myChart');
+const ctx = document.getElementById('bar-chart');
 
 new Chart(ctx, {
     type: 'bar',
@@ -9,7 +9,14 @@ new Chart(ctx, {
     datasets: [{
         label: '# of Registrations',
         data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1
+        borderWidth: 1,
+        backgroundColor: 'rgba(54, 162, 235, 0.4)',
+    },
+    {
+        label: '# of vacancies',
+        data: [5, 10, 15, 20, 25, 30],
+        borderWidth: 1,
+        backgroundColor: 'rgba(137, 211, 19, 0.4)',
     }]
     },
     options: {
@@ -25,7 +32,7 @@ new Chart(ctx, {
 
 
 
-const ctx2 = document.getElementById('myChart2');
+const ctx2 = document.getElementById('doughnut-chart');
 
 const dataValues = [30, 25, 20, 25, 15, 10];
 const total = dataValues.reduce((sum, value) => sum + value, 0);

@@ -20,7 +20,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 1.5rem;
-    background: #0f172a;
+    background: linear-gradient(to right, #0f172a , #112962,#0f172a);
     color: white;
     border-radius: 0.875rem;
 }
@@ -30,7 +30,7 @@ header {
     text-decoration: none;
     padding: 0.5rem 0.75rem;
     border-radius: 0.875rem;
-    transition: transform 0.2s ease, background-color 0.2s ease;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .nav-links a:hover,
@@ -55,7 +55,7 @@ header {
 .panel,
 .stat-card,
 .topbar {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 /*main panels*/
@@ -77,7 +77,7 @@ header {
 .chart-card {
     position: relative;
     height: 600px;
-    border: 1px solid #ddd;
+    border: 3px solid #ccc;
     border-radius: 10px;
     padding: 10px;
     background: #fff;
@@ -104,12 +104,12 @@ header {
 .topbar,
 .panel,
 .stat-card {
-    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
 }
 
 .stat-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.15);
+    box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
 }
 
 .panel label {
@@ -128,47 +128,62 @@ form.panel {
     grid-template-columns: repeat(3, minmax(220px, 1fr));
 }
 
-.search-form {
+.search-event-admin {
     display: block;
+    border: 3px solid #ccc;
+    border-radius: 0.875rem;
+    padding: 0.5rem 1rem;
     width: 100%;
     max-width: 500px;
     margin: 0 auto 1.5rem;
 }
 
-input,
+.event-creation-input,
 select {
     width: 100%;
     padding: .6rem;
-    border: 1px solid #ccc;
+    border: 3px solid #ccc;
     border-radius: .875rem;
     box-sizing: border-box;
-    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
 }
 
-.submit {
+.submit-event-button {
     padding: .9rem 1.2rem;
     font-size: 1.2rem;
     grid-column: 1 / -1;
 }
 
 /*all buttons*/
-button {
+button.edit-event,
+button.submit-event-button {
     border: none;
     border-radius: .875rem;
-    background: #2563eb;
+    background-image: radial-gradient(#87a6e9 5%, #5485f0 15%, #2563eb 60%);
     color: white;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
-    transition: transform .2s ease box-shadow 0.2s ease;;
+    box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-button:hover {
+button.event-category-dropdown:hover,
+button.submit-event-button:hover,
+button.edit-event:hover {
     transform: scale(1.05);
-    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.35);
+    box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
+}
+
+.event-category-dropdown {
+    padding: .6rem;
+    border: 3px solid #ccc;
+    border-radius: .875rem;
+    box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
+    background-color: white;
+    cursor: pointer;
 }
 
 /*Manage events*/
-.edit {/*button*/
+.edit-event {/*button*/
     padding: .6rem 1rem;
 }
 
@@ -203,6 +218,6 @@ button:hover {
 .scroll-container {
   height: 39rem;
   overflow-y: auto;    
-  border: 1px solid #ccc;
+  border: 3px solid #ccc;
   padding: 0;
 }

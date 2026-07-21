@@ -24,42 +24,32 @@
         <form class ="panel">
             <label>
                 Event Name
-                <input type="text" placeholder="Enter event name" /><br>
+                <input class = "event-creation-input" type="text" placeholder="Enter event name" /><br>
             </label>
             
             <label>
                 Description
-                <input type="text" placeholder="Event description" /><br>
+                <input class = "event-creation-input" type="text" placeholder="Event description" /><br>
             </label>
 
             <label>
                 Location
-                <input type="text" placeholder="Event location" /><br>
+                <input class = "event-creation-input" type="text" placeholder="Event location" /><br>
             </label>
 
             <label>
                 Organizer
-                <input type="text" placeholder="Organizer" /><br>
+                <input class = "event-creation-input" type="text" placeholder="Organizer" /><br>
             </label>
 
             <label>
                 Capacity
-                <input type="number" min="1" placeholder="Enter event capacity" /><br>
-            </label>
-
-            <label>
-                Start Date
-                <input type="datetime-local" /><br>
-            </label>
-
-            <label>
-                End Date
-                <input type="datetime-local" /><br>
+                <input class = "event-creation-input" type="number" min="1" placeholder="Enter event capacity" /><br>
             </label>
 
             <label>
                 Category
-                <select>
+                <select class = "event-category-dropdown">
                     <option>All Events</option>
                     <option>Academic</option>
                     <option>Social</option>
@@ -71,6 +61,16 @@
             </label>
 
             <label>
+                Start Date
+                <input class = "event-creation-input" type="datetime-local" /><br>
+            </label>
+
+            <label>
+                End Date
+                <input class = "event-creation-input"    type="datetime-local" /><br>
+            </label>
+
+            <label>
                 Status
                 <select>
                     <option>Open</option>
@@ -78,7 +78,7 @@
                 </select>
             </label>
             
-            <button type="submit" class="submit">Create Event</button>
+            <button type="submit" class="submit-event-button">Create Event</button>
         </form>
 
 </body>
