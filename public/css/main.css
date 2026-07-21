@@ -11,12 +11,16 @@
 /* Importing the CSS for the footer component */
 
 
-
 /* Importing the CSS for the My Registrations page */ 
 @import "./my-registrations/my-registrations.css";
 
+/* Importing the CSS for the profile */
+@import url("./profile/profile.css");
 
+/* Importing the CSS for the event details */
+@import url("./events-details/events-details.css");
 /**/
+@import "./Admin/styles2.css"
 @import "./Admin/styles2.css";
 
 
