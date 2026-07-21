@@ -2,52 +2,48 @@ DROP DATABASE IF EXISTS SMART_CAMPUS_EVENT_PLANNER;
 CREATE DATABASE SMART_CAMPUS_EVENT_PLANNER;
 USE SMART_CAMPUS_EVENT_PLANNER;
 
-CREATE TABLE user (
-	user_id varchar(100) PRIMARY KEY,
-    first_name varchar(100),
-    last_name varchar(100),
-    email varchar(100),
-    password varchar(100),
+CREATE TABLE users (
+    user_id VARCHAR(100) PRIMARY KEY,
+    full_name VARCHAR(150) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
     role ENUM('student', 'admin') NOT NULL DEFAULT 'student',
-    creation_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE event (
-	event_id varchar(100) PRIMARY KEY,
-    title varchar(100),
-    description varchar(100),
-    category varchar(100),
-    event_date DATE,
-    start_time TIME,
-    end_time TIME,
-    location varchar(100),
-    capacity INT,
-    status Enum(
-			'Academic workshops',
-			'Career events',
-            'Club activities',
-            'Sports events',
-            'Cultural events',
-            'Volunteering events',
-            'Social events',
-            'Guest lectures',
-            'Networking events',
-            'Other'),
-    organizer_id varchar(100),
-    created_on DATE
+CREATE TABLE categories (
+    category_id VARCHAR(100) PRIMARY KEY,
+    category_name VARCHAR(100) NOT NULL UNIQUE,
+    description VARCHAR(255)
 );
 
-CREATE TABLE registration (
-	registration_id VARCHAR(100) PRIMARY KEY,
-    user_id VARCHAR(100),
-    event_id VARCHAR(100),
-    registration_date DATE,
-    status VARCHAR(100),
-    attended Enum('yes', 'no')
+CREATE TABLE events (
+    event_id VARCHAR(100) PRIMARY KEY,
+    title VARCHAR(150) NOT NULL,
+    description TEXT,
+    category_id VARCHAR(100) NOT NULL,
+    event_date DATE NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    location VARCHAR(150) NOT NULL,
+    capacity INT NOT NULL,
+    status ENUM('open', 'full', 'cancelled', 'completed', 'disabled') NOT NULL DEFAULT 'open',
+    organizer_id VARCHAR(100) NOT NULL,
+    created_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CHECK (capacity > 0),
+    CHECK (end_time > start_time),
+    FOREIGN KEY (category_id) REFERENCES categories(category_id),
+    FOREIGN KEY (organizer_id) REFERENCES users(user_id)
 );
 
-CREATE TABLE category(
-	category_id VARCHAR(100) PRIMARY KEY,
-    catergory_name VARCHAR(100),
-    description VARCHAR(100)
+CREATE TABLE registrations (
+    registration_id VARCHAR(100) PRIMARY KEY,
+    user_id VARCHAR(100) NOT NULL,
+    event_id VARCHAR(100) NOT NULL,
+    registration_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('registered', 'cancelled', 'attended', 'missed') NOT NULL DEFAULT 'registered',
+    attended ENUM('yes', 'no') NOT NULL DEFAULT 'no',
+    UNIQUE (user_id, event_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (event_id) REFERENCES events(event_id)
 );
