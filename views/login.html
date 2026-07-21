@@ -1,13 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Login</title>
+        <title>Sign In</title>
+        <link rel="stylesheet" href="../public/css/Public Pages/public_pages.css">
     </head>
-    <body>
-        <form>
-            <h3>Login</h3>
-            <label>User ID</label>          <input type="text" placeholder="Enter your user ID"> </div>
-            <div> <label>Password</label>   <input type="text" placeholder="Enter your password"> </div>
+    <body class="home-page">
+        <main class="home-card">  
+
+        <header>
+            <h2>Sign In</h2>
+            <em>Welcome back!</em>
+        </header>
+
+        <form class="home-actions">
+            <div class="form-field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" autocomplete="username">
+            </div>
+            <div class="form-field">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password">
+            </div>    
+            <button class="login-or-create-account-buttons" type="submit">Sign In</button>
         </form>
+
+        <p> <a href="index.html" class="back-to-home-link">Back to home</a></p>
+
+        <p>Don't have an account? <a href="register.html">Create an account</a></p>
+
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2026 Smart Campus Event Planner</p>
+            <a href="Contact.html">Contact Us</a>
+            <br>
+            <a href="About.html">About Us</a>
+        </footer>
+
     </body>
 </html>
