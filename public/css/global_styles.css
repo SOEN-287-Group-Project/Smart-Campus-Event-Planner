@@ -55,7 +55,7 @@ header {
 
 .topbar {
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     padding: 1rem 1.5rem;
     background: linear-gradient(to right, #0f172a , #214eb6,#0f172a);
@@ -102,11 +102,13 @@ header {
 .menu-button {
     display: flex;
     align-items: center;
-    
     border: none;
     border-radius: 0.875rem;
-    background: #4c4c4c;   
+    background: #7c7c7c;   
     cursor: pointer;
+    width: 2.5rem;
+    height: 2rem;
+    padding: 0;
 }
 
 .dropdown {
@@ -140,12 +142,26 @@ header {
 
 .arrow{
     display: inline-block;
-    padding:6px;
     transition: transform 0.3s ease;
-    border-radius: 50%;
+    width:inherit;
+    height: inherit;
+    text-align: center;
+    line-height: 2rem;
+    border-radius: inherit;
 }
 .arrow.open {
   transform: rotate(180deg);
 }
 
 /**End of header styles, subject to change**/
+
+.panel {                /*Use class="panel" as a container of items in body*/
+    margin-bottom: 1.5rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    background: white;
+    border-radius: 0.875rem;
+    padding: 1.25rem;
+    box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
+
+}

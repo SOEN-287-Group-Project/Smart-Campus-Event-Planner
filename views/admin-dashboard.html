@@ -38,24 +38,82 @@
         </div>
     </header>
 
-    <section id="overview" class="panel">
-        <h1>Overview</h1>
-        <div class="stats-grid">
+    <section class="overview-grid">
+        <div class="panel overview-title">
 
-            <div class="stat-card">
-                <span>Total Events</span>
-                <strong>128</strong>
+            <h1>Overview</h1>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span>Total Events</span>
+                    <strong>128</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>Upcoming Events</span>
+                    <strong>24</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>Registrations</span>
+                    <strong>3,482</strong>
+                </div>
             </div>
 
-            <div class="stat-card">
-                <span>Upcoming Events</span>
-                <strong>24</strong>
+        </div>
+
+        <div class="panel overview-title">
+
+            <h1>Top Events</h1>
+
+            <div class="stats-grid">
+                <table class="stat-card">
+                    <tbody>
+                        <tr>
+                            <td>Spring Tech Summit</td>
+                            <td><strong>185</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Volunteer Fair</td>
+                            <td><strong>143</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Campus Networking Night</td>
+                            <td><strong>92</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <div class="stat-card">
-                <span>Registrations</span>
-                <strong>3,482</strong>
+        </div>
+
+        <div></div>
+
+        <div class = "panel calendar">
+            <div class="cal-header">
+                <button id="prevBtn">
+                    <h2>‹</h2>
+                </button>
+                <div class="monthYear" id="monthYear"></div>
+                <button id="nextBtn">
+                    <h2>›</h2>
+                </button>
             </div>
-        
+            <div class="days">
+                <div class="day">Mon</div>
+                <div class="day">Tue</div>
+                <div class="day">Wed</div>
+                <div class="day">Thu</div>
+                <div class="day">Fri</div>
+                <div class="day">Sat</div>
+                <div class="day">Sun</div>
+            </div>
+            <div class="dates" id="dates"></div>
+        </div>   
+
+        <script>renderCalendar()</script>
+
+
     </section>
+
 </body>
