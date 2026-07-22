@@ -2,3 +2,143 @@
     background-color:#928d94c1;
     color: white;
 }
+
+/**************Header styles**************/
+
+/*Follow this template for the styles to work*/
+/*
+
+
+<script src="../controllers/adminController.js"></script>   /// link .js
+<header>
+
+    <div class="topbar">
+        <h1>Admin Dashboard</h1>    // change page title
+        <nav class = "nav-links">
+            <a class="active-page" href="Admin-dashboard.html" target="_self">Overview</a>     /// class="active-page" highlights the active page, change to match the page
+            <a href="manage-events.html"  target="_self">Manage Events</a>
+            <a href="create-event.html" target="_self">Create Event</a>
+            <a href="analytics.html" target="_self">Analytics</a>
+            
+            
+            <div class="user-menu">             /// drop down menu
+                <button id="menuButton" class="menu-button">
+                    <span>▼</span>
+                    <script>rotateMenuArrow()</script>                  /// Dropdown menu animation       
+                </button>
+
+                <div id="dropdown" class="dropdown hidden">
+                    <a href="index.html">Logout</a>                    /// Add more menu items as links ( <a>...</a>  ) here if needed -->
+                </div>
+
+            </div>
+
+            <script>toggleDropdown();</script>                          /// Dropdown menu function
+        </nav>
+    </div>
+</header>
+
+*/
+body {
+    background: #f1f5f9;
+    font-family: Verdana, sans-serif;
+    margin: 0;   
+}
+
+header {
+    margin-bottom: 1.5rem;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between ;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(to right, #0f172a , #112962,#0f172a);
+    color: rgb(255, 255, 255);
+    font-family: Verdana, sans-serif;
+    
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.875rem;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active-page {
+    background: #2563eb;
+    transform: scale(1.05);
+}
+
+.nav-links {
+    display: flex;
+    gap: 0.75em;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.875rem;
+}
+
+.user-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-button {
+    display: flex;
+    align-items: center;
+    
+    border: none;
+    border-radius: 0.875rem;
+    background: #4c4c4c;   
+    cursor: pointer;
+}
+
+.dropdown {
+    position:absolute;
+    right: 0;
+    left: auto;
+    width: auto;
+    overflow: hidden;
+    border: black 1px solid;
+    border-radius: 0.835rem;
+}
+
+.dropdown a{
+    display: block;
+    box-sizing: border-box;
+    font-size: 15px;
+    color:black;
+    background: #f1f5f9; 
+    border-radius:0;
+}
+
+.dropdown a:hover{
+    transition:none;
+    transform:none;
+    background-color: #dbeaff;
+}
+
+.hidden {
+    display: none;
+}
+
+.arrow{
+    display: inline-block;
+    padding:6px;
+    transition: transform 0.3s ease;
+    border-radius: 50%;
+}
+.arrow.open {
+  transform: rotate(180deg);
+}
+
+/**End of header styles, subject to change**/

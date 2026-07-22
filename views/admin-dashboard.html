@@ -4,18 +4,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../public/css/main.css" />
+    <script src="../controllers/adminController.js"></script>
 </head>
 
 <body>
-
+    
     <header><!--navigation bar-->
         <div class="topbar">
             <h1>Admin Dashboard</h1>
             <nav class = "nav-links">
-                <a class="active" href="Admin-dashboard.html" target="_self">Overview</a>
+                <a class="active-page" href="Admin-dashboard.html" target="_self">Overview</a>
                 <a href="manage-events.html"  target="_self">Manage Events</a>
                 <a href="create-event.html" target="_self">Create Event</a>
                 <a href="analytics.html" target="_self">Analytics</a>
+                
+                
+                <div class="user-menu">
+
+                    <button id="menuButton" class="menu-button">
+                        <span class="arrow">▲</span>
+                        <script>rotateMenuArrow()</script>
+                    </button>
+                   
+                    <div id="dropdown" class="dropdown hidden">
+                        <a id="menu-items" href="index.html">Logout</a> <!-- Add more menu items here if needed -->
+                    </div>
+
+                </div>
+                <script>toggleDropdown();</script>                
             </nav>
         </div>
     </header>

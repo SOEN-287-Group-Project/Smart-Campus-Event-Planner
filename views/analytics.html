@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../public/css/main.css" />
+    <script src="../controllers/adminController.js"></script>
 </head>
 
 <body>
@@ -15,7 +16,23 @@
                 <a href="Admin-dashboard.html" target="_self">Overview</a>
                 <a href="manage-events.html"  target="_self">Manage Events</a>
                 <a href="create-event.html" target="_self">Create Event</a>
-                <a class="active" href="analytics.html" target="_self">Analytics</a>
+                <a class="active-page" href="analytics.html" target="_self">Analytics</a>
+                
+                
+                <div class="user-menu">
+                    <button id="menuButton" class="menu-button">
+                        <span class="arrow">▲</span>
+                        <script>rotateMenuArrow()</script>
+                    </button>
+
+                    <div id="dropdown" class="dropdown hidden">
+                        <a href="index.html">Logout</a> <!-- Add more menu items here if needed -->
+                    </div>
+                    
+                </div>
+                
+                <script>toggleDropdown();</script>
+                
             </nav>
         </div>
     </header>
@@ -35,6 +52,6 @@
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../controllers/adminController.js"></script>
+    <script>rendercharts();</script>
     
 </body>
