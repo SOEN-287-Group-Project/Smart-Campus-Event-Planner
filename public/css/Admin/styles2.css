@@ -1,50 +1,3 @@
-body {
-    background: #f1f5f9;
-    font-family: Verdana, sans-serif;
-    margin: 0;   
-}
-
-header {
-    margin-bottom: 1.5rem;
-}
-
-.panel {
-    margin-bottom: 1.5rem;
-}
-
-.topbar {
-    display: flex;
-    justify-content: space-between ;
-    align-items: center;
-    padding: 1rem 1.5rem;
-    background: linear-gradient(to right, #0f172a , #112962,#0f172a);
-    color: rgb(255, 255, 255);
-    font-family: Verdana, sans-serif;
-    
-    box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
-}
-
-/*navigation*/
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.875rem;
-    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.nav-links a:hover,
-.nav-links a.active-page {
-    background: #2563eb;
-    transform: scale(1.05);
-}
-
-.nav-links {
-    display: flex;
-    gap: 0.75em;
-    flex-wrap: wrap;
-}
-
 .panel,
 .stat-card {
     transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
@@ -52,6 +5,7 @@ header {
 
 /*main panels*/
 .panel {
+    margin-bottom: 1.5rem;
     background: white;
     border-radius: 0.875rem;
     padding: 1.25rem;
@@ -143,6 +97,7 @@ select {
     padding: .9rem 1.2rem;
     font-size: 1.2rem;
     grid-column: 1 / -1;
+    font-family:'inter';
 }
 
 /*all buttons*/
@@ -215,56 +170,3 @@ button.edit-event:hover {
 
 
 /***********************************/
-.user-menu {
-    position: relative;
-    display: inline-block;
-}
-
-.menu-button {
-    display: flex;
-    align-items: center;
-    
-    border: none;
-    border-radius: 0.875rem;
-    background: #4c4c4c;   
-    cursor: pointer;
-}
-
-.dropdown {
-    position:absolute;
-    right: 0;
-    left: auto;
-    width: auto;
-    overflow: hidden;
-    border: black 1px solid;
-    border-radius: 0.835rem;
-}
-
-.dropdown a{
-    display: block;
-    box-sizing: border-box;
-    font-size: 15px;
-    color:black;
-    background: #f1f5f9; 
-    border-radius:0;
-}
-
-.dropdown a:hover{
-    transition:none;
-    transform:none;
-    background-color: #dbeaff;
-}
-
-.hidden {
-    display: none;
-}
-
-.arrow{
-    display: inline-block;
-    padding:6px;
-    transition: transform 0.3s ease;
-    border-radius: 50%;
-}
-.arrow.open {
-  transform: rotate(180deg);
-}

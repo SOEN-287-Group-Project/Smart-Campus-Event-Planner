@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Inter');
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue');
+
 .bg-grey-theme {
     background-color:#928d94c1;
     color: white;
@@ -13,7 +16,8 @@
 <header>
 
     <div class="topbar">
-        <h1>Admin Dashboard</h1>    // change page title
+        <h1>Smart Event Planner</h1>
+        <h2>Admin Dashboard</h2>    // change page title
         <nav class = "nav-links">
             <a class="active-page" href="Admin-dashboard.html" target="_self">Overview</a>     /// class="active-page" highlights the active page, change to match the page
             <a href="manage-events.html"  target="_self">Manage Events</a>
@@ -28,7 +32,7 @@
                 </button>
 
                 <div id="dropdown" class="dropdown hidden">
-                    <a href="index.html">Logout</a>                    /// Add more menu items as links ( <a>...</a>  ) here if needed -->
+                    <a href="index.html">Logout</a>                    /// Add more menu items as links ( <a>...</a>  ) here if needed
                 </div>
 
             </div>
@@ -40,8 +44,8 @@
 
 */
 body {
-    background: #f1f5f9;
-    font-family: Verdana, sans-serif;
+    background: rgb(241, 245, 249);
+    font-family: 'Inter';
     margin: 0;   
 }
 
@@ -50,14 +54,28 @@ header {
 }
 
 .topbar {
-    display: flex;
-    justify-content: space-between ;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     padding: 1rem 1.5rem;
-    background: linear-gradient(to right, #0f172a , #112962,#0f172a);
+    background: linear-gradient(to right, #0f172a , #214eb6,#0f172a);
     color: rgb(255, 255, 255);
-    font-family: Verdana, sans-serif;
-    
+}
+
+.topbar h1{
+    justify-self: start;
+    font-family: 'Bebas Neue';
+    font-size: 2.3rem;
+}
+
+.topbar h2 {
+    justify-self: center;
+    font-family: 'Bebas Neue';
+    font-size: 2.3rem;
+}
+
+.nav-links {
+    justify-self: end;
 }
 
 .nav-links a {
@@ -74,19 +92,8 @@ header {
     transform: scale(1.05);
 }
 
-.nav-links {
-    display: flex;
-    gap: 0.75em;
-    flex-wrap: wrap;
-}
 
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.875rem;
-}
-
+/*Dropdown menu*/
 .user-menu {
     position: relative;
     display: inline-block;
