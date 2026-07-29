@@ -165,3 +165,17 @@ header {
     box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
 
 }
+
+/* Student dashboard styles */
+.upcoming-events-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .upcoming-events-table td {
+    padding: 0.75rem 1rem;
+  }
+  
+  .upcoming-events-table tbody tr:nth-child(even) td {
+    background-color: lightcyan; /* clearly darker than the card */
+  }
