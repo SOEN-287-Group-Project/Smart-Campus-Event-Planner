@@ -12,32 +12,32 @@
 /*
 
 
-<script src="../controllers/adminController.js"></script>   /// link .js
+<script src="../controllers/adminController.js"></script>   <!-- link .js -->
 <header>
 
     <div class="topbar">
         <h1>Smart Event Planner</h1>
-        <h2>Admin Dashboard</h2>    // change page title
+        <h2>Admin Dashboard</h2>    <!-- change page title -->
         <nav class = "nav-links">
-            <a class="active-page" href="Admin-dashboard.html" target="_self">Overview</a>     /// class="active-page" highlights the active page, change to match the page
+            <a class="active-page" href="Admin-dashboard.html" target="_self">Overview</a>     <!-- class="active-page" highlights the active page, change to match the page -->
             <a href="manage-events.html"  target="_self">Manage Events</a>
             <a href="create-event.html" target="_self">Create Event</a>
             <a href="analytics.html" target="_self">Analytics</a>
             
             
-            <div class="user-menu">             /// drop down menu
+            <div class="user-menu">             <!-- drop down menu -->
                 <button id="menuButton" class="menu-button">
                     <span>▼</span>
-                    <script>rotateMenuArrow()</script>                  /// Dropdown menu animation       
+                    <script>rotateMenuArrow()</script>                  <!-- Dropdown menu animation -->
                 </button>
 
                 <div id="dropdown" class="dropdown hidden">
-                    <a href="index.html">Logout</a>                    /// Add more menu items as links ( <a>...</a>  ) here if needed
+                    <a href="index.html">Logout</a>                    <!-- Add more menu items as links ( <a>...</a>  ) here if needed -->
                 </div>
 
             </div>
 
-            <script>toggleDropdown();</script>                          /// Dropdown menu function
+            <script>toggleDropdown();</script>                          <!-- Dropdown menu function -->
         </nav>
     </div>
 </header>
