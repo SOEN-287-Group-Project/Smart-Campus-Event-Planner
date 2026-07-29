@@ -24,7 +24,7 @@
                 <div class="user-menu">
                     <button id="menuButton" class="menu-button">
                         <span class="arrow">▲</span>
-                        <script>rotateMenuArrow()</script>
+                        <script>rotateMenuArrow()</script> <!--Animation-->
                     </button>
 
                     <div id="dropdown" class="dropdown hidden">
@@ -75,6 +75,9 @@
                     <option>Cultural</option>
                     <option>Career</option>
                     <option>Workshop</option>
+                    <option>Club activities</option>
+                    <option>Volunteering</option>
+                    <option>Networking</option>
                 </select><br>
             </label>
 
@@ -90,13 +93,14 @@
 
             <label>
                 Status
-                <select>
+                <select class = "event-category-dropdown">
                     <option>Open</option>
                     <option>Closed</option>
                 </select>
             </label>
             
             <button type="submit" class="submit-event-button">Create Event</button>
+            <button type="reset" class="reset-event-button">Reset</button>
         </form>
 
 </body>
