@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="StyleSheet" href="../public/css/global_styles.css">
+        <link rel="Stylesheet" href="../public/css/Page_styles/events.css">
+        <script src="../controllers/adminController.js"></script>
+        <script src="../public/js/events.js" defer></script>
+        <title>My Registrations</title>
+    </head>
+    <body>
+          
+        <header><!--navigation bar-->
+            <div class="topbar">
+                <h1>Smart Event Planner</h1>
+                <h2>Matthew's Dashboard</h2> <!-- TODO: Change to student's name -->
+                <nav class = "nav-links">
+                    <a  href="student-dashboard.html" target="_self">Overview</a>
+                    <a class="active-page" href="events.html"  target="_self">Events</a>
+                    <a href="my-registrations.html" target="_self">My Registrations</a>
+                    <a href="profile.html" target="_self">Profile</a>
+                    
+                    
+                    <div class="user-menu">
+
+                        <button id="menuButton" class="menu-button">
+                            <span class="arrow">▲</span>
+                            <script>rotateMenuArrow()</script>
+                        </button>
+                    
+                        <div id="dropdown" class="dropdown hidden">
+                            <a id="menu-items" href="index.html">Logout</a> <!-- Add more menu items here if needed -->
+                        </div>
+
+                    </div>
+                    <script>toggleDropdown();</script>                
+                </nav>
+            </div>
+        </header>
+
+        <search class="search-bar-container">
+            <form>
+                <div>
+                    <input class="search-bar" type="search" placeholder="Search"></input>
+                </div>
+                <div class="filter-buttons-container">
+                    <button type="button" class="filter-buttons">Available</button>
+                    <button type="button" class="filter-buttons">Registered</button>
+                    <button type="button" class="filter-buttons">Location</button>
+                    <button type="button" class="filter-buttons">Dates</button>
+                    <button type="button" class="filter-buttons">Type</button>
+                </div>
+            </form>
+        </search>
+        <p></p>
+        <section class = "event-card-container">
+            <article class="bg-grey-theme event-card">
+                <header class="event-card-header" style="background-image: url(https://www.concordia.ca/news/stories/2019/08/08/concordia-improves-its-international-standing-in-2-world-rankings/_jcr_content/top-image.img.768.medium.jpg/1565272551020.jpg)">
+                    <span class="event-card-category js-career" >Career</span>
+                    <span class="event-card-status">Full</span>
+                </header>
+                    <footer class="event-card-footer">
+                        <div class="footer-details">
+                        <span class="date-time">Oct 24, 6:00 PM</span>
+                        <span class="location">Downtown Auditorium</span>
+                        <span class="spots">Spots left: 12</span>
+                        </div>
+                        <div class="register-container">
+                        <button type="button" class="register-button">
+                        <!-- Creates an SVG that looks like a "+" for the button-->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                         <!-- 1. Vertical Line -->
+                         <line x1="12" y1="4" x2="12" y2="20"></line>
+  
+                        <!-- 2. Horizontal Line -->
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        </button>
+                    </div>
+                    </footer>
+            </article>
+             <article class="bg-grey-theme event-card">
+                <header class="event-card-header" style="background-image: url(https://www.concordia.ca/news/stories/2019/08/08/concordia-improves-its-international-standing-in-2-world-rankings/_jcr_content/top-image.img.768.medium.jpg/1565272551020.jpg)">
+                    <span class="event-card-category js-career" >Career</span>
+                    <span class="event-card-status">Full</span>
+                </header>
+                    <footer class="event-card-footer">
+                        <div class="footer-details">
+                        <span class="date-time">Oct 24, 6:00 PM</span>
+                        <span class="location">Downtown Auditorium</span>
+                        <span class="spots">Spots left: 12</span>
+                        </div>
+                        <div class="register-container">
+                        <button type="button" class="register-button">
+                        <!-- Creates an SVG that looks like a "+" for the button-->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                         <!-- 1. Vertical Line -->
+                         <line x1="12" y1="4" x2="12" y2="20"></line>
+  
+                        <!-- 2. Horizontal Line -->
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        </button>
+                    </div>
+                    </footer>
+            </article> <article class="bg-grey-theme event-card">
+                <header class="event-card-header" style="background-image: url(https://www.concordia.ca/news/stories/2019/08/08/concordia-improves-its-international-standing-in-2-world-rankings/_jcr_content/top-image.img.768.medium.jpg/1565272551020.jpg)">
+                    <span class="event-card-category js-career" >Career</span>
+                    <span class="event-card-status">Full</span>
+                </header>
+                    <footer class="event-card-footer">
+                        <div class="footer-details">
+                        <span class="date-time">Oct 24, 6:00 PM</span>
+                        <span class="location">Downtown Auditorium</span>
+                        <span class="spots">Spots left: 12</span>
+                        </div>
+                        <div class="register-container">
+                        <button type="button" class="register-button">
+                        <!-- Creates an SVG that looks like a "+" for the button-->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                         <!-- 1. Vertical Line -->
+                         <line x1="12" y1="4" x2="12" y2="20"></line>
+  
+                        <!-- 2. Horizontal Line -->
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        </button>
+                    </div>
+                    </footer>
+            </article> <article class="bg-grey-theme event-card">
+                <header class="event-card-header" style="background-image: url(https://www.concordia.ca/news/stories/2019/08/08/concordia-improves-its-international-standing-in-2-world-rankings/_jcr_content/top-image.img.768.medium.jpg/1565272551020.jpg)">
+                    <span class="event-card-category js-career" >Career</span>
+                    <span class="event-card-status">Full</span>
+                </header>
+                    <footer class="event-card-footer">
+                        <div class="footer-details">
+                        <span class="date-time">Oct 24, 6:00 PM</span>
+                        <span class="location">Downtown Auditorium</span>
+                        <span class="spots">Spots left: 12</span>
+                        </div>
+                        <div class="register-container">
+                        <button type="button" class="register-button">
+                        <!-- Creates an SVG that looks like a "+" for the button-->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                         <!-- 1. Vertical Line -->
+                         <line x1="12" y1="4" x2="12" y2="20"></line>
+  
+                        <!-- 2. Horizontal Line -->
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        </button>
+                    </div>
+                    </footer>
+            </article> <article class="bg-grey-theme event-card">
+                <header class="event-card-header" style="background-image: url(https://www.concordia.ca/news/stories/2019/08/08/concordia-improves-its-international-standing-in-2-world-rankings/_jcr_content/top-image.img.768.medium.jpg/1565272551020.jpg)">
+                    <span class="event-card-category js-career" >Career</span>
+                    <span class="event-card-status">Full</span>
+                </header>
+                    <footer class="event-card-footer">
+                        <div class="footer-details">
+                        <span class="date-time">Oct 24, 6:00 PM</span>
+                        <span class="location">Downtown Auditorium</span>
+                        <span class="spots">Spots left: 12</span>
+                        </div>
+                        <div class="register-container">
+                        <button type="button" class="register-button">
+                        <!-- Creates an SVG that looks like a "+" for the button-->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                         <!-- 1. Vertical Line -->
+                         <line x1="12" y1="4" x2="12" y2="20"></line>
+  
+                        <!-- 2. Horizontal Line -->
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        </button>
+                    </div>
+                    </footer>
+            </article>
+            
+        </section>
+    </body>
+</html>
