@@ -160,3 +160,119 @@ function renderCalendar(){
 
     updateCalendar();
 }
+
+/************************MODAL popup********************************* */ 
+function renderEvents(){
+    const events = [
+    {
+        id: 1,
+        name: "Spring Tech Summit",
+        start: "2026-03-15T10:00",
+        end: "2026-03-15T12:00",
+        category: "Workshop",
+        capacity: 185
+    },
+    {
+        id: 2,
+        name: "Campus Networking Night",
+        start: "2026-04-02T18:00",
+        end: "2026-04-02T20:00",
+        category: "Career",
+        capacity: 92
+    },
+    {
+        id: 3,
+        name: "Volunteer Fair",
+        start: "2026-04-10T21:00",
+        end: "2026-04-10T23:00",
+        category: "Social",
+        capacity: 143
+    }
+    ];
+
+    const tbody = document.getElementById("eventTableBody");
+    const modal = document.getElementById("editModal");
+
+    const editName = document.getElementById("editName");
+    const editStart = document.getElementById("editStart");
+    const editEnd = document.getElementById("editEnd");
+    const editCategory = document.getElementById("editCategory");
+    const editCapacity = document.getElementById("editCapacity")
+
+    const saveBtn = document.getElementById("saveBtn");
+    const cancelBtn = document.getElementById("cancelBtn");
+
+    let currentEvent = null;
+
+    function renderTable() {
+        tbody.innerHTML = "";
+
+        events.forEach((event) => {
+            tbody.innerHTML += `
+                <tr>
+                    <td>${event.name}</td>
+                    <td>${event.start.replace("T", "<br>")}</td>
+                    <td>${event.end.replace("T", "<br>")}</td>
+                    <td>${event.category}</td>
+                    <td>${event.capacity}</td>
+                    <td>
+                        <button class="edit-event" data-id="${event.id}">
+                            Edit
+                        </button>
+
+                    </td>
+                </tr>
+            `;
+        });
+    }
+
+    renderTable();
+
+    tbody.addEventListener("click", (e) => {
+        if (!e.target.classList.contains("edit-event")) return;
+
+        const id = Number(e.target.dataset.id);
+        currentEvent = events.find((event) => event.id === id);
+
+        editName.value = currentEvent.name;
+        editStart.value = currentEvent.start;
+        editEnd.value = currentEvent.end;
+        editCategory.value = currentEvent.category;
+        editCapacity.value = currentEvent.capacity;
+
+        modal.style.display = "flex";
+    });
+
+    saveBtn.addEventListener("click", () => {
+        currentEvent.name = editName.value;
+        currentEvent.start = editStart.value;
+        currentEvent.end = editEnd.value;
+        currentEvent.category = editCategory.value;
+        currentEvent.capacity = editCapacity.value;
+
+        renderTable();
+        modal.style.display = "none";
+    });
+
+    cancelBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+
+}
+
+
+
+
+
+
+
+
+
+
+
