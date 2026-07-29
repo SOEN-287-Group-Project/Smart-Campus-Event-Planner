@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css?family=Bebas+Neue');
 
 .bg-grey-theme {
-    background-color:#928d94c1;
-    color: white;
+    background-color:#c7c7c7;
+    color: rgb(0, 0, 0);
 }
 
 /**************Header styles**************/
