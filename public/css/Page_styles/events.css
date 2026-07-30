@@ -10,13 +10,6 @@ button {
     font-weight: bold;
 }
 
-.filter-buttons:hover{
-  scale: 110%;
-}
-
-.filter-buttons:active{
-  background-color: #2563eb;
-}
 
 .search-bar-container {
     display : flex;
@@ -55,6 +48,13 @@ button.filter-buttons{
     box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
 }
 
+.filter-buttons:hover{
+  scale: 110%;
+}
+
+.filter-buttons:active{
+  background-color: #2563eb;
+}
 
 /* Created a grid to make it easier to align cards*/
 .event-card-container {
