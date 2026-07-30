@@ -10,9 +10,12 @@ button {
     font-weight: bold;
 }
 
-/* Didn't add specific background color since its specific to idle color*/
-button:hover{
-    scale: 110%;
+.filter-buttons:hover{
+  scale: 110%;
+}
+
+.filter-buttons:active{
+  background-color: #2563eb;
 }
 
 .search-bar-container {
@@ -64,7 +67,7 @@ button.filter-buttons{
 
 
 .event-card {
-  max-width: 55rem;
+  max-width: 40rem;
   display: grid;
   grid-template-rows: auto auto;
   height: 30rem;
@@ -88,7 +91,7 @@ button.filter-buttons{
 }
 
 .event-card-category{
-    background-color: #928d94f6;
+    background-color: rgb(241, 245, 249); 
     font-weight: bolder;
     font-size: large;
     border-radius: 20px;
@@ -97,13 +100,36 @@ button.filter-buttons{
 }
 
 .event-card-status{
-    background-color: #fa000078;
+    background-color: rgb(241, 245, 249);
     font-weight: bolder;
     font-size: large;
     border-radius: 20px;
     padding: 0.4rem 0.7rem;
 }
+/* Changes color of the status depending on the event_status*/
+.status-dot{
+width: 10px;
+height: 10px;
+border-radius: 50%; 
+display: inline-block;
+background-color:blue;
+}
 
+.status-Open{
+  color:rgba(11, 129, 11, 0.995);
+}
+
+.status-Full{
+ color:rgb(123, 9, 9);
+}
+
+.status-dot-status-Open{
+  background-color:rgba(11, 129, 11, 0.995);
+}
+
+.status-dot-status-Full{
+  background-color:rgb(123, 9, 9);
+}
 
 .event-card-footer {
   display: grid;
@@ -137,6 +163,19 @@ button.filter-buttons{
   align-items: center;
   justify-content: center;
                
+}
+/* Allows animation only on buttons that have event_status = Open */
+.btn-Open:hover{
+    scale: 120%;
+}
+
+.btn-Open:active{
+  background-color: rgb(241, 245, 249);
+}
+/* Changes and shows user that you can't click register button when event_status = Full */
+.btn-Full{
+  background-color: rgba(128, 128, 128, 0.341);
+  cursor:  not-allowed;
 }
 /* Controls the length of the "+" */
 .register-button svg {
