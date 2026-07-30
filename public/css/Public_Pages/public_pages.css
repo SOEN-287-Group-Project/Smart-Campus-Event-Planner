@@ -120,3 +120,9 @@
     max-height: 120px;   
     overflow-y: auto;
   }
+
+  /* Calendar styles */
+  .date.has-event {
+    background-color: #f59e0b; 
+    font-weight: 600;
+  }
