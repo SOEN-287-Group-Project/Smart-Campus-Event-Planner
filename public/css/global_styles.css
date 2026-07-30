@@ -166,7 +166,7 @@ header {
 
 }
 
-/* Student dashboard styles */
+
 .upcoming-events-table {
     width: 100%;
     border-collapse: collapse;
@@ -177,5 +177,9 @@ header {
   }
   
   .upcoming-events-table tbody tr:nth-child(even) td {
-    background-color: lightcyan; /* clearly darker than the card */
+    background-color: lightcyan; 
+  }
+
+  .student-chart-card {
+    height: 400px; 
   }

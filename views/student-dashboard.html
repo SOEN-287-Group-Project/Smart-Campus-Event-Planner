@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="../public/css/main.css" />
         <link rel="stylesheet" href="../public/css/global_styles.css" />
         <script src="../controllers/adminController.js"></script>
+        <script src="../models/studentDashboard.js"></script>
     </head>
 
     <body>
@@ -73,6 +74,7 @@
                 <h1>Your Upcoming Events</h1>
 
                 <div class="stats-card">
+                    <div class="upcoming-events-scroll">
                     <table class="upcoming-events-table">
                         <tbody>
                             <tr>
@@ -91,20 +93,29 @@
                                 <td>Aerospace Engineering Conference</td>
                                 <td><strong>September 10, 2026</strong></td>
                             </tr>
+                            <tr>
+                                <td>Aerospace Engineering Conference</td>
+                                <td><strong>September 10, 2026</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Aerospace Engineering Conference</td>
+                                <td><strong>September 10, 2026</strong></td>
+                            </tr>
                         </tbody>
                     </table>
+                    </div>
                 </div>
 
             </div>
 
             <section class="panel">
-                    <div class="chart-card">
-                        <canvas id="bar-chart"></canvas>
+                    <div class="chart-card student-chart-card">
+                        <canvas id="student-attendance-chart"></canvas>
                     </div>
             </section>
 
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <script>rendercharts();</script>
+            <script>renderStudentAttendanceChart();</script>
 
             <div class = "panel calendar">
                 <div class="cal-header">
