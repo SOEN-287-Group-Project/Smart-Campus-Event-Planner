@@ -1,0 +1,14 @@
+.container-objective{
+  margin: 0 auto;
+  margin-top: 5rem;
+  max-width: 90rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 0.875em;
+  border: 3px solid #cccccc68;
+  background-color:#faf9f971;
+}
+
+h1 {
+    
+    text-align: center;
+}
