@@ -4,7 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="StyleSheet" href="../public/css/global_styles.css">
-        <link rel="Stylesheet" href="../public/css/Page_styles/my-registrations.css">
+        <link rel="Stylesheet" href="../public/css/my-registrations/my-registrations.css">
+        <script type="module" src="../public/js/my-registrations.js" defer></script>
         <script src="../controllers/adminController.js"></script>
         <title>My Registrations</title>
     </head>
@@ -44,7 +45,7 @@
                     <input class="search-bar" type="search" placeholder="Search"></input>
                 </div>
                 <div class="filter-buttons-container">
-                    <button type="button" class="filter-buttons">Available</button>
+                    <button type="button" class="filter-buttons">Organiser</button>
                     <button type="button" class="filter-buttons">Full</button>
                     <button type="button" class="filter-buttons">Location</button>
                     <button type="button" class="filter-buttons">Dates</button>
@@ -54,132 +55,6 @@
         </search>
         <p></p>
         <section class = "event-card-container">
-            <article class="bg-grey-theme event-card">
-                <header class="event-card-header">
-                    <span class="event-card-category">Career</span>
-                    <span class="event-card-status">Full</span>
-                </header>
-                    <footer class="event-card-footer">
-                        <div class="footer-details">
-                        <span class="date-time">Oct 24, 6:00 PM</span>
-                        <span class="location">Downtown Auditorium</span>
-                        <span class="spots">Spots left: 12</span>
-                        </div>
-                        <div class="register-container">
-                        <button type="button" class="register-button">
-                        <!-- Creates an SVG that looks like a "+" for the button-->
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                         <!-- 1. Vertical Line -->
-                         <line x1="12" y1="4" x2="12" y2="20"></line>
-  
-                        <!-- 2. Horizontal Line -->
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
-                        </button>
-                    </div>
-                    </footer>
-            </article>
-            <article class="bg-grey-theme event-card">
-                <header class="event-card-header">
-                    <span class="event-card-category">Sports</span>
-                    <span class="event-card-status">Full</span>
-                </header>
-                    <footer class="event-card-footer">
-                        <div class="footer-details">
-                        <span class="date-time">Oct 24, 6:00 PM</span>
-                        <span class="location">Downtown Auditorium</span>
-                        <span class="spots">Spots left: 12</span>
-                        </div>
-                        <div class="register-container">
-                        <button type="button" class="register-button">
-                        <!-- Creates an SVG that looks like a "+" for the button-->
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                         <!-- 1. Vertical Line -->
-                         <line x1="12" y1="4" x2="12" y2="20"></line>
-  
-                        <!-- 2. Horizontal Line -->
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
-                        </button>
-                    </div>
-                    </footer>
-            </article>
-             <article class="bg-grey-theme event-card">
-                <header class="event-card-header">
-                    <span class="event-card-category">Cultural</span>
-                    <span class="event-card-status">Full</span>
-                </header>
-                    <footer class="event-card-footer">
-                        <div class="footer-details">
-                        <span class="date-time">Oct 24, 6:00 PM</span>
-                        <span class="location">Downtown Auditorium</span>
-                        <span class="spots">Spots left: 12</span>
-                        </div>
-                        <div class="register-container">
-                        <button type="button" class="register-button">
-                        <!-- Creates an SVG that looks like a "+" for the button-->
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                         <!-- 1. Vertical Line -->
-                         <line x1="12" y1="4" x2="12" y2="20"></line>
-  
-                        <!-- 2. Horizontal Line -->
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
-                        </button>
-                    </div>
-                    </footer>
-            </article>
-             <article class="bg-grey-theme event-card">
-                <header class="event-card-header">
-                    <span class="event-card-category">Social</span>
-                    <span class="event-card-status">Full</span>
-                </header>
-                    <footer class="event-card-footer">
-                        <div class="footer-details">
-                        <span class="date-time">Oct 24, 6:00 PM</span>
-                        <span class="location">Downtown Auditorium</span>
-                        <span class="spots">Spots left: 12</span>
-                        </div>
-                        <div class="register-container">
-                        <button type="button" class="register-button">
-                        <!-- Creates an SVG that looks like a "+" for the button-->
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                         <!-- 1. Vertical Line -->
-                         <line x1="12" y1="4" x2="12" y2="20"></line>
-  
-                        <!-- 2. Horizontal Line -->
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
-                        </button>
-                    </div>
-                    </footer>
-            </article>
-             <article class="bg-grey-theme event-card">
-                <header class="event-card-header">
-                    <span class="event-card-category">Networking</span>
-                    <span class="event-card-status">Full</span>
-                </header>
-                    <footer class="event-card-footer">
-                        <div class="footer-details">
-                        <span class="date-time">Oct 24, 6:00 PM</span>
-                        <span class="location">Downtown Auditorium</span>
-                        <span class="spots">Spots left: 12</span>
-                        </div>
-                        <div class="register-container">
-                        <button type="button" class="register-button">
-                        <!-- Creates an SVG that looks like a "+" for the button-->
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                         <!-- 1. Vertical Line -->
-                         <line x1="12" y1="4" x2="12" y2="20"></line>
-  
-                        <!-- 2. Horizontal Line -->
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
-                        </button>
-                    </div>
-                    </footer>
-            </article>
-            
         </section>
     </body>
 </html>
