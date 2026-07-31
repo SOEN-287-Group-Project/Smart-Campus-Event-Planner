@@ -69,13 +69,30 @@ form.panel {
     grid-template-columns: repeat(3, minmax(220px, 1fr));
 }
 
+@media (max-width: 900px) {
+    form.panel {
+        grid-template-columns: 1fr;
+
+    }
+    .panel label {
+        width: 100%;
+    }
+    .submit-event-button,
+    .reset-event-button {
+        grid-column: 1;
+        width: 100%;
+        align-content: center;
+    }
+}
+
+
 .search-event-admin {
     display: block;
     border: 3px solid #ccc;
     border-radius: 0.875rem;
     padding: 0.5rem 1rem;
     width: 100%;
-    max-width: 500px;
+    max-width: 1000px;
     margin: 0 auto 1.5rem;
 }
 
@@ -191,6 +208,7 @@ section.scroll-container {
   padding-right: 0;
   padding-left:0;
 }
+
 
 .overview-grid{
     display: grid;

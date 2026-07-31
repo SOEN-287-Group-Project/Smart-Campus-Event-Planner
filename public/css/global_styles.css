@@ -43,6 +43,7 @@
 </header>
 
 */
+
 body {
     background: rgb(241, 245, 249);
     font-family: 'Inter';
@@ -69,9 +70,26 @@ header {
 }
 
 .topbar h2 {
+    text-align: center;
     justify-self: center;
     font-family: 'Bebas Neue';
     font-size: 2.3rem;
+}
+@media (min-width: 901px) {
+    .dropdown a:not(:first-child) {
+        display: none;
+    }
+}
+@media (max-width:900px){
+
+    .nav-links a{
+        display:none;
+    }
+
+    .user-menu{
+        display:inline-block;
+    }
+
 }
 
 .nav-links {
@@ -119,6 +137,8 @@ header {
     overflow: hidden;
     border: black 1px solid;
     border-radius: 0.835rem;
+            z-index: 1000;
+
 }
 
 .dropdown a{
@@ -128,6 +148,7 @@ header {
     color:black;
     background: #f1f5f9; 
     border-radius:0;
+
 }
 
 .dropdown a:hover{
@@ -148,10 +169,14 @@ header {
     text-align: center;
     line-height: 2rem;
     border-radius: inherit;
+    color:white;
+    font-size: large;
+    font-weight: bold;
 }
 .arrow.open {
   transform: rotate(180deg);
 }
+
 
 /**End of header styles, subject to change**/
 
