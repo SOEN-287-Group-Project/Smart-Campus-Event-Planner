@@ -42,7 +42,7 @@
     border: 1px solid #cccccc;
     border-radius: 6px;
     font-size: 1rem;
-    color: rgb(179, 179, 179);
+    color: black;
 }
 
 .profile-actions {
@@ -58,6 +58,10 @@
     border: none;
     border-radius: 6px;
     cursor: pointer;
+}
+
+.profile-actions button:hover{
+    scale: 120%;
 }
 
 .profile-actions a {
