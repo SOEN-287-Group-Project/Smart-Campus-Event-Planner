@@ -53,6 +53,15 @@ header {
     margin-bottom: 1.5rem;
 }
 
+button {
+    transition: scale 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    background-color: #2563eb;
+    font-size: large;
+    font-weight: bold;
+}
 .topbar {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
