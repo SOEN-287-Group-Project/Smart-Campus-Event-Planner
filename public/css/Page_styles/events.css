@@ -59,7 +59,7 @@ button.filter-buttons{
 /* Created a grid to make it easier to align cards*/
 .event-card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr)); 
   justify-content: center; 
   gap: 2rem 2.5rem;
   padding: 0 1.5rem;
