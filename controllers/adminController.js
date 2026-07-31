@@ -4,16 +4,16 @@ function rendercharts() {
     new Chart(ctx, {
         type: 'bar',
         data: {
-        labels: ['Academic', 'Social', 'Sports', 'Cultural', 'Career', 'Workshops'],
+        labels: ['Academic', 'Social', 'Sports', 'Cultural', 'Career', 'Workshops' , 'Club Activities' , 'Volunteering' , 'Networking'],
         datasets: [{
-            label: '# of Registrations',
-            data: [12, 19, 3, 5, 2, 3],
+            label: '# of Registrations', //number of registrations per category
+            data: [12, 19, 3, 5, 2, 3, 8, 12, 6],
             borderWidth: 1,
             backgroundColor: 'rgba(54, 162, 235, 0.4)',
         },
         {
-            label: '# of vacancies',
-            data: [5, 10, 15, 20, 25, 30],
+            label: '# of vacancies', //number of vacancies per category
+            data: [5, 10, 15, 20, 25, 30, 7, 18, 5],
             borderWidth: 1,
             backgroundColor: 'rgba(137, 211, 19, 0.4)',
         }]
@@ -33,13 +33,13 @@ function rendercharts() {
 
     const ctx2 = document.getElementById('doughnut-chart');
 
-    const dataValues = [30, 25, 20, 25, 15, 10];
+    const dataValues = [30, 25, 20, 25, 15, 10, 12, 30, 2]; //number of events per category
     const total = dataValues.reduce((sum, value) => sum + value, 0);
-
+    
     new Chart(ctx2, {
         type: 'doughnut',
         data: {
-            labels: ['Academic', 'Social', 'Sports', 'Cultural', 'Career', 'Workshops'],
+            labels: ['Academic', 'Social', 'Sports', 'Cultural', 'Career', 'Workshops' , 'Club Activities' , 'Volunteering' , 'Networking'],
             datasets: [{
                 data: dataValues,
                 backgroundColor: [
@@ -48,7 +48,10 @@ function rendercharts() {
                     '#ffce56',
                     '#4bc0c0',
                     '#9966ff',
-                    '#ff40d6'
+                    '#ff40d6',
+                    '#ff3848',
+                    '#6e25ff',
+                    '#ffca39'
                 ],
                 borderColor: '#fff',
                 borderWidth: 2

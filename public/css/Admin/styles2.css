@@ -6,6 +6,20 @@
     transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
     box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
 }
+.top-events-scroll{
+    background: #eff6ff;
+    padding: 1.875em;
+    border-radius: 0.875em;
+    border: 3px solid #ccc;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
+    max-height: 240px;
+    overflow-y: auto;
+}
+table.stat-card{
+    width: 100%;
+    padding: auto;
+}
 
 /*main panels*/
 .panel {
@@ -22,7 +36,7 @@
 /*charts*/
 .chart-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
     gap: 20px;
 }
 
@@ -85,7 +99,6 @@ form.panel {
     }
 }
 
-
 .search-event-admin {
     display: block;
     border: 3px solid #ccc;
@@ -116,7 +129,7 @@ select {
     padding: .9rem 1.2rem;
     font-size: 1.2rem;
     font-family:'inter';
-    background: #e5e7eb;
+    background: #7c7c7c;
     border: none;
     border-radius: .875rem;
     cursor: pointer;
@@ -212,7 +225,7 @@ section.scroll-container {
 
 .overview-grid{
     display: grid;
-    grid-template-columns: 6fr 4fr;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
 
 }
 
