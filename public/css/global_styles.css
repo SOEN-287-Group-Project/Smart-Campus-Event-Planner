@@ -201,19 +201,4 @@ button {
 }
 
 
-.upcoming-events-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .upcoming-events-table td {
-    padding: 0.75rem 1rem;
-  }
-  
-  .upcoming-events-table tbody tr:nth-child(even) td {
-    background-color: lightcyan; 
-  }
 
-  .student-chart-card {
-    height: 400px; 
-  }

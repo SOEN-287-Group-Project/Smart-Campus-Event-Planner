@@ -116,14 +116,3 @@
     text-align: center;
     color: rgba(255, 255, 255, 0.85);
 }
-.upcoming-events-scroll {
-    max-height: 280px;   
-    overflow-y: auto;
-  }
-
-  /* Calendar styles */
-  .date.has-event {
-    background-color: lightblue;
-    border: 1px solid #64748b;
-    font-weight: 600;
-  }
