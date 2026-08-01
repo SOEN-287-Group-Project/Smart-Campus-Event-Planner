@@ -1,64 +1,60 @@
 <!DOCTYPE html>
 <html lang="eng">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="StyleSheet" href="../public/css/global_styles.css">
-        <link rel="Stylesheet" href="../public/css/Page_styles/my-registrations.css">
+        <link rel="Stylesheet" href="../public/css/my-registrations/my-registrations.css">
+        <script type="module" src="../public/js/my-registrations.js" defer></script>
+        <script src="../controllers/adminController.js"></script>
         <title>My Registrations</title>
     </head>
     <body>
-        <h1>My Registrations</h1>
+          
+        <header><!--navigation bar-->
+            <div class="topbar">
+                <h1>Smart Event Planner</h1>
+                <h2>Student Dashboard</h2> <!-- TODO: Change to student's name -->
+                <nav class = "nav-links">
+                    <a  href="student-dashboard.html" target="_self">Overview</a>
+                    <a href="events.html"  target="_self">Events</a>
+                    <a class="active-page" href="my-registrations.html" target="_self">My Registrations</a>
+                    <a href="profile.html" target="_self">Profile</a>
+                    
+                    
+                    <div class="user-menu">
+
+                        <button id="menuButton" class="menu-button">
+                            <span class="arrow">▲</span>
+                            <script>rotateMenuArrow()</script>
+                        </button>
+                    
+                        <div id="dropdown" class="dropdown hidden">
+                            <a id="menu-items" href="index.html">Logout</a> <!-- Add more menu items here if needed -->
+                        </div>
+
+                    </div>
+                    <script>toggleDropdown();</script>                
+                </nav>
+            </div>
+        </header>
+
         <search class="search-bar-container">
             <form>
                 <div>
-                    <input class="search-bar bg-grey-theme" type="search" placeholder="Search"></input>
+                    <input class="search-bar" type="search" placeholder="Search"></input>
                 </div>
                 <div class="filter-buttons-container">
-                    <button type="button" class="bg-grey-theme filter-buttons">Filter1</button>
-                    <button type="button" class="bg-grey-theme filter-buttons">Filter2</button>
-                    <button type="button" class="bg-grey-theme filter-buttons">Filter3</button>
-                    <button type="button" class="bg-grey-theme filter-buttons">Filter4</button>
-                    <button type="button" class="bg-grey-theme filter-buttons">Filter5</button>
+                    <button type="button" class="filter-buttons">Organiser</button>
+                    <button type="button" class="filter-buttons">Full</button>
+                    <button type="button" class="filter-buttons">Location</button>
+                    <button type="button" class="filter-buttons">Dates</button>
+                    <button type="button" class="filter-buttons">Type</button>
                 </div>
             </form>
         </search>
         <p></p>
         <section class = "event-card-container">
-            <article class="bg-grey-theme event-card">
-                <header class="event-card-header">
-                    <span class="event-card-category">Category1</span>
-                    <span class="event-card-status">Status</span>
-                </header>
-                <footer class="event-card-footer">
-                    <button type="button" class="register-button">Register</button>
-                </footer>
-            </article>
-            <article class="bg-grey-theme event-card">
-                <header class="event-card-header">
-                    <span class="event-card-category">Category2</span>
-                    <span class="event-card-status">Status</span>
-                </header>
-                <footer class="event-card-footer">
-                    <button type="button" class="register-button">Register</button>
-                </footer>
-            </article>
-            <article class="bg-grey-theme event-card">
-                <header class="event-card-header">
-                    <span class="event-card-category">Category3</span>
-                    <span class="event-card-status">Status</span>
-                </header>
-                <footer class="event-card-footer">
-                    <button type="button" class="register-button">Register</button>
-                </footer>
-            </article>
-            <article class="bg-grey-theme event-card">
-                <header class="event-card-header">
-                    <span class="event-card-category">Category4</span>
-                    <span class="event-card-status">Status</span>
-                </header>
-                <footer class="event-card-footer">
-                    <button type="button" class="register-button">Register</button>
-                </footer>
-            </article>
         </section>
     </body>
 </html>

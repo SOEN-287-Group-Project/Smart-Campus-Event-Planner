@@ -1,0 +1,12 @@
+{
+  "name": "smart-campus-event-planner",
+  "version": "1.0.0",
+  "type": "module",
+  "imports":{              
+    "#models/*": "./models/*",
+    "#root/*": "./*"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

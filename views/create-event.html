@@ -4,18 +4,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../public/css/main.css" />
+    <link rel="stylesheet" href="../public/css/global_styles.css" />
+    <script src="../controllers/adminController.js"></script>
 </head>
 
 <body>
 
-    <header> <!--navigation bar-->
-            <div class="topbar">
-            <h1>Admin Dashboard</h1>
+    <header><!--navigation bar-->
+        <div class="topbar">
+            <h1>Smart Event Planner</h1>
+            <h2>Admin Dashboard</h2>
             <nav class = "nav-links">
                 <a href="Admin-dashboard.html" target="_self">Overview</a>
                 <a href="manage-events.html"  target="_self">Manage Events</a>
-                <a class="active" href="create-event.html" target="_self">Create Event</a>
+                <a class="active-page" href="create-event.html" target="_self">Create Event</a>
                 <a href="analytics.html" target="_self">Analytics</a>
+                
+                
+                <div class="user-menu">
+                    <button id="menuButton" class="menu-button">
+                        <span class="arrow">▲</span>
+                        <script>rotateMenuArrow()</script> <!--Animation-->
+                    </button>
+
+                    <div id="dropdown" class="dropdown hidden">
+                        <a href="index.html">Logout</a> <!-- Add every link from the <nav> container into here, MAKE SURE IT IS BELOW THE LOGOUT AND NOT ABOVE-->
+                        <a href="Admin-dashboard.html" target="_self">Overview</a>
+                        <a href="manage-events.html" target="_self">Manage Events</a>
+                        <a href="create-event.html" target="_self">Create Event</a>
+                        <a href="analytics.html" target="_self">Analytics</a>
+                    </div>
+                    
+                </div>
+                
+                <script>toggleDropdown();</script>
             </nav>
         </div>
     </header>
@@ -57,6 +79,9 @@
                     <option>Cultural</option>
                     <option>Career</option>
                     <option>Workshop</option>
+                    <option>Club activities</option>
+                    <option>Volunteering</option>
+                    <option>Networking</option>
                 </select><br>
             </label>
 
@@ -72,13 +97,14 @@
 
             <label>
                 Status
-                <select>
+                <select class = "event-category-dropdown">
                     <option>Open</option>
                     <option>Closed</option>
                 </select>
             </label>
             
             <button type="submit" class="submit-event-button">Create Event</button>
+            <button type="reset" class="reset-event-button">Reset</button>
         </form>
 
 </body>
