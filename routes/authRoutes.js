@@ -1,9 +1,19 @@
 import express from "express";
+import {
+    showLogin,
+    showRegister,
+    login,
+    register
+} from "../controllers/authController.js"
 
-const express = express();
+const router = express.Router();
 
-router.get("/login", authController.showLogin);
-router.post("/login", authController.login);
+router.get('/login', showLogin);
+router.post('/login', login);
 
-router.get("/signup", authController.showSignup);
-router.post("/signup", authController.signup);
+router.get('/register', showRegister);
+router.post('/register', register)
+
+export {
+    router
+}
