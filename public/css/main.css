@@ -20,9 +20,10 @@
 /* Importing the CSS for the event details */
 @import url("./events-details/events-details.css");
 /**/
-@import "./Admin/styles2.css";
+@import url("./Admin/styles2.css");
 
-@import "./Public_Pages/public_pages.css";
+
+@import url("./Public_Pages/public_pages.css");
 
 
 

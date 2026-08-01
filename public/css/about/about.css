@@ -1,3 +1,11 @@
+.about-page{
+background: linear-gradient(to right, #0f172a, #214eb6, #0f172a);
+}
+
+h1 {
+    
+    text-align: center;
+}
 .container-objective{
   margin: 0 auto;
   margin-top: 5rem;
@@ -5,10 +13,55 @@
   padding: 0.4rem 0.7rem;
   border-radius: 0.875em;
   border: 3px solid #cccccc68;
-  background-color:#faf9f971;
+  background-color:#faf9f9;
+  
+  
+}
+.disc{
+ display: flex;
+ line-height: 1.5;
+ 
+ gap: 3rem;
+}
+.container-team{
+   margin: 0 auto;
+  margin-top: 2rem;
+  max-width: 90rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 0.875em;
+  border: 3px solid #cccccc68;
+  background-color:#f3f4f6;
+}
+.member{
+  padding: 0.4rem 0.7rem;
+  border-radius: 0.875em;
+  border: 3px solid black;
+  background-color:#faf9f9;
+   width: 100%;
+    box-sizing: border-box;
+  
+}
+.member-details {
+
+    display: none;
+
+}
+.member-sum {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    display: flex;
+}
+ 
+
+
+.members {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+.details-button {
+    margin-left: auto;
 }
 
-h1 {
-    
-    text-align: center;
-}
+
