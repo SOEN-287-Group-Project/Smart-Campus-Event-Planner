@@ -6,14 +6,14 @@
     <title>My Profile</title>
     <link rel="StyleSheet" href="../public/css/global_styles.css">
     <link rel="Stylesheet" href="../public/css/profile/profile.css">
-    <script src="../controllers/adminController.js"></script>
+  <!--  <script src="../controllers/adminController.js"></script> -->
 </head>
 
 <body>
     <header><!--navigation bar-->
             <div class="topbar">
                 <h1>Smart Event Planner</h1>
-                <h2>Student Dashboard</h2> <!-- TODO: Change to student's name -->
+                <h2>Student Dashboard</h2> 
                 <nav class = "nav-links">
                     <a href="student-dashboard.html" target="_self">Overview</a>
                     <a href="events.html"  target="_self">Events</a>
@@ -41,7 +41,7 @@
                 </nav>
             </div>
         </header>
-    <main class="profile-page">
+    <!-- <main class="profile-page">
         <section class="profile-card">
             <h1>My Profile</h1>
             <p class="profile-subtitle">View and update your account information.</p>
@@ -93,7 +93,143 @@
                 </div>
             </form>
         </section>
-    </main>
+    </main> -->
+    <main class="profile-page">
+
+    <section class="profile-card">
+        <h1>My Profile</h1>
+
+        <p class="profile-subtitle">
+            View and update your account information.
+        </p>
+
+        <form class="profile-form" id="profile-form">
+
+            <div class="form-group">
+                <label for="first-name">First Name</label>
+
+                <input
+                    type="text"
+                    id="first-name"
+                    name="firstName"
+                    value="Student first name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="last-name">Last Name</label>
+
+                <input
+                    type="text"
+                    id="last-name"
+                    name="lastName"
+                    value="Student last name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="student@gmail.com"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="student-id">Student ID</label>
+
+                <input
+                    type="text"
+                    id="student-id"
+                    name="studentId"
+                    value="40000000"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="program">Program</label>
+
+                <input
+                    type="text"
+                    id="program"
+                    name="program"
+                    value="----"
+                    required
+                >
+            </div>
+
+            <div class="profile-actions">
+                <button type="submit">
+                    Update Profile
+                </button>
+            </div>
+
+        </form>
+    </section>
+
+    <section class="profile-card password-card">
+        <h2>Change Password</h2>
+
+        <p class="profile-subtitle">
+            Enter your current password and choose a new password.
+        </p>
+
+        <form class="profile-form" id="password-form">
+
+            <div class="form-group">
+                <label for="current-password">Current Password</label>
+
+                <input
+                    type="password"
+                    id="current-password"
+                    name="currentPassword"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="new-password">New Password</label>
+
+                <input
+                    type="password"
+                    id="new-password"
+                    name="newPassword"
+                    minlength="8"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="confirm-password">
+                    Confirm New Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirm-password"
+                    name="confirmPassword"
+                    minlength="8"
+                    required
+                >
+            </div>
+
+            <div class="profile-actions">
+                <button type="submit">
+                    Update Password
+                </button>
+            </div>
+
+        </form>
+    </section>
+
+</main>
 
     <footer class="footer-generic">
     <p>&copy; 2026 Smart Campus Event Planner</p>
@@ -101,6 +237,6 @@
     <br>
     <a href="about.html">About Us</a>
     </footer> 
-    
+    <script src="../public/js/profile.js"></script>
 </body>
 </html>
