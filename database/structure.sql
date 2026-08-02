@@ -5,8 +5,8 @@ DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS events;
 DROP TABLE IF EXISTS registration;
 
-CREATE TABLE users (
-    user_id VARCHAR(100) PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS users (
+    user_id INTEGER PRIMARY KEY,
     full_name VARCHAR(150) NOT NULL,
     email VARCHAR(150) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
@@ -14,13 +14,13 @@ CREATE TABLE users (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE categories (
+CREATE TABLE IF NOT EXISTS categories (
     category_id VARCHAR(100) PRIMARY KEY,
     category_name VARCHAR(100) NOT NULL UNIQUE,
     description VARCHAR(255)
 );
 
-CREATE TABLE events (
+CREATE TABLE IF NOT EXISTS events (
     event_id VARCHAR(100) PRIMARY KEY,
     organizer_id VARCHAR(100) NOT NULL,
     category_id VARCHAR(100) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE events (
     FOREIGN KEY (organizer_id) REFERENCES users(user_id)
 );
 
-CREATE TABLE registrations (
+CREATE TABLE IF NOT EXISTS registrations (
     registration_id VARCHAR(100) PRIMARY KEY,
     user_id VARCHAR(100) NOT NULL,
     event_id VARCHAR(100) NOT NULL,

@@ -1,6 +1,7 @@
+import { createUser } from "../database/database.js";
 
 function showLogin(req, res){
-    res.sendFile("login.html", {root: "views"});
+    res.render("login.html", {root: "views"});
 } 
 
 function showRegister(req, res){
@@ -20,6 +21,11 @@ function register(){
         confirmed_password
     } = req.body;
 
+    if (password === confirmed_password) {
+        return;
+    }
+
+    createUser(first_name + last_name, email, password);
 }
 
 function logout(){

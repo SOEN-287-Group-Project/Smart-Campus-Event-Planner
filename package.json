@@ -2,11 +2,15 @@
   "name": "smart-campus-event-planner",
   "version": "1.0.0",
   "type": "module",
-  "imports":{              
+  "imports": {
     "#models/*": "./models/*",
     "#root/*": "./*"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0", 
+    "better-sqlite3": "^13.0.2"
+  },
+  "scripts": {
+    "start": "node app.js"
   }
 }
