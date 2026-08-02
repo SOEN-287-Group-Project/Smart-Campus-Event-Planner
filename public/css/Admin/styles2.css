@@ -1,4 +1,7 @@
 .stat-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background: #eff6ff;
     padding: 1.875em;
     border-radius: 0.875em;
@@ -6,21 +9,35 @@
     transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
     box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
 }
-.top-events-scroll{
-    background: #eff6ff;
-    padding: 1.875em;
-    border-radius: 0.875em;
-    border: 3px solid #ccc;
-    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
-    max-height: 240px;
-    overflow-y: auto;
+.stat-card strong {
+    margin-left: auto;
+    margin-right: 10px;
 }
+
 table.stat-card{
     width: 100%;
     padding: auto;
 }
 
+  .upcoming-events-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .upcoming-events-table td {
+    padding: 0.75rem 1rem;
+  }
+  
+  .upcoming-events-table tbody tr:nth-child(even) td {
+    background-color: lightcyan;
+  }
+  
+  .upcoming-events-scroll {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  
 /*main panels*/
 .panel {
     margin-bottom: 1.5rem;
@@ -61,7 +78,6 @@ table.stat-card{
     gap: 1em;
 }
 
-
 .stat-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
@@ -84,6 +100,10 @@ form.panel {
 }
 
 @media (max-width: 900px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
     form.panel {
         grid-template-columns: 1fr;
 

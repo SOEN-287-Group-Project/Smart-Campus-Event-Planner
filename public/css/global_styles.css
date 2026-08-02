@@ -200,5 +200,11 @@ button {
 
 }
 
+.footer-generic,
+.footer-generic a {
+    margin-top: .25em;
+    text-align: center;
+    color: black;
+}
 
 
