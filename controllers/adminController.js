@@ -190,6 +190,142 @@ function renderEvents(){
         end: "2026-04-10T23:00",
         category: "Social",
         capacity: 143
+    },
+        {
+        id: 4,
+        name: "Career Networking Night",
+        start: "2026-04-15T18:00",
+        end: "2026-04-15T20:30",
+        category: "Career",
+        capacity: 120
+    },
+    {
+        id: 5,
+        name: "Basketball Tournament",
+        start: "2026-04-18T10:00",
+        end: "2026-04-18T16:00",
+        category: "Sports",
+        capacity: 200
+    },
+    {
+        id: 6,
+        name: "Coding Bootcamp",
+        start: "2026-04-20T09:00",
+        end: "2026-04-20T15:00",
+        category: "Workshops",
+        capacity: 75
+    },
+    {
+        id: 7,
+        name: "Spring Music Festival",
+        start: "2026-04-23T17:00",
+        end: "2026-04-23T22:00",
+        category: "Cultural",
+        capacity: 500
+    },
+    {
+        id: 8,
+        name: "Academic Success Seminar",
+        start: "2026-04-25T13:00",
+        end: "2026-04-25T15:00",
+        category: "Academic",
+        capacity: 90
+    },
+    {
+        id: 9,
+        name: "Community Food Drive",
+        start: "2026-04-27T09:00",
+        end: "2026-04-27T13:00",
+        category: "Volunteering",
+        capacity: 80
+    },
+    {
+        id: 10,
+        name: "Chess Club Meetup",
+        start: "2026-05-01T18:30",
+        end: "2026-05-01T20:30",
+        category: "Club Activities",
+        capacity: 40
+    },
+    {
+        id: 11,
+        name: "Entrepreneurship Workshop",
+        start: "2026-05-04T14:00",
+        end: "2026-05-04T17:00",
+        category: "Career",
+        capacity: 65
+    },
+    {
+        id: 12,
+        name: "Soccer Friendly Match",
+        start: "2026-05-07T15:00",
+        end: "2026-05-07T17:00",
+        category: "Sports",
+        capacity: 180
+    },
+    {
+        id: 13,
+        name: "Photography Walk",
+        start: "2026-05-09T11:00",
+        end: "2026-05-09T14:00",
+        category: "Social",
+        capacity: 55
+    },
+    {
+        id: 14,
+        name: "Resume Building Workshop",
+        start: "2026-05-12T16:00",
+        end: "2026-05-12T18:00",
+        category: "Workshops",
+        capacity: 70
+    },
+    {
+        id: 15,
+        name: "International Food Fair",
+        start: "2026-05-15T12:00",
+        end: "2026-05-15T18:00",
+        category: "Cultural",
+        capacity: 350
+    },
+    {
+        id: 16,
+        name: "Math Competition",
+        start: "2026-05-18T09:00",
+        end: "2026-05-18T12:00",
+        category: "Academic",
+        capacity: 110
+    },
+    {
+        id: 17,
+        name: "Park Cleanup",
+        start: "2026-05-21T08:30",
+        end: "2026-05-21T11:30",
+        category: "Volunteering",
+        capacity: 100
+    },
+    {
+        id: 18,
+        name: "Gaming Club Tournament",
+        start: "2026-05-24T17:00",
+        end: "2026-05-24T22:00",
+        category: "Club Activities",
+        capacity: 90
+    },
+    {
+        id: 19,
+        name: "Research Symposium",
+        start: "2026-05-28T10:00",
+        end: "2026-05-28T16:00",
+        category: "Academic",
+        capacity: 250
+    },
+    {
+        id: 20,
+        name: "Leadership Conference",
+        start: "2026-06-02T09:00",
+        end: "2026-06-02T17:00",
+        category: "Career",
+        capacity: 300
     }
     ];
 
