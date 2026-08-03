@@ -78,3 +78,9 @@ h1 {
 .back-button:hover {
     background-color: #3f2ff0;
 }
+.member-sum img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    
+}
