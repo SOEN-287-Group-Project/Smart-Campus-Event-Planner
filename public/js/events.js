@@ -45,15 +45,15 @@ class Event{
 function get_category_image_url(category){
     const category_images= {
      "Academic workshops" : "../public/images/image_project/image_project.jpg",
-     "Career events" : "public/images/image_project/image2.jpg",
-     "Club activities": "public/images/image_project/image3.jpg",
-     "Sports events": "public/images/image_project/image4.jpg",
-     "Cultural event": "public/images/image_project/image5.jpg",
-     "Volunteering events": "public/images/image_project/image6.jpg",
-     "Social events": "public/images/image_project/image7.jpg",
-     "Guest lectures": "public/images/image_project/image8.jpg",
-     "Networking events": "public/images/image_project/image9.jpg",
-     "Other": "public/images/image_project/image10.jpg"
+     "Career events" : "../public/images/image_project/image2.jpg",
+     "Club activities": "../public/images/image_project/image3.jpg",
+     "Sports events": "../public/images/image_project/image4.jpg",
+     "Cultural event": "../public/images/image_project/image5.jpg",
+     "Volunteering events": "../public/images/image_project/image6.jpg",
+     "Social events": "../public/images/image_project/image7.jpg",
+     "Guest lectures": "../public/images/image_project/image8.jpg",
+     "Networking events": "../public/images/image_project/image9.jpg",
+     "Other": "../public/images/image_project/image10.jpg"
     }
 
     return category_images[category] || category_images["Other"];  // Return the url depending on the category
