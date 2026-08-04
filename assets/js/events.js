@@ -1,4 +1,4 @@
-/*import Event from "../../models/Event.js";*/
+/*import Event from "../../models/Event.js"; */
 // Creates a lookup table with links to an image for each categories
 class Event{
     constructor(
@@ -42,19 +42,18 @@ class Event{
     }
 
 }
-
 function get_category_image_url(category){
     const category_images= {
-     "Academic workshops" : "../public/images/image_project/image_project.jpg",
-     "Career events" : "public/images/image_project/image2.jpg",
-     "Club activities": "public/images/image_project/image3.jpg",
-     "Sports events": "public/images/image_project/image4.jpg",
-     "Cultural event": "public/images/image_project/image5.jpg",
-     "Volunteering events": "public/images/image_project/image6.jpg",
-     "Social events": "public/images/image_project/image7.jpg",
-     "Guest lectures": "public/images/image_project/image8.jpg",
-     "Networking events": "public/images/image_project/image9.jpg",
-     "Other": "public/images/image_project/image10.jpg"
+     "Academic workshops" : "/images/image_project/image_project.jpg",
+     "Career events" : "images/image_project/image2.jpg",
+     "Club activities": "images/image_project/image3.jpg",
+     "Sports events": "images/image_project/image4.jpg",
+     "Cultural event": "images/image_project/image5.jpg",
+     "Volunteering events": "images/image_project/image6.jpg",
+     "Social events": "images/image_project/image7.jpg",
+     "Guest lectures": "images/image_project/image8.jpg",
+     "Networking events": "images/image_project/image9.jpg",
+     "Other": "images/image_project/image10.jpg"
     }
 
     return category_images[category] || category_images["Other"];  // Return the url depending on the category
@@ -92,6 +91,9 @@ function create_event(event){
                                  <!-- Creates an SVG that looks like a "+" for the button-->
 
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+
+                                 <!-- 1. Vertical Line -->
+                                 <line x1="12" y1="4" x2="12" y2="20"></line>
   
                                 <!-- 2. Horizontal Line -->
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -106,18 +108,18 @@ function create_event(event){
 // FAKE EVENTS FOR ****  TESTING ****
 const fake_events = [
   new Event(
-    4,
-    "Intramural Basketball Tournament",
-    "5v5 tournament for student teams of all skill levels.",
-    "Sports events",
-    "Nov 15",
-    "1:00 PM",
+    1,
+    "Web Development Workshop",
+    "Learn HTML & CSS Basics from scratch with hands-on practice.",
+    "Academic workshops",
+    "Oct 24",
     "6:00 PM",
-    "Loyola Gymnasium",
-    8,
+    "8:00 PM",
+    "Downtown Auditorium",
+    12,
     "Open",
-    104,
-    "2026-07-22"
+    101,
+    "2026-07-20"
   ),
   new Event(
     2,
@@ -148,18 +150,18 @@ const fake_events = [
     "2026-07-22"
   ),
   new Event(
-    1,
-    "Web Development Workshop",
-    "Learn HTML & CSS Basics from scratch with hands-on practice.",
-    "Academic workshops",
-    "Oct 24",
+    4,
+    "Intramural Basketball Tournament",
+    "5v5 tournament for student teams of all skill levels.",
+    "Sports events",
+    "Nov 15",
+    "1:00 PM",
     "6:00 PM",
-    "8:00 PM",
-    "Downtown Auditorium",
-    12,
+    "Loyola Gymnasium",
+    8,
     "Open",
-    101,
-    "2026-07-20"
+    104,
+    "2026-07-22"
   ),
   new Event(
     5,
@@ -174,8 +176,78 @@ const fake_events = [
     "Open",
     105,
     "2026-07-23"
+  ),
+  new Event(
+    6,
+    "Campus Food Bank Drive",
+    "Help sort and package food donations for students in need.",
+    "Volunteering events",
+    "Nov 18",
+    "11:00 AM",
+    "2:00 PM",
+    "Student Union Center",
+    15,
+    "Open",
+    106,
+    "2026-07-24"
+  ),
+  new Event(
+    7,
+    "End of Term Mixer",
+    "Relax, enjoy free snacks, and celebrate the end of classes.",
+    "Social events",
+    "Dec 12",
+    "4:00 PM",
+    "7:00 PM",
+    "Reggie's Lounge",
+    30,
+    "Open",
+    107,
+    "2026-07-25"
+  ),
+  new Event(
+    8,
+    "AI & Ethics in Tech",
+    "Guest lecture by Dr. Sarah Chen on the future of machine learning.",
+    "Guest lectures",
+    "Nov 22",
+    "2:00 PM",
+    "4:00 PM",
+    "Hall Building Room 110",
+    5,
+    "Open",
+    108,
+    "2026-07-25"
+  ),
+  new Event(
+    9,
+    "Coffee & Alumni Connections",
+    "Speed-networking session with recent engineering graduates.",
+    "Networking events",
+    "Nov 28",
+    "9:00 AM",
+    "11:00 AM",
+    "MB Building Lounge",
+    0,
+    "Full",
+    109,
+    "2026-07-26"
+  ),
+  new Event(
+    10,
+    "Campus Sustainability Workshop",
+    "Learn practical zero-waste strategies for student apartment living.",
+    "Other",
+    "Dec 01",
+    "3:00 PM",
+    "4:30 PM",
+    "Greenhouse Center",
+    18,
+    "Open",
+    110,
+    "2026-07-27"
   )
-  ];
+];
 
 
 const container = document.querySelector(".event-card-container");

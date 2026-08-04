@@ -1,14 +1,10 @@
 import { createUser } from "../database/database.js";
 
-function showLogin(req, res){
-    res.render("login.html", {root: "views"});
-} 
+function login(){
 
-function showRegister(req, res){
-    res.sendFile("register.html", {root: "views"});
 }
 
-function login(req, res){
+function logout(){
 
 }
 
@@ -28,13 +24,7 @@ function register(){
     createUser(first_name + last_name, email, password);
 }
 
-function logout(){
-
-}
-
 export {
-    showLogin,
-    showRegister,
     login,
     register
 }

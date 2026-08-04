@@ -1,19 +1,21 @@
 import express from "express";
-import {
-    showLogin, 
-    showRegister, 
-    login, 
-    register
-} from "../controllers/authController.js"
+import { login, register } from "../controllers/authController.js"
 
+/*
 const authRoutes = express.Router();
 
-authRoutes.get('/login', showLogin);
+authRoutes.get('/login', (req, res)=>{
+    res.sendFile('login.html', {root: 'views'})
+});
 authRoutes.post('/login', login);
 
-authRoutes.get('/register', showRegister);
+authRoutes.get('/register', (req, res)=>{
+    res.sendFile('register.html', {root: 'views'})
+});
+
 authRoutes.post('/register', register)
 
 export {
     authRoutes
 }
+*/

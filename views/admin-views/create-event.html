@@ -3,8 +3,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="../public/css/main.css" />
-    <link rel="stylesheet" href="../public/css/global_styles.css" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/global_styles.css" />
     <script src="../controllers/adminController.js"></script>
 </head>
 
@@ -15,10 +15,10 @@
             <h1>Smart Event Planner</h1>
             <h2>Admin Dashboard</h2>
             <nav class = "nav-links">
-                <a href="Admin-dashboard.html" target="_self">Overview</a>
-                <a href="manage-events.html"  target="_self">Manage Events</a>
-                <a class="active-page" href="create-event.html" target="_self">Create Event</a>
-                <a href="analytics.html" target="_self">Analytics</a>
+                <a href="/admin-dashboard" target="_self">Overview</a>
+                <a href="/manage-events"  target="_self">Manage Events</a>
+                <a class="active-page" href="/create-event" target="_self">Create Event</a>
+                <a href="/analytics" target="_self">Analytics</a>
                 
                 
                 <div class="user-menu">
@@ -28,11 +28,11 @@
                     </button>
 
                     <div id="dropdown" class="dropdown hidden">
-                        <a href="index.html">Logout</a> <!-- Add every link from the <nav> container into here, MAKE SURE IT IS BELOW THE LOGOUT AND NOT ABOVE-->
-                        <a href="Admin-dashboard.html" target="_self">Overview</a>
-                        <a href="manage-events.html" target="_self">Manage Events</a>
-                        <a href="create-event.html" target="_self">Create Event</a>
-                        <a href="analytics.html" target="_self">Analytics</a>
+                        <a href="/index">Logout</a> <!-- Add every link from the <nav> container into here, MAKE SURE IT IS BELOW THE LOGOUT AND NOT ABOVE-->
+                        <a href="/admin-dashboard" target="_self">Overview</a>
+                        <a href="/manage-events" target="_self">Manage Events</a>
+                        <a href="/create-event" target="_self">Create Event</a>
+                        <a href="/analytics" target="_self">Analytics</a>
                     </div>
                     
                 </div>
@@ -110,8 +110,8 @@
 
     <footer class="footer-generic">
         <p>&copy; 2026 Smart Campus Event Planner</p>
-        <a href="contact.html">Contact Us</a>
+        <a href="/contact">Contact Us</a>
         <br>
-        <a href="about.html">About Us</a>
+        <a href="/about">About Us</a>
     </footer>        
 </body>
