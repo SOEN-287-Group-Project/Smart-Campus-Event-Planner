@@ -1,4 +1,5 @@
 function rendercharts() {
+
     const ctx = document.getElementById('bar-chart');
 
     new Chart(ctx, {
@@ -28,8 +29,6 @@ function rendercharts() {
         }
         }
     });
-
-
 
     const ctx2 = document.getElementById('doughnut-chart');
 
@@ -78,6 +77,7 @@ function rendercharts() {
         }
     });
 }
+
 function toggleDropdown() {
     const button = document.getElementById("menuButton");
     const menu = document.getElementById("dropdown");
@@ -91,7 +91,6 @@ function toggleDropdown() {
         menu.classList.add("hidden");
     });
 }
-
 
 function rotateMenuArrow(){
     const arrow = document.querySelector(".arrow");
@@ -108,12 +107,6 @@ function renderCalendar(){
     const nextBtn = document.getElementById('nextBtn');
 
     let currentDate = new Date();
-
-    
-
-
-
-
 
     const updateCalendar = () => {
         const currentYear = currentDate.getFullYear();
@@ -404,14 +397,3 @@ function renderEvents(){
     });
 
 }
-
-
-
-
-
-
-
-
-
-
-
