@@ -1,17 +1,60 @@
-import Event from "../../models/Event.js";
+/*import Event from "../../models/Event.js";*/
 // Creates a lookup table with links to an image for each categories
+class Event{
+    constructor(
+        event_id,
+        title,
+        description,
+        category, 
+            /*
+            Academic workshops
+            Career events
+            Club activities
+            Sports events
+            Cultural events
+            Volunteering events
+            Social events
+            Guest lectures
+            Networking events
+            Other
+            */
+        event_date,
+        start_time,
+        end_time,
+        location,
+        capacity,
+        status, // open, full, cancelled, completed, disabled
+        organizer_id,
+        created_on
+    ){
+        this.event_id = event_id;
+        this.title = title;
+        this.description = description;
+        this.category = category;
+        this.event_date = event_date;
+        this.start_time = start_time;
+        this.end_time = end_time;
+        this.location = location;
+        this.capacity = capacity;
+        this.status = status;
+        this.organizer_id = organizer_id;
+        this.created_on = created_on;
+    }
+
+}
+
 function get_category_image_url(category){
     const category_images= {
-     "Academic workshops" : "https://library.concordia.ca/images/workshop-teaching-classroom730x600.jpg",
-     "Career events" : "https://www.concordia.ca/content/concordia/en/students/success/career-planning/events.social.png/1752846174947.jpg",
-     "Club activities": "https://www.concordia.ca/cunews/main/stories/2021/09/17/7-clubs-at-Concordia-that-empower-BIPOC-students/_jcr_content/parsys/image.img.jpg/1631217629935.jpg",
-     "Sports events": "https://www.concordia.ca/content/concordia/en/students/life/sports-recreation-athletics/_jcr_content/content-main/grid_container_340858671/grid-container-parsys/card_deck/card-deck-parsys/card_1809173446/adaptiveimage.img.620.medium.jpg/1618322972190.jpg",
-     "Cultural event": "https://concordia-www.s3.amazonaws.com/files/pages/full_xsml_christmas-concert-202412582109.jpg",
-     "Volunteering events": "https://www.concordia.ca/content/concordia/en/students/volunteering/_jcr_content/content-main/grid_container_397463943/grid-container-parsys/card_deck/card-deck-parsys/card/adaptiveimage.img.620.medium.jpg/1761252176660.jpg",
-     "Social events": "https://www.concordia.ca/cunews/main/stories/2024/06/26/concordia-s-shift-centre-for-social-transformation-celebrates-its-impact-through-relationship-building/_jcr_content/parsys/image.img.jpg/1719418837870.jpg",
-     "Guest lectures": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmUyMSKg6C1QlaNJim6_XMRVeKWOGzyAhH4gjAZ2zbig&s",
-     "Networking events": "https://www.concordia.ca/content/shared/en/events/offices/provost/ssc/2024/11/27/networking-101.social.png/1724787203464.jpg",
-     "Other": "https://www.concordia.ca/news/stories/2019/08/08/concordia-improves-its-international-standing-in-2-world-rankings/_jcr_content/top-image.img.768.medium.jpg/1565272551020.jpg"
+     "Academic workshops" : "../public/images/image_project/image_project.jpg",
+     "Career events" : "public/images/image_project/image2.jpg",
+     "Club activities": "public/images/image_project/image3.jpg",
+     "Sports events": "public/images/image_project/image4.jpg",
+     "Cultural event": "public/images/image_project/image5.jpg",
+     "Volunteering events": "public/images/image_project/image6.jpg",
+     "Social events": "public/images/image_project/image7.jpg",
+     "Guest lectures": "public/images/image_project/image8.jpg",
+     "Networking events": "public/images/image_project/image9.jpg",
+     "Other": "public/images/image_project/image10.jpg"
     }
 
     return category_images[category] || category_images["Other"];  // Return the url depending on the category
