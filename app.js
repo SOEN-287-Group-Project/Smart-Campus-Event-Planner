@@ -1,4 +1,5 @@
 import express from "express";
+import { login, register } from "../controllers/authController.js"
 // import { authRoutes } from "./routes/authRoutes.js";
 
 const app = express();
@@ -68,6 +69,10 @@ app.get('/profile', (req, res)=>{
 app.get('/student-dashboard', (req, res)=>{
     res.sendFile('student-dashboard.html', {root: 'views/student-views'})
 });
+
+// ********************
+
+app.post('/register', register)
 
 // ********************
 
