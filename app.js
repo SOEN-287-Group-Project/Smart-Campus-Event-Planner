@@ -1,4 +1,8 @@
 import express from "express";
+import publicRoutes from "./routes/publicRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
+import studentRoutes from "./routes/studentRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 
 // initialize the server
 const app = express();
@@ -15,10 +19,10 @@ app.get('/', (req, res)=>{
 });
 
 // mount the routers
-app.use('/public', authRoutes);
+app.use('/public', publicRoutes);
 app.use('/auth', authRoutes);
-app.use('/student', authRoutes);
-app.use('/admin', authRoutes);
+app.use('/student', studentRoutes);
+app.use('/admin', adminRoutes);
 
 // start server
 app.listen(3000, 'localhost');

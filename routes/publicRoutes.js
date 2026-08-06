@@ -14,3 +14,5 @@ publicRoutes.get('/about', (req, res)=>{
 publicRoutes.get('/contact', (req, res)=>{
     res.sendFile('contact.html', {root: publicRoot})
 });
+
+export default publicRoutes;

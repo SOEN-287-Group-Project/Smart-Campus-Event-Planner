@@ -22,3 +22,5 @@ studentRoutes.get('/profile', (req, res)=>{
 studentRoutes.get('/student-dashboard', (req, res)=>{
     res.sendFile('student-dashboard.html', {root: studentRoot});
 });
+
+export default studentRoutes;
