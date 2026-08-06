@@ -5,7 +5,7 @@ class Event{
         event_id,
         title,
         description,
-        category, 
+        category,
             /*
             Academic workshops
             Career events
@@ -40,8 +40,8 @@ class Event{
         this.organizer_id = organizer_id;
         this.created_on = created_on;
     }
-
 }
+
 function get_category_image_url(category){
     const category_images= {
      "Academic workshops" : "/images/image_project/image_project.jpg",

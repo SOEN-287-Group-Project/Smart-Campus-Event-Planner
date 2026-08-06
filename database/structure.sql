@@ -1,10 +1,5 @@
 -- Database Definition --
 
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS categories;
-DROP TABLE IF EXISTS events;
-DROP TABLE IF EXISTS registration;
-
 CREATE TABLE IF NOT EXISTS users (
     user_id INTEGER PRIMARY KEY,
     full_name VARCHAR(150) NOT NULL,

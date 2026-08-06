@@ -40,3 +40,6 @@ export default class Event{
     }
 
 }
+
+// serialize
+new-event.serialize()
