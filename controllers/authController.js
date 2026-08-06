@@ -1,7 +1,33 @@
-import { createUser } from "../database/database.js";
+import { insertUser, queryUser } from "../database/database.js";
+import bcrypt from "bcrypt";
 
 function login(req, res){
+    const {
+        email,
+        password
+    } = req.body || {};
 
+    if (!email || !password) {
+        return res.status(400).send("All fields are required.");
+    }
+
+    try{
+        const user = queryUser(email);
+
+        if (!user || !bcrypt.compareSync(password, user.password_hash)) {
+            return res.status(401).send("Invalid email or password.");
+        }
+
+        if (user.role === "admin") {
+            return res.redirect('/admin/admin-dashboard');
+        }
+
+        return res.redirect('/student/student-dashboard');
+    }
+    catch (error){
+        console.error(error);
+        return res.status(500).send("Unable to sign in.");
+    }
 }
 
 function logout(req, res){
@@ -15,7 +41,7 @@ function register(req, res){
         email,
         password,
         confirmed_password
-    } = req.body;
+    } = req.body || {};
 
     if (!first_name || !last_name || !email || !password || !confirmed_password) {
         return res.status(400).send("All fields are required.");
@@ -26,29 +52,17 @@ function register(req, res){
     }
 
     try {
-        createUser(`${first_name} ${last_name}`, email, password);
-        return res.redirect('/student-dashboard');
-    } catch (error) {
+        const password_hash = bcrypt.hashSync(password, 10);
+        insertUser(`${first_name} ${last_name}`, email, password_hash);
+        return res.redirect('/student/student-dashboard');
+    } 
+    catch (error) {
         if (error.code === "SQLITE_CONSTRAINT_UNIQUE") {
             return res.status(409).send("An account with this email already exists.");
         }
         console.error(error);
         return res.status(500).send("Unable to create account.");
     }
-}
-
-function signin(req, res){
-    const {
-        email,
-        password
-    } = res.body;
-
-    if (!email || !password) {
-        return res.status(400).send("All fields are required.");
-    }
-
-    
-    
 }
 
 export {

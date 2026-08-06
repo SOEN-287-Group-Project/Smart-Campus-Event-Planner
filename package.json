@@ -7,10 +7,15 @@
     "#root/*": "./*"
   },
   "dependencies": {
-    "express": "^5.1.0", 
-    "better-sqlite3": "^13.0.2"
+    "express": "^5.1.0",
+    "better-sqlite3": "^13.0.2",
+    "bcrypt": "^6.0.0"
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "nodemon app.js"
+  },
+  "allowScripts": {
+    "better-sqlite3@13.0.2": true,
+    "bcrypt@6.0.0": true
   }
 }

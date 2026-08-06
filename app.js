@@ -4,6 +4,9 @@ import authRoutes from "./routes/authRoutes.js";
 import studentRoutes from "./routes/studentRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 
+// set port number
+const PORT = process.env.PORT || 3000;
+
 // initialize the server
 const app = express();
 
@@ -25,4 +28,4 @@ app.use('/student', studentRoutes);
 app.use('/admin', adminRoutes);
 
 // start server
-app.listen(3000, 'localhost');
+app.listen(PORT, 'localhost');
