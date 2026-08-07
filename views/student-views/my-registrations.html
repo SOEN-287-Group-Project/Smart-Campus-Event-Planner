@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="StyleSheet" href="/css/global_styles.css">
         <link rel="Stylesheet" href="/css/my-registrations/my-registrations.css">
-        <script src="/js/events.js" defer></script>
-        <script src="../controllers/adminController.js"></script>
+        <script src="/js/student/events.js" defer></script>
+        <script src="/js/student/admin.js" defer></script>
         <title>My Registrations</title>
     </head>
     <body>
@@ -26,19 +26,14 @@
 
                         <button id="menuButton" class="menu-button">
                             <span class="arrow">▲</span>
-                            <script>rotateMenuArrow()</script>
                         </button>
                     
-                        <div id="dropdown" class="dropdown hidden">
+                        <div id="studentDropdown" class="dropdown hidden">
                             <a id="menu-items" href="/public/index">Logout</a> <!-- Add more menu items here if needed -->
-                            <a href="/student/student-dashboard" target="_self">Overview</a>
-                            <a href="/student/events" target="_self">Events</a>
-                            <a href="/student/my-registrations" target="_self">My Registrations</a>
-                            <a href="/student/profile" target="_self">Profile</a>
+
                         </div>
 
                     </div>
-                    <script>toggleDropdown();</script>                
                 </nav>
             </div>
         </header>

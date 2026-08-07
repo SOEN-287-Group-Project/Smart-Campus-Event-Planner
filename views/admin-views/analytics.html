@@ -5,7 +5,8 @@
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/global_styles.css" />
-    <script src="/js/admin/admin.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/student/admin.js" defer></script>
 </head>
 
 <body>
@@ -24,17 +25,13 @@
                 <div class="user-menu">
                     <button id="menuButton" class="menu-button">
                         <span class="arrow">▲</span>
-                        <script>rotateMenuArrow()</script>
                     </button>
 
                     <div id="dropdown" class="dropdown hidden">
                         <a href="/public/index">Logout</a> <!-- Add more menu items here if needed -->
-                        <script>getNavDropdown(); </script>
                     </div>
                     
                 </div>
-                
-                <script>toggleDropdown();</script>
                 
             </nav>
         </div>
@@ -55,10 +52,6 @@
 
         </div>
     </section>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>rendercharts();</script>
-
 
     <footer class="footer-generic">
         <p>&copy; 2026 Smart Campus Event Planner</p>

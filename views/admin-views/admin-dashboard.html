@@ -5,7 +5,8 @@
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/global_styles.css" />
-    <script src="/js/admin/admin.js" defer></script>
+    <script src="/js/student/admin.js" defer></script>
+
 </head>
 
 <body>
@@ -23,16 +24,13 @@
 
                     <button id="menuButton" class="menu-button">
                         <span class="arrow">▲</span>
-                        <script>rotateMenuArrow()</script>
                     </button>
                    
                     <div id="dropdown" class="dropdown hidden">
                         <a id="menu-items" href="/public/index">Logout</a>
-                        <script>getNavDropdown(); </script>
                     </div>
 
                 </div>
-                <script>toggleDropdown();</script>                
             </nav>
         </div>
     </header>
@@ -188,7 +186,6 @@
             <div class="dates" id="dates"></div>
         </div>   
 
-        <script>renderCalendar()</script>
 
 
     </section>

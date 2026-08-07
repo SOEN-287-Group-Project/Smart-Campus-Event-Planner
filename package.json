@@ -9,14 +9,16 @@
   "dependencies": {
     "bcrypt": "^6.0.0",
     "better-sqlite3": "^13.0.2",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "express-session": "^1.19.0"
   },
   "scripts": {
     "start": "nodemon app.js"
   },
   "allowScripts": {
     "better-sqlite3@13.0.2": true,
-    "bcrypt@6.0.0": true
+    "bcrypt@6.0.0": true,
+    "fsevents@2.3.3": true
   },
   "devDependencies": {
     "nodemon": "^3.1.14"

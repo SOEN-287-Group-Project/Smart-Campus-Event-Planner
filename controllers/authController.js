@@ -17,6 +17,12 @@ function login(req, res){
         if (!user || !bcrypt.compareSync(password, user.password_hash)) {
             return res.status(401).send("Invalid email or password.");
         }
+        
+        req.session.userId = user.user_id;
+        req.session.role = user.role;
+        req.session.fullName = user.full_name;
+
+        console.log(req.session);
 
         if (user.role === "admin") {
             return res.redirect('/admin/admin-dashboard');
@@ -30,8 +36,15 @@ function login(req, res){
     }
 }
 
-function logout(req, res){
-
+function logout(req, res) {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send("Unable to log out.");
+    }
+    console.log("Log out successful");
+    res.redirect("/public/index");
+  });
 }
 
 function register(req, res){
@@ -53,7 +66,15 @@ function register(req, res){
 
     try {
         const password_hash = bcrypt.hashSync(password, 10);
-        addUser(`${first_name} ${last_name}`, email, password_hash);
+        insertUser(`${first_name} ${last_name}`, email, password_hash);
+
+        const user = getUser(email);
+        req.session.userId = user.user_id;
+        req.session.role = user.role;
+        req.session.fullName = user.full_name;
+
+        console.log(req.session);
+
         return res.redirect('/student/student-dashboard');
     } 
     catch (error) {
@@ -67,5 +88,6 @@ function register(req, res){
 
 export default {
     login,
-    register
+    register,
+    logout
 }
