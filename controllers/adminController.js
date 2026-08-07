@@ -254,3 +254,7 @@ function renderEvents(){
     });
 
 }
+
+export {
+    renderEvents,
+}

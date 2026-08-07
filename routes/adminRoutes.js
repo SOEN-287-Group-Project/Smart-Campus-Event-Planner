@@ -1,4 +1,5 @@
 import express from "express";
+import { renderEvents } from "#root/controllers/adminController.js";
 
 const adminRoutes = express.Router();
 const adminRoot = 'views/admin-views';
@@ -16,6 +17,7 @@ adminRoutes.get('/create-event', (req, res)=>{
 });
 
 adminRoutes.get('/manage-events', (req, res)=>{
+    renderEvents();
     res.sendFile('manage-events.html', {root: adminRoot});
 });
 
