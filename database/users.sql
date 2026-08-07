@@ -1,4 +1,4 @@
-INSERT INTO users(
+INSERT OR IGNORE INTO users(
     user_id,
     full_name,
     email,

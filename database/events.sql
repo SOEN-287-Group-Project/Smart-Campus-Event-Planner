@@ -1,4 +1,4 @@
-INSERT INTO events (
+INSERT OR IGNORE INTO events (
     event_id,
     organizer_id,
     category_id,

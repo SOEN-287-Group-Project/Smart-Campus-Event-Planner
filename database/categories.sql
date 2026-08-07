@@ -1,4 +1,4 @@
-INSERT INTO categories (
+INSERT OR IGNORE INTO categories (
     category_id,
     category_name,
     description

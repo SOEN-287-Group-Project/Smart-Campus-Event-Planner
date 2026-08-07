@@ -1,4 +1,4 @@
-INSERT INTO registrations (
+INSERT OR IGNORE INTO registrations (
     registration_id,
     user_id,
     event_id,
