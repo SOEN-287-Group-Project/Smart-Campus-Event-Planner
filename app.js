@@ -12,6 +12,8 @@ const app = express();
 
 // set the static root
 app.use(express.static('assets'));
+
+//Express access to folder content
 app.use('/controllers', express.static('controllers'));
 
 // middleware for parsing incoming request URLs

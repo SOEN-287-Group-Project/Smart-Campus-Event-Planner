@@ -157,22 +157,28 @@ function renderCalendar(){
     updateCalendar();
 }
 
-/************************MODAL popup********************************* */ 
+/***Rendering events table from database***/ 
 function renderEvents(){
-    const tbody = document.getElementById("eventTableBody");
-    const modal = document.getElementById("editModal");
-    const editName = document.getElementById("editName");
-    const editStart = document.getElementById("editStart");
-    const editEnd = document.getElementById("editEnd");
+    const tbody = document.getElementById("eventTableBody"); //locate the table body
+    const modal = document.getElementById("editModal"); //locate edit button
+
+    const editName = document.getElementById("editName");//modal input fields
+
+
+    const editStartDate = document.getElementById("editStartDate");
+    const editStartTime = document.getElementById("editStartTime");
+    const editEndTime = document.getElementById("editEndTime");
+
+
     const editCategory = document.getElementById("editCategory");
     const editCapacity = document.getElementById("editCapacity");
     const saveBtn = document.getElementById("saveBtn");
     const cancelBtn = document.getElementById("cancelBtn");
 
-    if (!tbody) return;
+    if (!tbody) return; //render only if the table body exists
 
-    let events = [];
-    let currentEvent = null;
+    let events = []; 
+    let currentEvent = null; // r
 
     function renderTable() {
         tbody.innerHTML = "";
@@ -183,8 +189,9 @@ function renderEvents(){
                     <td>${event.title}</td>
                     <td>${event.start_time ? event.start_time.replace("T", "<br>") : ""}</td>
                     <td>${event.end_time ? event.end_time.replace("T", "<br>") : ""}</td>
-                    <td>${event.category_id || event.category || ""}</td>
+                    <td>${event.category_id || ""}</td>
                     <td>${event.capacity || ""}</td>
+                    <td>${event.status || ""}</td>
                     <td>
                         <button class="edit-event" data-id="${event.event_id}">
                             Edit
@@ -210,7 +217,8 @@ function renderEvents(){
             console.error(error);
             tbody.innerHTML = `<tr><td colspan="6">Unable to load events from the server.</td></tr>`;
         });
-
+    
+    /*Modal popup for editing events*/    
     tbody.addEventListener("click", (e) => {
         if (!e.target.classList.contains("edit-event")) return;
 
@@ -220,9 +228,10 @@ function renderEvents(){
         if (!currentEvent) return;
 
         editName.value = currentEvent.title;
-        editStart.value = currentEvent.start_time;
-        editEnd.value = currentEvent.end_time;
-        editCategory.value = currentEvent.category_id || currentEvent.category;
+        editStartDate.value = currentEvent.event_date;
+        editStartTime.value = currentEvent.start_time;
+        editEndTime.value = currentEvent.end_time;
+        editCategory.value = currentEvent.category_id;
         editCapacity.value = currentEvent.capacity;
 
         if (modal) {
@@ -230,12 +239,13 @@ function renderEvents(){
         }
     });
 
-    saveBtn?.addEventListener("click", () => {
+    saveBtn?.addEventListener("click", () => {//save changes to the event (push to db?)
         if (!currentEvent) return;
 
         currentEvent.title = editName.value;
-        currentEvent.start_time = editStart.value;
-        currentEvent.end_time = editEnd.value;
+        currentEvent.start_date = editStartDate.value;
+        currentEvent.start_time = editStartTime.value;
+        currentEvent.end_time = editEndTime.value;
         currentEvent.category_id = editCategory.value;
         currentEvent.capacity = editCapacity.value;
 
@@ -255,3 +265,15 @@ function renderEvents(){
         }
     });
 }
+
+    /***dynamically populate the admin navigation menu***/
+function getNavDropdown() {
+    const adminNavItems = document.getElementById("dropdown");
+
+    adminNavItems.innerHTML += `
+                        <a href="/admin/admin-dashboard" target="_self">Overview</a>
+                        <a href="/admin/manage-events" target="_self">Manage Events</a>
+                        <a href="/admin/create-event" target="_self">Create Event</a>
+                        <a href="/admin/analytics" target="_self">Analytics</a>
+                                `;
+    }

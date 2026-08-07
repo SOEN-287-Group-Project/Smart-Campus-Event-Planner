@@ -98,7 +98,7 @@ const selectAllFromEvents = db.prepare(
 );
 
 function getAllEvent(){
-    const result = selectAllFromEvents.run();
+    const result = selectAllFromEvents.all();
     return result;
 }
 

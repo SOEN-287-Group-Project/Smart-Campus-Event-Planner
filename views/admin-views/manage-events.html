@@ -28,10 +28,7 @@
 
                     <div id="dropdown" class="dropdown hidden">
                         <a href="/public/index" target="_self">Logout</a> <!-- Add more menu items here if needed -->
-                        <a href="/admin/admin-dashboard" target="_self">Overview</a>
-                        <a href="/admin/manage-events" target="_self">Manage Events</a>
-                        <a href="/admin/create-event" target="_self">Create Event</a>
-                        <a href="/admin/analytics" target="_self">Analytics</a>
+                        <script>getNavDropdown(); </script>
                     </div>
                     
                 </div>
@@ -61,6 +58,7 @@
                     <th>End</th>
                     <th>Category</th>
                     <th>Capacity</th>
+                    <th>Status</th>
                     <th style="text-align: center;">Action</th>
                 </tr>
 
@@ -83,16 +81,6 @@
             </div>
 
             <div class="field">
-                <label>Start Date & Time</label>
-                <input id="editStart" type="datetime-local">
-            </div>
-
-            <div class="field">
-                <label>End Date & Time</label>
-                <input id="editEnd" type="datetime-local">
-            </div>
-
-            <div class="field">
                 <label>Category</label>
                 <select id="editCategory">
                     <option>Academic</option>
@@ -111,6 +99,32 @@
                 <label>Capacity</label>
                 <input id="editCapacity" type="number" min="1">
             </div>
+
+
+            
+            <div class="field">
+                <label>Start Date</label>
+                <input id="editStartDate" type="date">
+            </div>
+            
+
+
+            <div class="field">
+                <label>Start Time</label>
+                <input id="editStartTime" type="time">
+            </div>
+             
+
+            <div class="field">
+                <label>End Time</label>
+                <input id="editEndTime" type="time">
+            </div>
+
+
+
+
+
+
 
             <div class="button-group">
                 <button id="saveBtn">Save</button>
