@@ -1,4 +1,5 @@
 import express from "express";
+import { getAllEvent } from "../database/database.js";
 
 const adminRoutes = express.Router();
 const adminRoot = 'views/admin-views';
@@ -17,6 +18,11 @@ adminRoutes.get('/create-event', (req, res)=>{
 
 adminRoutes.get('/manage-events', (req, res)=>{
     res.sendFile('manage-events.html', {root: adminRoot});
+});
+
+adminRoutes.get('/api/events', (req, res) => {
+    const events = getAllEvent();
+    res.json(events);
 });
 
 export default adminRoutes;
