@@ -1,5 +1,7 @@
 .about-page{
 background: linear-gradient(to right, #0f172a, #214eb6, #0f172a);
+font-family: 'Bebas Neue', sans-serif;
+font-size: 1.25em;
 }
 
 h1 {
@@ -17,11 +19,12 @@ h1 {
   
   
 }
-.disc{
- display: flex;
- line-height: 1.5;
- 
- gap: 3rem;
+.disc {
+    display: flex;
+    gap: 3rem;
+    line-height: 1.5;
+    width: 90%;
+    margin: 0 auto;
 }
 .container-team{
    margin: 0 auto;
@@ -31,38 +34,77 @@ h1 {
   border-radius: 0.875em;
   border: 3px solid #cccccc68;
   background-color:#f3f4f6;
-}
-.member{
-  padding: 0.4rem 0.7rem;
-  border-radius: 0.875em;
-  border: 3px solid black;
-  background-color:#faf9f9;
-   width: 100%;
-    box-sizing: border-box;
   
 }
+
+ .member {
+    position: relative;
+    padding: 0;
+    border-radius: 18px;
+    border: none;
+    background: linear-gradient(to right, #ffffff, #eef3ff);
+    width: 90%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.member:hover {
+
+    transform: translateY(-5px);
+
+}
+
+
 .member-details {
 
     display: none;
-
+    margin-left: 220px;
+    padding: 0 70px 20px 20px;
+    text-align: right;
+    line-height: 1.5;
 }
 .member-sum {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    display: flex;
+    width: 100%;
 }
- 
+ .member-sum h2 {
+    margin-left: auto;
+    margin-right: 15px;
+    text-align: right;
+}
+
+
 
 
 .members {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
 }
+
+
 .details-button {
-    margin-left: auto;
+    margin-left: 0;
+    margin-right: 20px;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
+    background-color: #214eb6;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
 }
+
+.details-button:hover {
+    background-color: #4218cc;
+    transform: scale(1.1);
+}
+
+
 
 .back-button {
     display: inline-block;
@@ -79,8 +121,9 @@ h1 {
     background-color: #3f2ff0;
 }
 .member-sum img {
-    width: 80px;
-    height: 80px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
+    
     
 }
