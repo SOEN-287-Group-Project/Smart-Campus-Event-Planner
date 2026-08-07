@@ -17,6 +17,7 @@ adminRoutes.get('/create-event', (req, res)=>{
 });
 
 adminRoutes.get('/manage-events', (req, res)=>{
+    renderEvents();
     res.sendFile('manage-events.html', {root: adminRoot});
 });
 
