@@ -83,14 +83,27 @@ function insertUser(full_name, email, password_hash){
     return result;
 }
 
-function queryUser(email, password){
+function getUser(email, password){
     const result = selectFromUsersByEmail.get(
         email
     );
     return result;
 }
 
+const selectAllFromEvents = db.prepare(
+    `
+    SELECT *
+    FROM events;
+    `
+);
+
+function getAllEvent(){
+    const result = selectAllFromEvents.run();
+    return result;
+}
+
 export{
     insertUser,
-    queryUser
+    getUser,
+    getAllEvent
 }

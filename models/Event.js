@@ -38,8 +38,4 @@ export default class Event{
         this.organizer_id = organizer_id;
         this.created_on = created_on;
     }
-
 }
-
-// serialize
-new-event.serialize()

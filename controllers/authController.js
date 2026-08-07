@@ -1,4 +1,4 @@
-import { insertUser, queryUser } from "../database/database.js";
+import { insertUser, getUser } from "../database/database.js";
 import bcrypt from "bcrypt";
 
 function login(req, res){
@@ -12,7 +12,7 @@ function login(req, res){
     }
 
     try{
-        const user = queryUser(email);
+        const user = getUser(email);
 
         if (!user || !bcrypt.compareSync(password, user.password_hash)) {
             return res.status(401).send("Invalid email or password.");
