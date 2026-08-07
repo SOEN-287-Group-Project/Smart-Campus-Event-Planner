@@ -1,7 +1,9 @@
 .stat-card {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .5rem;
     background: #eff6ff;
     padding: 1.875em;
     border-radius: 0.875em;
@@ -10,8 +12,7 @@
     box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
 }
 .stat-card strong {
-    margin-left: auto;
-    margin-right: 10px;
+    margin: 0;
 }
 
 table.stat-card{
@@ -47,7 +48,6 @@ table.stat-card{
     border-radius: 0.875rem;
     padding: 1.25rem;
     box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
-
 }
 
 /*charts*/
@@ -257,13 +257,10 @@ section.scroll-container {
 /***************Calendar********************/
 
 .calendar{
-    
     display: flex;
     flex-direction: column;
     padding: 10px;
     background:#fff
-    
-
 }
 
 .cal-header{
@@ -274,7 +271,6 @@ section.scroll-container {
 }
 
 .cal-header button{
-    
     display: flex;
     align-items: center;
     justify-content: center;
