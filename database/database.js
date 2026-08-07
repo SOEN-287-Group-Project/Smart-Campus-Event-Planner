@@ -117,7 +117,7 @@ const selectFromUsersByEmail = db.prepare(
 const selectFromCategoryByCategoryName = db.prepare(
     `
     SELECT *
-    FROM category
+    FROM categories
     WHERE category_name = ?;
     `
 );

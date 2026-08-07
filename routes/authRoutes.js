@@ -1,5 +1,5 @@
 import express from "express";
-import { login, register, logout } from "../controllers/authController.js"
+import authController from "../controllers/authController.js"
 
 const authRoutes = express.Router();
 const authRoot = 'views/auth-views';
@@ -16,6 +16,6 @@ authRoutes.get('/register', (req, res)=>{
 
 authRoutes.post('/register', authController.register)
 
-authRoutes.get('/logout', logout);
+authRoutes.get('/logout', authController.logout);
 
 export default authRoutes;

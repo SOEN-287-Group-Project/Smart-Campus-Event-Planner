@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllEvent } from "../database/database.js";
+import database from "../database/database.js";
 
 const adminRoutes = express.Router();
 const adminRoot = 'views/admin-views';
