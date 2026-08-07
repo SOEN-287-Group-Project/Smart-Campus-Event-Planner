@@ -84,12 +84,12 @@ button {
     font-family: 'Bebas Neue';
     font-size: 2.3rem;
 }
-@media (min-width: 901px) {
+@media (min-width: 100rem) {
     .dropdown a:not(:first-child) {
         display: none;
     }
 }
-@media (max-width:98.25rem){
+@media (max-width:100rem){
 
     .nav-links a{
         display:none;

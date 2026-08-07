@@ -1,5 +1,3 @@
-import { getAllEvent } from "#root/database/database.js";
-
 function rendercharts() {
 
     const ctx = document.getElementById('bar-chart');
@@ -159,39 +157,28 @@ function renderCalendar(){
     updateCalendar();
 }
 
-/************************MODAL popup********************************* */ 
+/***Rendering events table from database***/ 
 function renderEvents(){
+    const tbody = document.getElementById("eventTableBody"); //locate the table body
+    const modal = document.getElementById("editModal"); //locate edit button
 
-    const events = getAllEvent().map(
-        (row) => new Event(
-            row.event_id,
-            row.title,
-            row.description,
-            row.category,
-            row.event_date,
-            row.start_time,
-            row.end_time,
-            row.location,
-            row.capacity,
-            row.status,
-            row.organizer_id,
-            row.created_on
-        )
-    );
+    const editName = document.getElementById("editName");//modal input fields
 
-    const tbody = document.getElementById("eventTableBody");
-    const modal = document.getElementById("editModal");
 
-    const editName = document.getElementById("editName");
-    const editStart = document.getElementById("editStart");
-    const editEnd = document.getElementById("editEnd");
+    const editStartDate = document.getElementById("editStartDate");
+    const editStartTime = document.getElementById("editStartTime");
+    const editEndTime = document.getElementById("editEndTime");
+
+
     const editCategory = document.getElementById("editCategory");
-    const editCapacity = document.getElementById("editCapacity")
-
+    const editCapacity = document.getElementById("editCapacity");
     const saveBtn = document.getElementById("saveBtn");
     const cancelBtn = document.getElementById("cancelBtn");
 
-    let currentEvent = null;
+    if (!tbody) return; //render only if the table body exists
+
+    let events = []; 
+    let currentEvent = null; // r
 
     function renderTable() {
         tbody.innerHTML = "";
@@ -200,42 +187,65 @@ function renderEvents(){
             tbody.innerHTML += `
                 <tr>
                     <td>${event.title}</td>
-                    <td>${event.start_time.replace("T", "<br>")}</td>
-                    <td>${event.end_time.replace("T", "<br>")}</td>
-                    <td>${event.category_id}</td>
-                    <td>${event.capacity}</td>
+                    <td>${event.start_time ? event.start_time.replace("T", "<br>") : ""}</td>
+                    <td>${event.end_time ? event.end_time.replace("T", "<br>") : ""}</td>
+                    <td>${event.category_id || ""}</td>
+                    <td>${event.capacity || ""}</td>
+                    <td>${event.status || ""}</td>
                     <td>
                         <button class="edit-event" data-id="${event.event_id}">
                             Edit
                         </button>
-
                     </td>
                 </tr>
             `;
         });
     }
 
-    renderTable();
-
+    fetch("/admin/api/events")
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Failed to load events");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            events = data;
+            renderTable();
+        })
+        .catch((error) => {
+            console.error(error);
+            tbody.innerHTML = `<tr><td colspan="6">Unable to load events from the server.</td></tr>`;
+        });
+    
+    /*Modal popup for editing events*/    
     tbody.addEventListener("click", (e) => {
         if (!e.target.classList.contains("edit-event")) return;
 
-        const id = Number(e.target.dataset.id);
-        currentEvent = events.find((event) => event.id === id);
+        const id = e.target.dataset.id;
+        currentEvent = events.find((event) => event.event_id === id);
 
-        editName.value = currentEvent.name;
-        editStart.value = currentEvent.start_time;
-        editEnd.value = currentEvent.end_time;
+        if (!currentEvent) return;
+
+        editName.value = currentEvent.title;
+        editStartDate.value = currentEvent.event_date;
+        editStartTime.value = currentEvent.start_time;
+        editEndTime.value = currentEvent.end_time;
         editCategory.value = currentEvent.category_id;
         editCapacity.value = currentEvent.capacity;
 
-        modal.style.display = "flex";
+        if (modal) {
+            modal.style.display = "flex";
+        }
     });
 
-    saveBtn.addEventListener("click", () => {
+    saveBtn?.addEventListener("click", () => {//save changes to the event (push to db?)
+        if (!currentEvent) return;
+
         currentEvent.title = editName.value;
-        currentEvent.start_time = editStart.value;
-        currentEvent.end_time = editEnd.value;
+        currentEvent.start_date = editStartDate.value;
+        currentEvent.start_time = editStartTime.value;
+        currentEvent.end_time = editEndTime.value;
         currentEvent.category_id = editCategory.value;
         currentEvent.capacity = editCapacity.value;
 
@@ -243,18 +253,35 @@ function renderEvents(){
         modal.style.display = "none";
     });
 
-    cancelBtn.addEventListener("click", () => {
-        modal.style.display = "none";
-    });
-
-    modal.addEventListener("click", (e) => {
-        if (e.target === modal) {
+    cancelBtn?.addEventListener("click", () => {
+        if (modal) {
             modal.style.display = "none";
         }
     });
 
+<<<<<<< HEAD
 }
 
 export {
     renderEvents,
 }
+=======
+    modal?.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+}
+
+    /***dynamically populate the admin navigation menu***/
+function getNavDropdown() {
+    const adminNavItems = document.getElementById("dropdown");
+
+    adminNavItems.innerHTML += `
+                        <a href="/admin/admin-dashboard" target="_self">Overview</a>
+                        <a href="/admin/manage-events" target="_self">Manage Events</a>
+                        <a href="/admin/create-event" target="_self">Create Event</a>
+                        <a href="/admin/analytics" target="_self">Analytics</a>
+                                `;
+    }
+>>>>>>> 4421b59e978f7ad67c10fcac862612023bb1283e
