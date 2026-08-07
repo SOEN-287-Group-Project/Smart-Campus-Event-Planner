@@ -21,7 +21,7 @@ adminRoutes.get('/manage-events', (req, res)=>{
 });
 
 adminRoutes.get('/api/events', (req, res) => {
-    const events = getAllEvent();
+    const events = database.getAllEvent();
     res.json(events);
 });
 

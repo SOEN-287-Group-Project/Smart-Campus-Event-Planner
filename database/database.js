@@ -41,6 +41,8 @@ db.exec(registrations);
 // get (one) from events by title
 // get (one) from registrations by registration_id
 
+// get all registrations by user_id
+
 // SELECT (all)
 // get (all) from users
 // get (all) from categories
@@ -94,11 +96,10 @@ const insertIntoEvents = db.prepare(
 const insertIntoRegistrations = db.prepare(
     `
     INSERT INTO registrations(
-        registration_id,
         user_id,
         event_id
     )
-    VALUES (?, ?, ?)
+    VALUES (?, ?)
     `
 );
 
@@ -145,7 +146,7 @@ const selectFromRegistrationByUserId = db.prepare(
     `
     SELECT *
     FROM registrations
-    JOIN registrations USING (user_id)
+    JOIN users USING (user_id)
     `
 );
 
