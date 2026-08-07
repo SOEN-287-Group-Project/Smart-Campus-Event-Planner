@@ -12,11 +12,6 @@ const app = express();
 
 // set the static root
 app.use(express.static('assets'));
-app.use('/js', express.static('assets/js'));
-app.use('/css', express.static('assets/css'));
-
-//Express access to folder content
-app.use('/assets/js/student', express.static('student'));
 
 // middleware for parsing incoming request URLs
 app.use(express.urlencoded({ extended: true }));
