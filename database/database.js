@@ -30,19 +30,22 @@ db.exec(registrations);
 // ********** SQL Scripts summary **********
 
 // INSERT (one)
-// insert (one) into users
-// insert (one) into categories
-// insert (one) into events
-// insert (one) into registrations
-
-// SELECT (all)
-// SELECT (all) from users
-// SELECT (all) from categories
-// SELECT (all) from events
-// SELECT (all) from registrations
+// add (one) into users
+// add (one) into categories
+// add (one) into events
+// add (one) into registrations
 
 // SECLECT (one)
+// get (one) from users by email
+// get (one) from categories by category_name
+// get (one) from events by title
+// get (one) from registrations by registration_id
 
+// SELECT (all)
+// get (all) from users
+// get (all) from categories
+// get (all) from events
+// get (all) from registrations
 
 // ********** SQL Scripts for INSERT **********
 
