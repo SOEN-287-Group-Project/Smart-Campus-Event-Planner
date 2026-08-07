@@ -89,7 +89,7 @@ button {
         display: none;
     }
 }
-@media (max-width:900px){
+@media (max-width:98.25rem){
 
     .nav-links a{
         display:none;

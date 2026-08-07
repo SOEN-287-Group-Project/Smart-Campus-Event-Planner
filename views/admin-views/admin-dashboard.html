@@ -6,6 +6,110 @@
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/global_styles.css" />
     <script src="../controllers/adminController.js"></script>
+    
+    <!--dropdown menu for admin navigation-->
+    <script>
+        function toggleDropdown() {
+            const button = document.getElementById("menuButton");
+            const menu = document.getElementById("dropdown");
+
+            button.addEventListener("click", (e) => {
+                e.stopPropagation();
+                menu.classList.toggle("hidden");
+            });
+
+            document.addEventListener("click", () => {
+                menu.classList.add("hidden");
+            });
+    }
+
+        function rotateMenuArrow(){
+            const arrow = document.querySelector(".arrow");
+
+            arrow.addEventListener("click", () => {
+                arrow.classList.toggle("open");
+            });
+        }
+    </script>
+
+    <!--dynamically populate the admin navigation menu --> 
+    <script>function getAdminNav() {
+        const adminNavItems = document.getElementById("dropdown");
+
+        adminNavItems.innerHTML += `
+                            <a href="/admin/admin-dashboard" target="_self">Overview</a>
+                            <a href="/admin/manage-events" target="_self">Manage Events</a>
+                            <a href="/admin/create-event" target="_self">Create Event</a>
+                            <a href="/admin/analytics" target="_self">Analytics</a>
+        `;
+    }
+
+        window.addEventListener("DOMContentLoaded", getAdminNav);
+    </script>
+
+
+    <!--calendar script-->
+    <script>
+        function renderCalendar(){
+    const monthYearElement = document.getElementById('monthYear');
+    const datesElement = document.getElementById('dates');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let currentDate = new Date();
+
+    const updateCalendar = () => {
+        const currentYear = currentDate.getFullYear();
+        const currentMonth = currentDate.getMonth();
+
+        const firstDay = new Date(currentYear, currentMonth, 0);
+        const lastDay = new Date(currentYear, currentMonth + 1, 0);
+        const totalDays = lastDay.getDate();
+        const firstDayIndex = firstDay.getDay();
+        const lastDayIndex = lastDay.getDay();
+
+        const monthYearString = currentDate.toLocaleDateString('default' , {month: 'long' , year: 'numeric'});
+        monthYearElement.textContent = monthYearString;
+
+        let datesHTML = '';
+
+        for(let i = firstDayIndex; i > 0; i--){
+            const prevDate = new Date(currentYear, currentMonth , 0 - i + 1);
+            datesHTML += `<div class = "date inactive">${prevDate.getDate()}</div>`;
+        }
+    
+
+        for(let i = 1; i<=totalDays; i++){
+            const date = new Date(currentYear, currentMonth, i);
+            const activeClass = date.toDateString() === new Date().toDateString() ? 'active' : '';
+            datesHTML += `<div class = "date ${activeClass}">${i}</div>`;
+        }
+
+        for(let i = 1; i <= 7 - lastDayIndex; i++){
+            const nextDate = new Date(currentYear, currentMonth + 1, i);
+            datesHTML += `<div class = "date inactive">${nextDate.getDate()}</div>`;
+
+        }
+
+        datesElement.innerHTML = datesHTML;
+    } 
+    
+    prevBtn.addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        updateCalendar();
+    })
+
+    nextBtn.addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        updateCalendar();
+    })
+
+    updateCalendar();
+}
+    </script>
+
+
+
 </head>
 
 <body>
@@ -29,11 +133,7 @@
                     </button>
                    
                     <div id="dropdown" class="dropdown hidden">
-                        <a id="menu-items" href="/public/index">Logout</a> <!-- Add more menu items here if needed -->
-                        <a href="/admin/admin-dashboard" target="_self">Overview</a>
-                        <a href="/admin/manage-events" target="_self">Manage Events</a>
-                        <a href="/admin/create-event" target="_self">Create Event</a>
-                        <a href="/admin/analytics" target="_self">Analytics</a>
+                        <a id="menu-items" href="/public/index">Logout</a>
                     </div>
 
                 </div>
