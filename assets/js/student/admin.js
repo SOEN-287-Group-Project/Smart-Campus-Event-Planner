@@ -1,4 +1,11 @@
 function rendercharts() {
+    if (typeof Chart === 'undefined') {
+        const container = document.querySelector('.chart-grid');
+        if (container) {
+            container.innerHTML = '<p>Chart library could not be loaded.</p>';
+        }
+        return;
+    }
 
     const ctx = document.getElementById('bar-chart');
 
@@ -270,6 +277,8 @@ function renderEvents(){
 function getNavDropdown() {
     const adminNavItems = document.getElementById("dropdown");
 
+    if (!adminNavItems) return;
+
     adminNavItems.innerHTML += `
                         <a href="/admin/admin-dashboard" target="_self">Overview</a>
                         <a href="/admin/manage-events" target="_self">Manage Events</a>
@@ -277,3 +286,35 @@ function getNavDropdown() {
                         <a href="/admin/analytics" target="_self">Analytics</a>
                                 `;
     }
+
+function initializeAdminPage() {
+    if (document.getElementById("menuButton") && document.getElementById("dropdown")) {
+        toggleDropdown();
+    }
+
+    if (document.querySelector(".arrow")) {
+        rotateMenuArrow();
+    }
+
+    if (document.getElementById("dropdown")) {
+        getNavDropdown();
+    }
+
+    if (document.getElementById("monthYear") && document.getElementById("dates")) {
+        renderCalendar();
+    }
+
+    if (document.getElementById("bar-chart") || document.getElementById("doughnut-chart")) {
+        rendercharts();
+    }
+
+    if (document.getElementById("eventTableBody")) {
+        renderEvents();
+    }
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeAdminPage);
+} else {
+    initializeAdminPage();
+}
