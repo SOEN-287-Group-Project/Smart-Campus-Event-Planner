@@ -140,6 +140,15 @@ const selectFromRegistrationByEvents = db.prepare(
     `
 );
 
+// sql script for getting registrations by user_id
+const selectFromRegistrationByUserId = db.prepare(
+    `
+    SELECT *
+    FROM registrations
+    JOIN registrations USING (user_id)
+    `
+);
+
 // ********** SQL Scripts for SELECT all **********
 
 // sql script for getting all users
@@ -273,6 +282,14 @@ function getRegistration(registration_id){
     return result;
 }
 
+function getRegistrationByStudent(registration_id){
+    const result = selectFromRegistrationByUserId.all(
+        user_id
+    );
+    return result;
+}
+
+
 // ********** API Functions for getting all entries **********
 
 // getting all the users from the users table
@@ -309,6 +326,7 @@ export default{
     getCategory,
     getEvent,
     getRegistration,
+    getRegistrationByStudent,
     getAllUsers,
     getAllCategories,
     getAllEvent,
