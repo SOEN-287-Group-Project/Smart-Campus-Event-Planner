@@ -1,5 +1,11 @@
 -- Database Definition --
 
+DROP TABLE IF EXISTS registrations;
+DROP TABLE IF EXISTS events;
+DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS users;
+
+
 CREATE TABLE IF NOT EXISTS users (
     user_id INTEGER PRIMARY KEY,
     full_name VARCHAR(150) NOT NULL,
@@ -10,16 +16,16 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS categories (
-    category_id VARCHAR(100) PRIMARY KEY,
+    category_id INTEGER PRIMARY KEY,
     category_name VARCHAR(100) NOT NULL UNIQUE,
     description VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS events (
-    event_id VARCHAR(100) PRIMARY KEY,
+    event_id INTEGER PRIMARY KEY,
     organizer_id VARCHAR(100) NOT NULL,
     category_id VARCHAR(100) NOT NULL,
-    title VARCHAR(100) NOT NULL,
+    title VARCHAR(100) NOT NULL UNIQUE,
     description VARCHAR(100) NOT NULL,
     event_date DATE NOT NULL,
     start_time TIME NOT NULL,
@@ -35,7 +41,7 @@ CREATE TABLE IF NOT EXISTS events (
 );
 
 CREATE TABLE IF NOT EXISTS registrations (
-    registration_id VARCHAR(100) PRIMARY KEY,
+    registration_id INTEGER PRIMARY KEY,
     user_id VARCHAR(100) NOT NULL,
     event_id VARCHAR(100) NOT NULL,
     registration_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,

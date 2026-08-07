@@ -1,4 +1,4 @@
-import { insertUser, getUser } from "../database/database.js";
+import { addUser, getUser } from "../database/database.js";
 import bcrypt from "bcrypt";
 
 function login(req, res){
@@ -53,7 +53,7 @@ function register(req, res){
 
     try {
         const password_hash = bcrypt.hashSync(password, 10);
-        insertUser(`${first_name} ${last_name}`, email, password_hash);
+        addUser(`${first_name} ${last_name}`, email, password_hash);
         return res.redirect('/student/student-dashboard');
     } 
     catch (error) {
@@ -65,7 +65,7 @@ function register(req, res){
     }
 }
 
-export {
+export default {
     login,
     register
 }

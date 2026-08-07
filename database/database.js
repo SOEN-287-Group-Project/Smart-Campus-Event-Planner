@@ -6,10 +6,45 @@ import Database from "better-sqlite3";
 const db = new Database("database/database.db");
 
 // initialize the schemas
-const sql = fs.readFileSync("./database/structure.sql", "utf8")
+const schemas = fs.readFileSync("./database/schemas.sql", "utf8");
 
-// create the tables if not exist
-db.exec(sql)
+// initialize the users
+const users = fs.readFileSync("./database/users.sql", "utf8");
+
+// initialize the categories
+const categories = fs.readFileSync("./database/categories.sql", "utf8");
+
+// initialize the events
+const events = fs.readFileSync("./database/events.sql", "utf8");
+
+// initialize the registrations
+const registrations = fs.readFileSync("./database/registrations.sql", "utf8");
+
+// execute the sql scripts
+db.exec(schemas);
+db.exec(users);
+db.exec(categories);
+db.exec(events);
+db.exec(registrations);
+
+// ********** SQL Scripts summary **********
+
+// INSERT (one)
+// insert (one) into users
+// insert (one) into categories
+// insert (one) into events
+// insert (one) into registrations
+
+// SELECT (all)
+// SELECT (all) from users
+// SELECT (all) from categories
+// SELECT (all) from events
+// SELECT (all) from registrations
+
+// SECLECT (one)
+
+
+// ********** SQL Scripts for INSERT **********
 
 // sql script for inserting to users
 const insertIntoUsers = db.prepare(
@@ -64,6 +99,8 @@ const insertIntoRegistrations = db.prepare(
     `
 );
 
+// ********** SQL Scripts for SELECT with condition **********
+
 // sql script for getting a user by unique email
 const selectFromUsersByEmail = db.prepare(
     `
@@ -73,8 +110,74 @@ const selectFromUsersByEmail = db.prepare(
     `
 );
 
-// adding new user to the database
-function insertUser(full_name, email, password_hash){
+// sql script for getting a category by unique category name
+const selectFromCategoryByCategoryName = db.prepare(
+    `
+    SELECT *
+    FROM category
+    WHERE category_name = ?;
+    `
+);
+
+// sql script for getting a user by unique email
+const selectFromEventsByEventTitle = db.prepare(
+    `
+    SELECT *
+    FROM events
+    WHERE title = ?;
+    `
+);
+
+// sql script for getting a user by unique email
+const selectFromRegistrationByEvents = db.prepare(
+    `
+    SELECT *
+    FROM registrations
+    WHERE registration_id = ?;
+    `
+);
+
+// ********** SQL Scripts for SELECT all **********
+
+// sql script for getting all users
+const selectAllFromUsers = db.prepare(
+    `
+    SELECT *
+    FROM users
+    `
+);
+
+// sql script for getting all events
+const selectAllFromEvents = db.prepare(
+    `
+    SELECT *
+    FROM events;
+    `
+);
+
+// sql script for getting all categories
+const selectAllFromCategories = db.prepare(
+    `
+    SELECT *
+    FROM categories;
+    `
+);
+
+// sql script for getting all registration
+const selectAllFromRegistrations = db.prepare(
+    `
+    SELECT *
+    FROM registrations;
+    `
+);
+
+// ********** API Functions for adding one entry **********
+
+// adding new user to the users table
+function addUser(
+    full_name, email, 
+    password_hash
+){
     const result = insertIntoUsers.run(
         full_name, 
         email, 
@@ -83,6 +186,62 @@ function insertUser(full_name, email, password_hash){
     return result;
 }
 
+// adding new category to the category table
+function addCategory(
+    category_name, 
+    description
+){
+    const result = insertIntoCategories.run(
+        category_name,
+        description
+    );
+    return result;
+}
+
+// adding new category to the category table
+function addEvents(
+    organizer_id,
+    category_id,
+    title,
+    description,
+    event_date,
+    start_time,
+    end_time,
+    location,
+    capacity,
+    status
+){
+    const result = insertIntoEvents.run(
+        organizer_id,
+        category_id,
+        title,
+        description,
+        event_date,
+        start_time,
+        end_time,
+        location,
+        capacity,
+        status
+    );
+    return result;
+}
+
+// adding new category to the category table
+function addRegistration(
+    user_id,
+    event_id,
+    attended
+){
+    const result = insertIntoRegistrations.run(
+        user_id,
+        event_id,
+        attended
+    );
+    return result;
+}
+
+// ********** API Functions for getting one entry  **********
+
 function getUser(email, password){
     const result = selectFromUsersByEmail.get(
         email
@@ -90,20 +249,65 @@ function getUser(email, password){
     return result;
 }
 
-const selectAllFromEvents = db.prepare(
-    `
-    SELECT *
-    FROM events;
-    `
-);
+function getCategory(category_name){
+    const result = selectFromCategoryByCategoryName.get(
+        category_name
+    );
+    return result;
+}
 
+function getEvent(event_id){
+    const result = selectFromEventsByEventTitle.get(
+        title
+    );
+    return result;
+}
+
+function getRegistration(registration_id){
+    const result = selectFromRegistrationByEvents.get(
+        registration_id
+    );
+    return result;
+}
+
+// ********** API Functions for getting all entries **********
+
+// getting all the users from the users table
+function getAllUsers(){
+    const result = selectAllFromUsers.all();
+    return result;
+}
+
+// getting all the users from the users table
+function getAllCategories(){
+    const result = selectAllFromUsers.all();
+    return result;
+}
+
+// get all the events from the events table
 function getAllEvent(){
     const result = selectAllFromEvents.all();
     return result;
 }
 
-export{
-    insertUser,
+// getting all the users from the users table
+function getAllRegistrations(){
+    const result = selectAllFromUsers.all();
+    return result;
+}
+
+// ********** Exports **********
+export default{
+    addUser,
+    addCategory,
+    addEvents,
+    addRegistration,
     getUser,
-    getAllEvent
+    getCategory,
+    getEvent,
+    getRegistration,
+    getAllUsers,
+    getAllCategories,
+    getAllEvent,
+    getAllRegistrations
 }
