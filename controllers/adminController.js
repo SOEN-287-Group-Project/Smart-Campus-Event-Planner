@@ -259,13 +259,6 @@ function renderEvents(){
         }
     });
 
-<<<<<<< HEAD
-}
-
-export {
-    renderEvents,
-}
-=======
     modal?.addEventListener("click", (e) => {
         if (e.target === modal) {
             modal.style.display = "none";
@@ -284,4 +277,3 @@ function getNavDropdown() {
                         <a href="/admin/analytics" target="_self">Analytics</a>
                                 `;
     }
->>>>>>> 4421b59e978f7ad67c10fcac862612023bb1283e

@@ -10,7 +10,7 @@ detailsButtons.forEach((button) => {
 
         if (isHidden) {
             memberDetails.style.display = "block";
-            button.textContent = "−";
+            button.textContent = "-";
         } else {
             memberDetails.style.display = "none";
             button.textContent = "+";

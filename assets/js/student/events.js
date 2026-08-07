@@ -1,4 +1,5 @@
 /*import Event from "../../models/Event.js"; */
+
 // Creates a lookup table with links to an image for each categories
 class Event{
     constructor(
