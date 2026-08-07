@@ -87,7 +87,9 @@ function rendercharts() {
 
 function toggleDropdown() {
     const button = document.getElementById("menuButton");
-    const menu = document.getElementById("dropdown");
+    const menu = document.getElementById("dropdown") || document.getElementById("studentDropdown");
+
+    if (!button || !menu) return;
 
     button.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -179,6 +181,8 @@ function renderEvents(){
 
     const editCategory = document.getElementById("editCategory");
     const editCapacity = document.getElementById("editCapacity");
+    const editDescription = document.getElementById("editDescription");
+
     const saveBtn = document.getElementById("saveBtn");
     const cancelBtn = document.getElementById("cancelBtn");
 
@@ -194,8 +198,8 @@ function renderEvents(){
             tbody.innerHTML += `
                 <tr>
                     <td>${event.title}</td>
-                    <td>${event.start_time ? event.start_time.replace("T", "<br>") : ""}</td>
-                    <td>${event.end_time ? event.end_time.replace("T", "<br>") : ""}</td>
+                    <td>${event.start_time || ""}</td>
+                    <td>${event.end_time || ""}</td>
                     <td>${event.category_id || ""}</td>
                     <td>${event.capacity || ""}</td>
                     <td>${event.status || ""}</td>
@@ -222,7 +226,7 @@ function renderEvents(){
         })
         .catch((error) => {
             console.error(error);
-            tbody.innerHTML = `<tr><td colspan="6">Unable to load events from the server.</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="7">Unable to load events from the server.</td></tr>`;
         });
     
     /*Modal popup for editing events*/    
@@ -240,6 +244,7 @@ function renderEvents(){
         editEndTime.value = currentEvent.end_time;
         editCategory.value = currentEvent.category_id;
         editCapacity.value = currentEvent.capacity;
+        editDescription.value = currentEvent.description;
 
         if (modal) {
             modal.style.display = "flex";
@@ -255,6 +260,7 @@ function renderEvents(){
         currentEvent.end_time = editEndTime.value;
         currentEvent.category_id = editCategory.value;
         currentEvent.capacity = editCapacity.value;
+        currentEvent.description = editDescription.value;
 
         renderTable();
         modal.style.display = "none";
@@ -287,10 +293,28 @@ function getNavDropdown() {
                                 `;
     }
 
+function getStudentNavDropdown() {
+    const adminNavItems = document.getElementById("studentDropdown");
+
+    if (!adminNavItems) return;
+
+    adminNavItems.innerHTML += `
+                        <a href="/student/student-dashboard" target="_self">Overview</a>
+                        <a href="/student/events" target="_self">Events</a>
+                        <a href="/student/my-registrations" target="_self">My Registrations</a>
+                        <a href="/student/profile" target="_self">Profile</a>
+                                `;
+    }
+
 function initializeAdminPage() {
     if (document.getElementById("menuButton") && document.getElementById("dropdown")) {
         toggleDropdown();
     }
+
+    if (document.getElementById("menuButton") && document.getElementById("studentDropdown")) {
+        toggleDropdown();
+    }
+    
 
     if (document.querySelector(".arrow")) {
         rotateMenuArrow();
@@ -298,6 +322,10 @@ function initializeAdminPage() {
 
     if (document.getElementById("dropdown")) {
         getNavDropdown();
+    }
+
+    if (document.getElementById("studentDropdown")) {
+        getStudentNavDropdown();
     }
 
     if (document.getElementById("monthYear") && document.getElementById("dates")) {
