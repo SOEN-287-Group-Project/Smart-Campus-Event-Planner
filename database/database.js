@@ -183,6 +183,21 @@ const selectAllFromRegistrations = db.prepare(
     FROM registrations;
     `
 );
+// ********** SQL Scripts for UPDATE **********
+
+// sql script for updating an event by id
+const updateEventById = db.prepare(`
+    UPDATE events
+    SET
+        category_id = ?,
+        title = ?,
+        description = ?,
+        event_date = ?,
+        start_time = ?,
+        end_time = ?,
+        capacity = ?
+    WHERE event_id = ?
+`);
 
 // ********** API Functions for adding one entry **********
 
@@ -311,10 +326,47 @@ function getAllEvent(){
     return result;
 }
 
-// getting all the users from the users table
+// getting all the users from the registrations table
 function getAllRegistrations(){
-    const result = selectAllFromUsers.all();
+    const result = selectAllFromRegistrations.all();
     return result;
+}
+
+// ********** API Functions for updating  **********
+
+// updating an event by id
+function updateEvent(
+    event_id,
+    category_id,
+    title,
+    description,
+    event_date,
+    start_time,
+    end_time,
+    capacity
+) {
+    const result = updateEventById.run(
+        category_id,
+        title,
+        description,
+        event_date,
+        start_time,
+        end_time,
+        capacity,
+        event_id
+    );
+
+    if (result.changes === 0) {
+        return null;
+    }
+    
+    // retrieve the updated event from the database
+    // and return it to the route/frontend
+    return db.prepare(`
+        SELECT *
+        FROM events
+        WHERE event_id = ?
+    `).get(event_id);
 }
 
 // ********** Exports **********
@@ -331,5 +383,6 @@ export default{
     getAllUsers,
     getAllCategories,
     getAllEvent,
-    getAllRegistrations
+    getAllRegistrations,
+    updateEvent
 }

@@ -166,44 +166,91 @@ function renderCalendar(){
     updateCalendar();
 }
 
-/***Rendering events table from database***/ 
+/*****Rendering events table from database*****/ 
+
+//Attendace modal()
+
+//Edit event modal()
+
+//Table rendering()
+
+//fetch APIs
+
+/**********************************************/
 function renderEvents(){
     const tbody = document.getElementById("eventTableBody"); //locate the table body
 
-    if (!tbody) return; //render only if the table body exists
-    let attendanceData = [];
+    if (!tbody) return;
+    
     let events = []; 
     let currentEvent = null;
+    let attendanceData = {};
+
 
     function attendanceModal() {
-        const modal = document.getElementById("attendanceModal");
-        const attendanceTableBody = document.getElementById("attendanceTableBody");
-        const eventTitle = document.getElementById("currentEventTitle");
 
+        const modal = document.getElementById("attendanceModal");
+        const attendanceTableBody =
+            document.getElementById("attendanceTableBody");
+        const eventTitle =
+            document.getElementById("currentEventTitle");
 
         tbody.addEventListener("click", (e) => {
+
             if (!e.target.classList.contains("Manage-Attendance")) return;
 
             const id = e.target.dataset.id;
 
-            currentEvent = events.find((event) => event.event_id == id);
+            currentEvent = events.find(
+                (event) => event.event_id == id
+            );
 
             if (!currentEvent) return;
 
-            eventTitle.textContent = currentEvent.title; // Set the event title in the modal
+            eventTitle.textContent = currentEvent.title;
+
+            // Remove attendees from previous event
+            attendanceTableBody.innerHTML = "";
+
+            // Get attendees belonging to this event
+            const attendees = attendanceData[id] || [];
+
             
+            attendees.forEach((attendee) => {
 
+                attendanceTableBody.innerHTML += `
+                    <tr>
+                        <td>${attendee.user_id}</td>
+                        <td>${attendee.attended}</td>
+                        <td>
+                            <button
+                                class="delete-attendee"
+                                data-id="${attendee.user_id}">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                `;
 
-            if (modal) modal.style.display = 'flex';
+            });
+
+            modal.style.display = 'flex';
         });
 
-        // Close modal 
-        modal.addEventListener("click", (e) => {
-            if (e.target === modal) {
-                modal.style.display = "none";
-            }
+
+    // Close modal
+    AttendanceCancelBtn?.addEventListener("click", () => {
+            modal.style.display = "none";
         });
-    }
+
+    modal.addEventListener("click", (e) => {
+
+        if (e.target === modal) {
+            modal.style.display = "none";
+        }
+
+    });
+}
 
     function editEventModal() {
         const modal = document.getElementById("editStudentModal"); //locate edit button
@@ -238,21 +285,50 @@ function renderEvents(){
             modal.style.display = "flex";
         });
 
-        saveBtn?.addEventListener("click", () => {
+        saveBtn?.addEventListener("click", async () => {
             if (!currentEvent) return;
 
-            currentEvent.title = editName.value;
-            currentEvent.start_date = editStartDate.value;
-            currentEvent.start_time = editStartTime.value;
-            currentEvent.end_time = editEndTime.value;
-            currentEvent.category_id = editCategory.value;
-            currentEvent.capacity = editCapacity.value;
-            currentEvent.description = editDescription.value;
+            const updatedEvent = {
+                title: editName.value,
+                event_date: editStartDate.value,
+                start_time: editStartTime.value,
+                end_time: editEndTime.value,
+                category_id: editCategory.value,
+                capacity: Number(editCapacity.value),
+                description: editDescription.value
+            };
 
-            renderTable();
-            modal.style.display = "none";
+            try {
+                const response = await fetch(// send the updated event data to Express with the event ID is included in the URL
+                    `/admin/api/events/${currentEvent.event_id}`,
+                    {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(updatedEvent) //convert the updated event object to a JSON string
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error("Failed to update event");
+                }
+
+                const savedEvent = await response.json();
+
+                // replace the local event with what the server saved
+                Object.assign(currentEvent, savedEvent);
+
+                renderTable();
+                modal.style.display = "none";
+
+            } catch (error) {
+                console.error(error);
+                alert("Failed to save event.");
+            }
         });
 
+        //close modal
         cancelBtn?.addEventListener("click", () => {
             modal.style.display = "none";
         });
@@ -271,7 +347,7 @@ function renderEvents(){
             tbody.innerHTML += `
                 <tr>
                     <td>${event.title}</td>
-                    <td>${event.start_time || ""}</td>
+                    <td>${(event.event_date && event.start_time) ? `${event.event_date}<br>${event.start_time}` : ""}</td>
                     <td>${event.end_time || ""}</td>
                     <td>${event.category_id || ""}</td>
                     <td>${event.capacity || ""}</td>
@@ -309,13 +385,35 @@ function renderEvents(){
         });
 
 
-    fetch('/api/attendance')//fetch attendance/registrations into attendanceData
+    
+
+    fetch('/admin/api/attendance') //fetch attendance
         .then((res) => {
-            if (!res.ok) throw new Error('Failed to load attendance data');
+            if (!res.ok) {
+                throw new Error('Failed to load attendance data');
+            }
+
             return res.json();
         })
         .then((data) => {
-            attendanceData = Array.isArray(data) ? data : [];
+
+            attendanceData = data.reduce((result, registration) => {
+
+                const eventId = registration.event_id;
+
+                // Create array for this event if it doesn't exist
+                if (!result[eventId]) {
+                    result[eventId] = [];
+                }
+
+                // Store the entire registration
+                result[eventId].push(registration);
+
+                return result;
+
+            }, {});
+
+
         })
         .catch((err) => {
             console.warn('Could not prefetch attendance data:', err);
@@ -354,7 +452,9 @@ function getStudentNavDropdown() {
                         <a href="/student/profile" target="_self">Profile</a>
                                 `;
     }
+    /****************************************************/
 
+/*Element checking before function calls*/
 function initializeAdminPage() {
     if (document.getElementById("menuButton") && document.getElementById("dropdown")) {
         toggleDropdown();

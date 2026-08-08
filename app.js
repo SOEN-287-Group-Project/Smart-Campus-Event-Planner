@@ -19,6 +19,9 @@ app.use(express.static('assets'));
 // middleware for parsing incoming request URLs
 app.use(express.urlencoded({ extended: true }));
 
+// Parses incoming JSON request bodies so req.body can be accessed in API routes
+app.use(express.json());
+
 // redirect the landing page
 app.get('/', (req, res)=>{
     res.redirect('/public/index');

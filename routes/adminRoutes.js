@@ -30,4 +30,49 @@ adminRoutes.get('/api/attendance', (req, res) => {
     res.json(registrations);
 });
 
+adminRoutes.put("/api/events/:id", (req, res) => {
+    const eventId = req.params.id;
+
+    const {
+        title,
+        event_date,
+        start_time,
+        end_time,
+        category_id,
+        capacity,
+        description
+    } = req.body;
+
+    try {
+        const updatedEvent = database.updateEvent(
+            eventId,
+            category_id,
+            title,
+            description,
+            event_date,
+            start_time,
+            end_time,
+            capacity
+        );
+
+        if (!updatedEvent) {
+            return res.status(404).json({
+                error: "Event not found"
+            });
+        }
+
+        res.json(updatedEvent);
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            error: "Failed to update event"
+        });
+    }
+});
+
+
+
+
 export default adminRoutes;

@@ -380,6 +380,48 @@ section.scroll-container {
     display: block;
 }
 
+
+.attendance-field {
+    grid-column: 1 / -1;
+    border: 3px solid #ccc;
+    border-radius: 0.875rem;
+    overflow: hidden;
+    z-index: 11;
+}
+
+.attendance-table {
+    grid-column: 1 / -1;
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    z-index: 10;
+}
+
+.attendance-table th,
+.attendance-table td {
+    text-align: center;    
+    padding: 1rem;
+    border-bottom: 1px solid #dbe4f0;
+}
+
+.attendance-table th {
+
+    background: #eff6ff;
+    color: #0f172a;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+}
+
+.attendance-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+.attendance-table td:last-child {
+    text-align: center;
+}
+
+
 .modal-content input,
 .modal-content select {
     width: 100%;
@@ -392,7 +434,10 @@ section.scroll-container {
 
 #saveBtn,
 #cancelBtn,
-#deleteBtn {
+#deleteBtn,
+#AttendanceSaveBtn,
+#AttendanceCancelBtn,
+.delete-attendee {
     font-size: 1.1rem;
     font-family: 'inter';
     border: none;
@@ -403,24 +448,30 @@ section.scroll-container {
 
 #saveBtn:hover,
 #cancelBtn:hover,
-#deleteBtn:hover {
+#deleteBtn:hover,
+#AttendanceSaveBtn:hover,
+#AttendanceCancelBtn:hover,
+.delete-attendee:hover {
     transform: scale(1.05);
     box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);    
 } 
 
-#saveBtn {
+#saveBtn,
+#AttendanceSaveBtn {
     background: #2563eb;
     color: white;
     padding: 0.75rem 2rem;
 }
 
-#cancelBtn {
+#cancelBtn,
+#AttendanceCancelBtn {
     background: #e5e7eb;
     color: #111827;
     padding: 0.75rem 2rem;
 }
 
-#deleteBtn {
+#deleteBtn,
+.delete-attendee {
     background: #dc2626;
     color: white;
     padding: 0.75rem 2rem;
