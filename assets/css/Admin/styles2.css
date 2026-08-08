@@ -209,7 +209,7 @@ button.Manage-Attendance:hover {
 }
 
 button.Manage-Attendance{
-    background: #e5e7eb;
+    background: #7c7c7c;
 }
 
 .event-table {
@@ -346,7 +346,8 @@ section.scroll-container {
 
 /***************************************/
 
-#editModal {
+#editStudentModal,
+#attendanceModal {
     display: none;
     position: fixed;
     inset: 0;
