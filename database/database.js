@@ -195,7 +195,8 @@ const updateEventById = db.prepare(`
         event_date = ?,
         start_time = ?,
         end_time = ?,
-        capacity = ?
+        capacity = ?,
+        location = ?
     WHERE event_id = ?
 `);
 
@@ -343,7 +344,8 @@ function updateEvent(
     event_date,
     start_time,
     end_time,
-    capacity
+    capacity,
+    location
 ) {
     const result = updateEventById.run(
         category_id,
@@ -353,6 +355,7 @@ function updateEvent(
         start_time,
         end_time,
         capacity,
+        location,
         event_id
     );
 
