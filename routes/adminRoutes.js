@@ -1,8 +1,11 @@
 import express from "express";
 import database from "../database/database.js";
+import requireAdmin from "../controllers/adminController.js";
 
 const adminRoutes = express.Router();
-const adminRoot = 'views/admin-views';
+const adminRoot = "views/admin-views";
+
+adminRoutes.use(requireAdmin); //Admin routes are protected by the requireAdmin middleware
 
 adminRoutes.get('/admin-dashboard', (req, res)=>{
     res.sendFile('admin-dashboard.html', {root: adminRoot});
@@ -30,6 +33,9 @@ adminRoutes.get('/api/attendance', (req, res) => {
     res.json(registrations);
 });
 
+
+
+// ********** API Functions for updating  **********
 adminRoutes.put("/api/events/:id", (req, res) => {
     const eventId = req.params.id;
 
@@ -40,6 +46,7 @@ adminRoutes.put("/api/events/:id", (req, res) => {
         end_time,
         category_id,
         capacity,
+        location,
         description
     } = req.body;
 
@@ -52,7 +59,8 @@ adminRoutes.put("/api/events/:id", (req, res) => {
             event_date,
             start_time,
             end_time,
-            capacity
+            capacity,
+            location
         );
 
         if (!updatedEvent) {

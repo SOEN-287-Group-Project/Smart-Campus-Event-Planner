@@ -84,7 +84,7 @@ function rendercharts() {
         }
     });
 }
-
+/**************Navigation Scripts**************/
 function toggleDropdown() {
     const button = document.getElementById("menuButton");
     const menu = document.getElementById("dropdown") || document.getElementById("studentDropdown");
@@ -108,7 +108,9 @@ function rotateMenuArrow(){
         arrow.classList.toggle("open");
     });
 }
+/**********************************************/
 
+/*Calendar rendering*/
 function renderCalendar(){
     const monthYearElement = document.getElementById('monthYear');
     const datesElement = document.getElementById('dates');
@@ -166,6 +168,33 @@ function renderCalendar(){
     updateCalendar();
 }
 
+/***dynamically populate the admin navigation menu***/
+function getNavDropdown() {
+    const adminNavItems = document.getElementById("dropdown");
+
+    if (!adminNavItems) return;
+
+    adminNavItems.innerHTML += `
+                        <a href="/admin/admin-dashboard" target="_self">Overview</a>
+                        <a href="/admin/manage-events" target="_self">Manage Events</a>
+                        <a href="/admin/create-event" target="_self">Create Event</a>
+                        <a href="/admin/analytics" target="_self">Analytics</a>
+                                `;
+    }
+
+function getStudentNavDropdown() {
+    const adminNavItems = document.getElementById("studentDropdown");
+
+    if (!adminNavItems) return;
+
+    adminNavItems.innerHTML += `
+                        <a href="/student/student-dashboard" target="_self">Overview</a>
+                        <a href="/student/events" target="_self">Events</a>
+                        <a href="/student/my-registrations" target="_self">My Registrations</a>
+                        <a href="/student/profile" target="_self">Profile</a>
+                                `;
+    }
+
 /*****Rendering events table from database*****/ 
 
 //Attendace modal()
@@ -176,7 +205,6 @@ function renderCalendar(){
 
 //fetch APIs
 
-/**********************************************/
 function renderEvents(){
     const tbody = document.getElementById("eventTableBody"); //locate the table body
 
@@ -253,14 +281,18 @@ function renderEvents(){
 }
 
     function editEventModal() {
-        const modal = document.getElementById("editStudentModal"); //locate edit button
-        const editName = document.getElementById("editName"); //modal input fields
+        //locate edit button
+        const modal = document.getElementById("editStudentModal"); 
+        //modal input fields
+        const editName = document.getElementById("editName"); 
         const editStartDate = document.getElementById("editStartDate");
         const editStartTime = document.getElementById("editStartTime");
         const editEndTime = document.getElementById("editEndTime");
         const editCategory = document.getElementById("editCategory");
         const editCapacity = document.getElementById("editCapacity");
         const editDescription = document.getElementById("editDescription");
+        const editEventLocation = document.getElementById("editEventLocation");
+
         const saveBtn = document.getElementById("saveBtn");
         const cancelBtn = document.getElementById("cancelBtn");
 
@@ -281,7 +313,7 @@ function renderEvents(){
             editCategory.value = currentEvent.category_id;
             editCapacity.value = currentEvent.capacity;
             editDescription.value = currentEvent.description;
-
+            editEventLocation.value = currentEvent.location;
             modal.style.display = "flex";
         });
 
@@ -295,11 +327,12 @@ function renderEvents(){
                 end_time: editEndTime.value,
                 category_id: editCategory.value,
                 capacity: Number(editCapacity.value),
-                description: editDescription.value
+                description: editDescription.value,
+                location: editEventLocation.value
             };
 
             try {
-                const response = await fetch(// send the updated event data to Express with the event ID is included in the URL
+                const response = await fetch( // send the updated event data to Express with the event ID is included in the URL
                     `/admin/api/events/${currentEvent.event_id}`,
                     {
                         method: "PUT",
@@ -351,6 +384,7 @@ function renderEvents(){
                     <td>${event.end_time || ""}</td>
                     <td>${event.category_id || ""}</td>
                     <td>${event.capacity || ""}</td>
+                    <td>${event.location || ""}</td>
                     <td>${event.status || ""}</td>
                     <td>
 
@@ -424,35 +458,7 @@ function renderEvents(){
 
 
 }
-
-
-    /***dynamically populate the admin navigation menu***/
-function getNavDropdown() {
-    const adminNavItems = document.getElementById("dropdown");
-
-    if (!adminNavItems) return;
-
-    adminNavItems.innerHTML += `
-                        <a href="/admin/admin-dashboard" target="_self">Overview</a>
-                        <a href="/admin/manage-events" target="_self">Manage Events</a>
-                        <a href="/admin/create-event" target="_self">Create Event</a>
-                        <a href="/admin/analytics" target="_self">Analytics</a>
-                                `;
-    }
-
-function getStudentNavDropdown() {
-    const adminNavItems = document.getElementById("studentDropdown");
-
-    if (!adminNavItems) return;
-
-    adminNavItems.innerHTML += `
-                        <a href="/student/student-dashboard" target="_self">Overview</a>
-                        <a href="/student/events" target="_self">Events</a>
-                        <a href="/student/my-registrations" target="_self">My Registrations</a>
-                        <a href="/student/profile" target="_self">Profile</a>
-                                `;
-    }
-    /****************************************************/
+/**********************************************/
 
 /*Element checking before function calls*/
 function initializeAdminPage() {

@@ -492,3 +492,97 @@ section.scroll-container {
     font-weight: 600;
 }
 
+
+
+
+
+#editStudentModal .field,
+#editStudentModal .Description-field{
+    min-width: 0;
+}
+
+#editStudentModal input,
+#editStudentModal select {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 800px) {
+    #editStudentModal .modal-content,
+    #editAttendanceModal .modal-content {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 550px) {
+    #editStudentModal .modal-content,
+    #editAttendanceModal .modal-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Responsive Attendance Modal */
+#attendanceModal .modal-content {
+    min-width: 0;
+}
+
+#attendanceModal .attendance-field {
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+#attendanceModal .attendance-table {
+    width: 100%;
+    min-width: 0;
+    table-layout: fixed;
+}
+
+#attendanceModal .attendance-table th,
+#attendanceModal .attendance-table td {
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+/* Smaller screens */
+@media (max-width: 800px) {
+    #attendanceModal .modal-content {
+        grid-template-columns: 1fr;
+    }
+
+    #attendanceModal .attendance-table th,
+    #attendanceModal .attendance-table td {
+        padding: 0.6rem 0.4rem;
+    }
+
+    #attendanceModal .attendance-table th {
+        font-size: 0.95rem;
+    }
+
+    #attendanceModal .attendance-table td {
+        font-size: 0.9rem;
+    }
+
+    #attendanceModal .delete-attendee {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Very narrow phones */
+@media (max-width: 550px) {
+    #attendanceModal .modal-content {
+        padding: 1rem;
+    }
+
+    #attendanceModal .attendance-table th,
+    #attendanceModal .attendance-table td {
+        padding: 0.5rem 0.25rem;
+    }
+
+    #attendanceModal .delete-attendee {
+        padding: 0.5rem 0.7rem;
+        font-size: 0.85rem;
+    }
+}
