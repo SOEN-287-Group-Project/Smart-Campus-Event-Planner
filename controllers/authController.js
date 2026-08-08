@@ -68,7 +68,7 @@ function register(req, res){
         const password_hash = bcrypt.hashSync(password, 10);
         database.addUser(`${first_name} ${last_name}`, email, password_hash);
 
-        const user = getUser(email);
+        const user = database.getUser(email);
         req.session.userId = user.user_id;
         req.session.role = user.role;
         req.session.fullName = user.full_name;
