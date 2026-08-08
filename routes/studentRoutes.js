@@ -3,8 +3,8 @@ import express from "express";
 const studentRoutes = express.Router();
 const studentRoot = 'views/student-views';
 
-studentRoutes.get('/event-details', (req, res)=>{
-    res.sendFile('event-details.html', {root: studentRoot});
+studentRoutes.get('/events-details', (req, res)=>{
+    res.sendFile('events-details.html', {root: studentRoot});
 });
 
 studentRoutes.get('/events', (req, res)=>{
