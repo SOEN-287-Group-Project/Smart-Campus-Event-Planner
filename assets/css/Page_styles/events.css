@@ -115,19 +115,19 @@ display: inline-block;
 background-color:blue;
 }
 
-.status-Open{
+.status-open{
   color:rgba(11, 129, 11, 0.995);
 }
 
-.status-Full{
+.status-full{
  color:rgb(123, 9, 9);
 }
 
-.status-dot-status-Open{
+.status-dot-status-open{
   background-color:rgba(11, 129, 11, 0.995);
 }
 
-.status-dot-status-Full{
+.status-dot-status-full{
   background-color:rgb(123, 9, 9);
 }
 

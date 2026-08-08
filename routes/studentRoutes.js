@@ -1,5 +1,6 @@
 import express from "express";
 import studentController from "../controllers/studentController.js";
+import database from "../database/database.js";
 
 const studentRoutes = express.Router();
 const studentRoot = 'views/student-views';
@@ -39,6 +40,11 @@ studentRoutes.put(
 
 studentRoutes.get('/student-dashboard', (req, res)=>{
     res.sendFile('student-dashboard.html', {root: studentRoot});
+});
+
+studentRoutes.get('/api/events', (req, res) => {
+    const events = database.getAllEvent();
+    res.json(events);
 });
 
 export default studentRoutes;
