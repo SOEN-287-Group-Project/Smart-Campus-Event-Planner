@@ -115,10 +115,11 @@ h1 {
     text-decoration: none;
     border-radius: 6px;
     font-weight: bold;
+    
 }
 
 .back-button:hover {
-    background-color: #3f2ff0;
+    background-color: #2e1091;
 }
 .member-sum img {
     width: 200px;
