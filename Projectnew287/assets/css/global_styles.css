@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css?family=Inter');
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue');
+
+.bg-grey-theme {
+    background-color:#c7c7c7;
+    color: rgb(0, 0, 0);
+}
+
+
+body {
+    background: rgb(241, 245, 249);
+    font-family: 'Inter';
+    margin: 0;   
+}
+
+header {
+    margin-bottom: 1.5rem;
+}
+
+button {
+    transition: scale 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    background-color: #2563eb;
+    font-size: large;
+    font-weight: bold;
+}
+.topbar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(to right, #0f172a , #214eb6,#0f172a);
+    color: rgb(255, 255, 255);
+}
+
+.topbar h1{
+    justify-self: start;
+    font-family: 'Bebas Neue';
+    font-size: 2.3rem;
+}
+
+.topbar h2 {
+    text-align: center;
+    justify-self: center;
+    font-family: 'Bebas Neue';
+    font-size: 2.3rem;
+}
+@media (min-width: 100rem) {
+    .dropdown a:not(:first-child),
+    .studentDropdown a:not(:first-child) {
+        display: none;
+    }
+}
+@media (max-width:100rem){
+
+    .nav-links a{
+        display:none;
+    }
+
+    .user-menu{
+        display:inline-block;
+    }
+
+}
+
+.nav-links {
+    justify-self: end;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.875rem;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active-page {
+    background: #2563eb;
+    transform: scale(1.05);
+}
+
+
+/*Dropdown menu*/
+.user-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-button {
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 0.875rem;
+    background: #7c7c7c;   
+    cursor: pointer;
+    width: 2.5rem;
+    height: 2rem;
+    padding: 0;
+}
+
+.dropdown,
+.studentDropdown {
+    position:absolute;
+    right: 0;
+    left: auto;
+    width: auto;
+    overflow: hidden;
+    border: black 1px solid;
+    border-radius: 0.835rem;
+            z-index: 1000;
+
+}
+
+.dropdown a,
+.studentDropdown a {
+    display: block;
+    box-sizing: border-box;
+    font-size: 15px;
+    color:black;
+    background: #f1f5f9; 
+    border-radius:0;
+
+}
+
+.dropdown a:hover,
+.studentDropdown a:hover {
+    transition:none;
+    transform:none;
+    background-color: #dbeaff;
+}
+
+.hidden {
+    display: none;
+}
+
+.arrow{
+    display: inline-block;
+    transition: transform 0.3s ease;
+    width:inherit;
+    height: inherit;
+    text-align: center;
+    line-height: 2rem;
+    border-radius: inherit;
+    color:white;
+    font-size: large;
+    font-weight: bold;
+}
+.arrow.open {
+  transform: rotate(180deg);
+}
+
+
+/**End of header styles, subject to change**/
+
+.panel {                /*Use class="panel" as a container of items in body*/
+    margin-bottom: 1.5rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    background: white;
+    border-radius: 0.875rem;
+    padding: 1.25rem;
+    box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
+
+}
+
+.footer-generic,
+.footer-generic a {
+    margin-top: .25em;
+    text-align: center;
+    color: black;
+}
+.footer-generic{
+    margin-bottom: 1.5em;
+}
+
+

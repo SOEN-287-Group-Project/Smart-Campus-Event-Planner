@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/global_styles.css" />
+    <script src="/js/admin/admin.js" defer></script>
+</head>
+
+<body>
+
+    <header><!--navigation bar-->
+        <div class="topbar">
+            <h1>Smart Event Planner</h1>
+            <h2>Admin Dashboard</h2>
+            <nav class = "nav-links">
+                <a href="/admin/admin-dashboard" target="_self">Overview</a>
+                <a class="active-page" href="/admin/manage-events"  target="_self">Manage Events</a>
+                <a href="/admin/create-event" target="_self">Create Event</a>
+                <a href="/admin/analytics" target="_self">Analytics</a>
+                
+                <div class="user-menu">
+                    <button id="menuButton" class="menu-button">
+                        <span class="arrow">▲</span>
+                    </button>
+
+                    <div id="dropdown" class="dropdown hidden">
+                        <a href="/public/index" target="_self">Logout</a> <!-- Add more menu items here if needed -->
+                    </div>
+                    
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    
+    <h2 style="text-align: center;">Active Events</h2>
+    
+    <form>
+        <input type="Search" class="search-event-admin" placeholder="Search events" />
+    </form> 
+
+    <section class="panel scroll-container">
+        
+        <table class="event-table">
+            <thead>
+
+                <tr>
+                    <th>Event Name</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Category</th>
+                    <th>Capacity</th>
+                    <th>Status</th>
+                    <th style="text-align: center;">Action</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="eventTableBody"></tbody>
+
+        </table>
+    </section>
+
+    <div id="editStudentModal" class="modal"> <!--modal popup-->
+        
+        <div class="modal-content">
+            
+            <h2>Edit Event</h2>
+
+            <div class="field">
+                <label>Event Name</label>
+                <input id="editName">
+            </div>
+
+            <div class="field">
+                <label>Category</label>
+                <select id="editCategory">
+                    <option value="1">Academic</option>
+                    <option value="3">Social</option>
+                    <option value="4">Sports</option>
+                    <option value="6">Cultural</option>
+                    <option value="2">Career</option>
+                    <option value="5">Workshop</option>
+                    <option value="8">Club activities</option>
+                    <option value="7">Volunteering</option>
+                    <option value="10">Networking</option>
+                    <option value="9">Guest lectures</option>
+                    <option value="11">Other</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Capacity</label>
+                <input id="editCapacity" type="number" min="1">
+            </div>
+
+
+            
+            <div class="field">
+                <label>Start Date</label>
+                <input id="editStartDate" type="date">
+            </div>
+            
+
+
+            <div class="field">
+                <label>Start Time</label>
+                <input id="editStartTime" type="time">
+            </div>
+             
+
+            <div class="field">
+                <label>End Time</label>
+                <input id="editEndTime" type="time">
+            </div>
+
+
+
+            <div class="Description-field">
+                <label>Description</label>
+                <input id="editDescription" type="text">
+            </div>
+
+
+
+            <div class="button-group">
+                <button id="saveBtn">Save</button>
+                <button id="cancelBtn">Cancel</button>
+                <button id="deleteBtn">Delete</button>
+            </div>    
+        </div>
+
+    </div>
+    
+    <div id="attendanceModal" class="modal">
+
+        <div class="modal-content">
+
+            <h2 id="currentEventTitle"></h2>
+
+            <div class="attendance-field">
+                
+
+                <table class = "attendance-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="attendanceTableBody"></tbody>
+                </table>
+            </div>
+
+            <div class="button-group">
+                <button id="AttendanceSaveBtn">Save</button>
+                <button id="AttendanceCancelBtn">Cancel</button>
+            </div>
+
+        </div>
+    </div>   
+
+    <footer class="footer-generic">
+        <p>&copy; 2026 Smart Campus Event Planner</p>
+        <a href="/public/contact">Contact Us</a>
+        <br>
+        <a href="/public/about">About Us</a>
+    </footer>    
+</body>

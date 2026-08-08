@@ -1,0 +1,191 @@
+
+/* Makes all buttons scale and change background color when hovered*/
+button {
+    transition: scale 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    background-color: #2563eb;
+    font-size: large;
+    font-weight: bold;
+}
+
+
+.search-bar-container {
+    display : flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin: 0 auto;
+    width: 90%;
+}
+input.search-bar {
+    width: 100%;
+    flex-grow: 1;
+    font-size: 20px;
+    border: 3px solid #ccc;
+    border-radius: 0.875rem;
+    padding: 20px 20px;
+}
+
+/*Gives placeholder text transparency*/
+input.search-bar::placeholder {
+    color: rgba(32, 1, 1, 0.599);
+}
+
+.filter-buttons-container {
+    display: flex;
+    margin-top: 0.5rem;
+    gap: 1.5rem;
+}
+
+button.filter-buttons{
+    flex-grow: 1;
+    color:rgb(95, 91, 91);
+    background-color: transparent;
+    padding: 0.5rem 0;
+    border: 3px solid #ccc;
+    border-radius: 0.875rem;
+    box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
+}
+
+.filter-buttons:hover{
+  scale: 110%;
+}
+
+.filter-buttons:active{
+  background-color: #2563eb;
+}
+
+/* Created a grid to make it easier to align cards*/
+.event-card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr)); 
+  justify-content: center; 
+  gap: 2rem 2.5rem;
+  padding: 0 1.5rem;
+}
+
+
+.event-card {
+  max-width: 40rem;
+  display: grid;
+  grid-template-rows: auto auto;
+  height: 30rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 0.875em;
+  border: 3px solid #cccccc18;
+  background-color:#c7c7c713;
+
+}
+
+.event-card-header {
+    background-size: 100% 100%;
+    background-color: rgb(185, 180, 180);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    height: 19rem;
+
+}
+
+.event-card-category{
+    background-color: rgb(241, 245, 249); 
+    font-weight: bolder;
+    font-size: large;
+    border-radius: 20px;
+    padding: 0.4rem 0.7rem;
+    
+}
+
+.event-card-status{
+    background-color: rgb(241, 245, 249);
+    font-weight: bolder;
+    font-size: large;
+    border-radius: 20px;
+    padding: 0.4rem 0.7rem;
+}
+/* Changes color of the status depending on the event_status*/
+.status-dot{
+width: 10px;
+height: 10px;
+border-radius: 50%; 
+display: inline-block;
+background-color:blue;
+}
+
+.status-Open{
+  color:rgba(11, 129, 11, 0.995);
+}
+
+.status-Full{
+ color:rgb(123, 9, 9);
+}
+
+.status-dot-status-Open{
+  background-color:rgba(11, 129, 11, 0.995);
+}
+
+.status-dot-status-Full{
+  background-color:rgb(123, 9, 9);
+}
+
+.event-card-footer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  row-gap: 0.4rem;    /* Small vertical gap between text rows */
+  column-gap: 0.75rem; /* Gap between Date and Spots on same row */
+  color: rgb(1, 0, 0); /* Text color from mockup */
+  font-size: 0.9rem;
+  margin-top: -1rem;
+}
+
+.footer-details {
+  display: flex;
+  margin-top: 1rem;
+  flex-direction: column;
+  font-weight: bold;
+  gap: .75rem; 
+}
+
+
+.register-button {
+  width: 4.8rem;                  
+  height: 4.8rem;                
+  border-radius: 50%;           
+  color: #ffffff;
+  display: flex;
+  margin-bottom: 1rem;
+  margin-right: 2rem;
+
+  /* creates the "+" in the middle */
+  align-items: center;
+  justify-content: center;
+               
+}
+/* Allows animation only on buttons that have event_status = Open */
+.btn-Open:hover{
+    scale: 120%;
+}
+
+.btn-Open:active{
+  background-color: rgb(241, 245, 249);
+}
+/* Changes and shows user that you can't click register button when event_status = Full */
+.btn-Full{
+  background-color: rgba(128, 128, 128, 0.341);
+  cursor:  not-allowed;
+}
+/* Controls the length of the "+" */
+.register-button svg {
+  width: 95%; 
+  height: 95%;
+}
+
+/* Gives animation when hovering card */
+.event-card:hover {
+  transform:  translateY(-4px); 
+  transition: transform 0.1s ease-in-out;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
