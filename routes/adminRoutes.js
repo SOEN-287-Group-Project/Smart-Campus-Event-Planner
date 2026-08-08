@@ -25,4 +25,9 @@ adminRoutes.get('/api/events', (req, res) => {
     res.json(events);
 });
 
+adminRoutes.get('/api/attendance', (req, res) => {
+    const registrations = database.getAllRegistrations();
+    res.json(registrations);
+});
+
 export default adminRoutes;

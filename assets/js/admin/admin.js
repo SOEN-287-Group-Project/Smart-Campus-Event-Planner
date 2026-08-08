@@ -169,27 +169,100 @@ function renderCalendar(){
 /***Rendering events table from database***/ 
 function renderEvents(){
     const tbody = document.getElementById("eventTableBody"); //locate the table body
-    const modal = document.getElementById("editModal"); //locate edit button
-
-    const editName = document.getElementById("editName");//modal input fields
-
-
-    const editStartDate = document.getElementById("editStartDate");
-    const editStartTime = document.getElementById("editStartTime");
-    const editEndTime = document.getElementById("editEndTime");
-
-
-    const editCategory = document.getElementById("editCategory");
-    const editCapacity = document.getElementById("editCapacity");
-    const editDescription = document.getElementById("editDescription");
-
-    const saveBtn = document.getElementById("saveBtn");
-    const cancelBtn = document.getElementById("cancelBtn");
 
     if (!tbody) return; //render only if the table body exists
-
+    let attendanceData = [];
     let events = []; 
-    let currentEvent = null; // r
+    let currentEvent = null;
+
+    function attendanceModal() {
+        const modal = document.getElementById("attendanceModal");
+        const attendanceTableBody = document.getElementById("attendanceTableBody");
+        const eventTitle = document.getElementById("currentEventTitle");
+
+
+        tbody.addEventListener("click", (e) => {
+            if (!e.target.classList.contains("Manage-Attendance")) return;
+
+            const id = e.target.dataset.id;
+
+            currentEvent = events.find((event) => event.event_id == id);
+
+            if (!currentEvent) return;
+
+            eventTitle.textContent = currentEvent.title; // Set the event title in the modal
+            
+
+
+            if (modal) modal.style.display = 'flex';
+        });
+
+        // Close modal 
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+    }
+
+    function editEventModal() {
+        const modal = document.getElementById("editStudentModal"); //locate edit button
+        const editName = document.getElementById("editName"); //modal input fields
+        const editStartDate = document.getElementById("editStartDate");
+        const editStartTime = document.getElementById("editStartTime");
+        const editEndTime = document.getElementById("editEndTime");
+        const editCategory = document.getElementById("editCategory");
+        const editCapacity = document.getElementById("editCapacity");
+        const editDescription = document.getElementById("editDescription");
+        const saveBtn = document.getElementById("saveBtn");
+        const cancelBtn = document.getElementById("cancelBtn");
+
+        if (!modal) return;
+
+        tbody.addEventListener("click", (e) => {
+            if (!e.target.classList.contains("edit-event")) return;
+
+            const id = e.target.dataset.id;
+            currentEvent = events.find((event) => event.event_id == id);
+
+            if (!currentEvent) return;
+
+            editName.value = currentEvent.title;
+            editStartDate.value = currentEvent.event_date;
+            editStartTime.value = currentEvent.start_time;
+            editEndTime.value = currentEvent.end_time;
+            editCategory.value = currentEvent.category_id;
+            editCapacity.value = currentEvent.capacity;
+            editDescription.value = currentEvent.description;
+
+            modal.style.display = "flex";
+        });
+
+        saveBtn?.addEventListener("click", () => {
+            if (!currentEvent) return;
+
+            currentEvent.title = editName.value;
+            currentEvent.start_date = editStartDate.value;
+            currentEvent.start_time = editStartTime.value;
+            currentEvent.end_time = editEndTime.value;
+            currentEvent.category_id = editCategory.value;
+            currentEvent.capacity = editCapacity.value;
+            currentEvent.description = editDescription.value;
+
+            renderTable();
+            modal.style.display = "none";
+        });
+
+        cancelBtn?.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+    }
 
     function renderTable() {
         tbody.innerHTML = "";
@@ -204,16 +277,22 @@ function renderEvents(){
                     <td>${event.capacity || ""}</td>
                     <td>${event.status || ""}</td>
                     <td>
-                        <button class="edit-event" data-id="${event.event_id}">
+
+                        <button type="button" class="edit-event" data-id="${event.event_id}">
                             Edit
                         </button>
+
+                        <button type="button" class="Manage-Attendance" data-id="${event.event_id}">
+                            Attendance
+                        </button>
+
                     </td>
                 </tr>
             `;
         });
     }
 
-    fetch("/admin/api/events")
+    fetch("/admin/api/events") //fetch events
         .then((response) => {
             if (!response.ok) {
                 throw new Error("Failed to load events");
@@ -228,56 +307,26 @@ function renderEvents(){
             console.error(error);
             tbody.innerHTML = `<tr><td colspan="7">Unable to load events from the server.</td></tr>`;
         });
-    
-    /*Modal popup for editing events*/    
-    tbody.addEventListener("click", (e) => {
-        if (!e.target.classList.contains("edit-event")) return;
 
-        const id = e.target.dataset.id;
-        currentEvent = events.find((event) => event.event_id === id);
 
-        if (!currentEvent) return;
+    fetch('/api/attendance')//fetch attendance/registrations into attendanceData
+        .then((res) => {
+            if (!res.ok) throw new Error('Failed to load attendance data');
+            return res.json();
+        })
+        .then((data) => {
+            attendanceData = Array.isArray(data) ? data : [];
+        })
+        .catch((err) => {
+            console.warn('Could not prefetch attendance data:', err);
+        });
 
-        editName.value = currentEvent.title;
-        editStartDate.value = currentEvent.event_date;
-        editStartTime.value = currentEvent.start_time;
-        editEndTime.value = currentEvent.end_time;
-        editCategory.value = currentEvent.category_id;
-        editCapacity.value = currentEvent.capacity;
-        editDescription.value = currentEvent.description;
+    editEventModal();
+    attendanceModal();
 
-        if (modal) {
-            modal.style.display = "flex";
-        }
-    });
 
-    saveBtn?.addEventListener("click", () => {//save changes to the event (push to db?)
-        if (!currentEvent) return;
-
-        currentEvent.title = editName.value;
-        currentEvent.start_date = editStartDate.value;
-        currentEvent.start_time = editStartTime.value;
-        currentEvent.end_time = editEndTime.value;
-        currentEvent.category_id = editCategory.value;
-        currentEvent.capacity = editCapacity.value;
-        currentEvent.description = editDescription.value;
-
-        renderTable();
-        modal.style.display = "none";
-    });
-
-    cancelBtn?.addEventListener("click", () => {
-        if (modal) {
-            modal.style.display = "none";
-        }
-    });
-
-    modal?.addEventListener("click", (e) => {
-        if (e.target === modal) {
-            modal.style.display = "none";
-        }
-    });
 }
+
 
     /***dynamically populate the admin navigation menu***/
 function getNavDropdown() {
