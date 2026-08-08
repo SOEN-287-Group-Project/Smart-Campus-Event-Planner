@@ -232,6 +232,14 @@ const updateEventById = db.prepare(`
     WHERE event_id = ?
 `);
 
+// sql script for update attendance by id
+const updateAttendanceById = db.prepare(`
+    UPDATE registrations
+    SET attended = ?
+    WHERE event_id = ?
+      AND user_id = ?
+`);
+
 // ********** API Functions for adding one entry **********
 
 // adding new user to the users table
@@ -429,6 +437,33 @@ function updateEvent(
     `).get(event_id);
 }
 
+
+// Update a student's attendance for an event
+function updateAttendance(
+    event_id,
+    user_id,
+    attended
+) {
+    const result = updateAttendanceById.run(
+        attended,
+        event_id,
+        user_id
+    );
+
+    if (result.changes === 0) {
+        return null;
+    }
+
+    // Retrieve the updated attendance record
+    // and return it to the route/frontend
+    return db.prepare(`
+        SELECT *
+        FROM registrations
+        WHERE event_id = ?
+          AND user_id = ?
+    `).get(event_id, user_id);
+}
+
 // ********** Exports **********
 export default{
     addUser,
@@ -450,5 +485,7 @@ export default{
     getAllCategories,
     getAllEvent,
     getAllRegistrations,
-    updateEvent
+
+    updateEvent,
+    updateAttendance
 }

@@ -82,6 +82,36 @@ adminRoutes.put("/api/events/:id", (req, res) => {
     }
 });
 
+// Change attendance by event_id
+adminRoutes.put("/api/attendance/:eventId/:userId", (req, res) => {
+    const eventId = req.params.eventId;
+    const userId = req.params.userId;
+
+    const { attended } = req.body;
+
+    try{
+        const updatedAttendance = database.updateAttendance( 
+            eventId,
+            userId,
+            attended
+        );
+
+        if (!updatedAttendance) {
+            return res.status(404).json({
+                error: "Attendance record not found"
+            });
+        }
+        
+        res.json(updatedAttendance);
+
+        } catch (error) {
+            console.error(error);
+
+            res.status(500).json({
+                error: "Failed to update attendance"
+            });    
+        }    
+    });    
 
 
 
