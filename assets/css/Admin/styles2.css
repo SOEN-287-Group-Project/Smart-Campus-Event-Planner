@@ -437,7 +437,7 @@ section.scroll-container {
 #deleteBtn,
 #AttendanceSaveBtn,
 #AttendanceCancelBtn,
-.delete-attendee {
+.manage-student-attendance {
     font-size: 1.1rem;
     font-family: 'inter';
     border: none;
@@ -451,7 +451,7 @@ section.scroll-container {
 #deleteBtn:hover,
 #AttendanceSaveBtn:hover,
 #AttendanceCancelBtn:hover,
-.delete-attendee:hover {
+.manage-student-attendance:hover {
     transform: scale(1.05);
     box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);    
 } 
@@ -464,15 +464,21 @@ section.scroll-container {
 }
 
 #cancelBtn,
-#AttendanceCancelBtn {
+#AttendanceCancelBtn,
+.manage-student-attendance {
     background: #e5e7eb;
     color: #111827;
     padding: 0.75rem 2rem;
 }
 
-#deleteBtn,
-.delete-attendee {
+#deleteBtn {
     background: #dc2626;
+    color: white;
+    padding: 0.75rem 2rem;
+}
+
+.manage-student-attendance{
+    background: #7c7c7c;
     color: white;
     padding: 0.75rem 2rem;
 }
@@ -564,7 +570,7 @@ section.scroll-container {
         font-size: 0.9rem;
     }
 
-    #attendanceModal .delete-attendee {
+    #attendanceModal .manage-student-attendance {
         padding: 0.6rem 1rem;
         font-size: 0.9rem;
     }
@@ -581,7 +587,7 @@ section.scroll-container {
         padding: 0.5rem 0.25rem;
     }
 
-    #attendanceModal .delete-attendee {
+    #attendanceModal .manage-student-attendance {
         padding: 0.5rem 0.7rem;
         font-size: 0.85rem;
     }

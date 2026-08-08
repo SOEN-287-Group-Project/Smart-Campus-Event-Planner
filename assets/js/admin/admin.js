@@ -218,10 +218,8 @@ function renderEvents(){
     function attendanceModal() {
 
         const modal = document.getElementById("attendanceModal");
-        const attendanceTableBody =
-            document.getElementById("attendanceTableBody");
-        const eventTitle =
-            document.getElementById("currentEventTitle");
+        const attendanceTableBody = document.getElementById("attendanceTableBody");
+        const eventTitle = document.getElementById("currentEventTitle");
 
         tbody.addEventListener("click", (e) => {
 
@@ -252,9 +250,9 @@ function renderEvents(){
                         <td>${attendee.attended}</td>
                         <td>
                             <button
-                                class="delete-attendee"
+                                class="manage-student-attendance"
                                 data-id="${attendee.user_id}">
-                                Delete
+                                Manage
                             </button>
                         </td>
                     </tr>
@@ -292,6 +290,7 @@ function renderEvents(){
         const editCapacity = document.getElementById("editCapacity");
         const editDescription = document.getElementById("editDescription");
         const editEventLocation = document.getElementById("editEventLocation");
+        const editStatus = document.getElementById("editStatus");
 
         const saveBtn = document.getElementById("saveBtn");
         const cancelBtn = document.getElementById("cancelBtn");
@@ -314,6 +313,7 @@ function renderEvents(){
             editCapacity.value = currentEvent.capacity;
             editDescription.value = currentEvent.description;
             editEventLocation.value = currentEvent.location;
+            editStatus.value = currentEvent.status;
             modal.style.display = "flex";
         });
 
@@ -328,7 +328,8 @@ function renderEvents(){
                 category_id: editCategory.value,
                 capacity: Number(editCapacity.value),
                 description: editDescription.value,
-                location: editEventLocation.value
+                location: editEventLocation.value,
+                status: editStatus.value
             };
 
             try {
@@ -380,6 +381,7 @@ function renderEvents(){
             tbody.innerHTML += `
                 <tr>
                     <td>${event.title}</td>
+                    <td>${event.organizer_id || ""}</td>
                     <td>${(event.event_date && event.start_time) ? `${event.event_date}<br>${event.start_time}` : ""}</td>
                     <td>${event.end_time || ""}</td>
                     <td>${event.category_id || ""}</td>

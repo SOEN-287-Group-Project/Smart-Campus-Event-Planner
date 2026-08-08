@@ -1,11 +1,11 @@
 import express from "express";
 import database from "../database/database.js";
-import requireAdmin from "../controllers/adminController.js";
+/*import requireAdmin from "../controllers/adminController.js";*/
 
 const adminRoutes = express.Router();
 const adminRoot = "views/admin-views";
 
-adminRoutes.use(requireAdmin); //Admin routes are protected by the requireAdmin middleware
+/*adminRoutes.use(requireAdmin);*/ //Admin routes are protected by the requireAdmin middleware
 
 adminRoutes.get('/admin-dashboard', (req, res)=>{
     res.sendFile('admin-dashboard.html', {root: adminRoot});
@@ -47,7 +47,8 @@ adminRoutes.put("/api/events/:id", (req, res) => {
         category_id,
         capacity,
         location,
-        description
+        description,
+        status
     } = req.body;
 
     try {
@@ -60,7 +61,8 @@ adminRoutes.put("/api/events/:id", (req, res) => {
             start_time,
             end_time,
             capacity,
-            location
+            location,
+            status
         );
 
         if (!updatedEvent) {

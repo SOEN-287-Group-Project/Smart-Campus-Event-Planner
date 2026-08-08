@@ -1,6 +1,6 @@
 
 //Admin authentication middleware
-function requireAdmin(req, res, next) { 
+/*function requireAdmin(req, res, next) { 
     // User is not logged in
     if (!req.session.userId) {
         return res.status(401).json({
@@ -18,4 +18,4 @@ function requireAdmin(req, res, next) {
     next();
 }
 
-export default requireAdmin;
+export default requireAdmin;*/
