@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Create an Account</title>
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body class="home-page">
+        <main class="home-card">
+
+            <header>
+                <h2>Create your Account</h2>
+            </header>
+
+            <form method="POST" action="/auth/register" class="home-actions">
+                <div class="form-field">
+                    <label for="first_name" > First Name </label>
+                    <input type="text" name="first_name" placeholder="First Name">
+                </div>
+                <div class="form-field">
+                    <label for="last_name"> Last Name </label>
+                    <input type="text" name="last_name" placeholder="Last Name">
+                </div>
+                <div class="form-field">
+                    <label for="email"> Email </label>
+                    <input type="email" name="email" placeholder="johndoe@gmail.com" autocomplete="email">
+                </div>
+                <div class="form-field">
+                    <label for="password"> Password </label>
+                    <input type="password" name="password" placeholder="************">
+                </div>
+                <div class="form-field">
+                    <label for="confirmed_password"> Confirm Password </label>
+                    <input type="password" name="confirmed_password" placeholder="************">
+                </div>
+                <button type="submit" class="login-or-create-account-buttons">
+                    Create Account
+                </button>
+            </form>
+
+            <a href="/public/index" class="back-to-home-link">Back to home</a>
+
+        </main>
+
+        <footer class="footer">
+            <p> &copy; 2026 Smart Campus Event Planner </p>
+            <a href="/public/contact">Contact Us</a>
+            <br>
+            <a href="/public/about">About Us</a>
+        </footer>
+    </body>
+</html>

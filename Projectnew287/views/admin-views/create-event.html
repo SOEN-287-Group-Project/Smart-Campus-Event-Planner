@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/global_styles.css" />
+    <script src="/js/admin/admin.js" defer></script>
+</head>
+
+<body>
+    <header><!--navigation bar-->
+        <div class="topbar">
+            <h1>Smart Event Planner</h1>
+            <h2>Admin Dashboard</h2>
+            <nav class = "nav-links">
+                <a href="/admin/admin-dashboard" target="_self">Overview</a>
+                <a href="/admin/manage-events"  target="_self">Manage Events</a>
+                <a class="active-page" href="/admin/create-event" target="_self">Create Event</a>
+                <a href="/admin/analytics" target="_self">Analytics</a>
+                
+                
+                <div class="user-menu">
+                    <button id="menuButton" class="menu-button">
+                        <span class="arrow">▲</span>
+                    </button>
+
+                    <div id="dropdown" class="dropdown hidden">
+                        <a href="/public/index">Logout</a> <!-- Add every link from the <nav> container into here, MAKE SURE IT IS BELOW THE LOGOUT AND NOT ABOVE-->
+                    </div>
+                    
+                </div>
+            </nav>
+        </div>
+    </header>
+
+
+        <form class ="panel">
+            <label>
+                Event Name
+                <input class = "event-creation-input" type="text" placeholder="Enter event name" /><br>
+            </label>
+            
+            <label>
+                Description
+                <input class = "event-creation-input" type="text" placeholder="Event description" /><br>
+            </label>
+
+            <label>
+                Location
+                <input class = "event-creation-input" type="text" placeholder="Event location" /><br>
+            </label>
+
+            <label>
+                Organizer
+                <input class = "event-creation-input" type="text" placeholder="Organizer" /><br>
+            </label>
+
+            <label>
+                Capacity
+                <input class = "event-creation-input" type="number" min="1" placeholder="Enter event capacity" /><br>
+            </label>
+
+            <label>
+                Category
+                <select class = "event-category-dropdown">
+                    <option>All Events</option>
+                    <option>Academic</option>
+                    <option>Social</option>
+                    <option>Sports</option>
+                    <option>Cultural</option>
+                    <option>Career</option>
+                    <option>Workshop</option>
+                    <option>Club activities</option>
+                    <option>Volunteering</option>
+                    <option>Networking</option>
+                </select><br>
+            </label>
+
+            <label>
+                Start Date
+                <input class = "event-creation-input" type="datetime-local" /><br>
+            </label>
+
+            <label>
+                End Date
+                <input class = "event-creation-input"    type="datetime-local" /><br>
+            </label>
+
+            <label>
+                Status
+                <select class = "event-category-dropdown">
+                    <option>Open</option>
+                    <option>Closed</option>
+                </select>
+            </label>
+            
+            <button type="submit" class="submit-event-button">Create Event</button>
+            <button type="reset" class="reset-event-button">Reset</button>
+        </form>
+
+
+    <footer class="footer-generic">
+        <p>&copy; 2026 Smart Campus Event Planner</p>
+        <a href="/public/contact">Contact Us</a>
+        <br>
+        <a href="/public/about">About Us</a>
+    </footer>        
+</body>

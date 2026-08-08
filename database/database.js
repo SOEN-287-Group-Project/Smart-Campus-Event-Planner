@@ -113,6 +113,37 @@ const selectFromUsersByEmail = db.prepare(
     WHERE email = ?;
     `
 );
+const selectUserById = db.prepare(
+    `
+    SELECT user_id, full_name, email, role
+    FROM users
+    WHERE user_id = ?;
+    `
+);
+
+const updateUserProfileById = db.prepare(
+    `
+    UPDATE users
+    SET full_name = ?, email = ?
+    WHERE user_id = ?;
+    `
+);
+
+const selectUserPasswordById = db.prepare(
+    `
+    SELECT password_hash
+    FROM users
+    WHERE user_id = ?;
+    `
+);
+
+const updateUserPasswordById = db.prepare(
+    `
+    UPDATE users
+    SET password_hash = ?
+    WHERE user_id = ?;
+    `
+);
 
 // sql script for getting a category by unique category name
 const selectFromCategoryByCategoryName = db.prepare(
@@ -277,6 +308,29 @@ function getUser(email, password){
     return result;
 }
 
+function getUserById(userId) {
+    return selectUserById.get(userId);
+}
+
+function updateUserProfile(userId, fullName, email) {
+    return updateUserProfileById.run(
+        fullName,
+        email,
+        userId
+    );
+}
+
+function getUserPasswordById(userId) {
+    return selectUserPasswordById.get(userId);
+}
+
+function updateUserPassword(userId, passwordHash) {
+    return updateUserPasswordById.run(
+        passwordHash,
+        userId
+    );
+}
+
 function getCategory(category_name){
     const result = selectFromCategoryByCategoryName.get(
         category_name
@@ -376,6 +430,12 @@ export default{
     addEvents,
     addRegistration,
     getUser,
+    
+    getUserById,
+    updateUserProfile,
+    getUserPasswordById,
+    updateUserPassword,
+
     getCategory,
     getEvent,
     getRegistration,
