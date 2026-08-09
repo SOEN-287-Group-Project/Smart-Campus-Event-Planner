@@ -37,19 +37,40 @@ const registrations = fs.readFileSync("./database/registrations.sql", "utf8");
 // add (one) into events
 // add (one) into registrations
 
-// SECLECT (one)
+// SELECT (one)
 // get (one) from users by email
+// get (one) from users by user_id
+// get (one) password from users by user_id
 // get (one) from categories by category_name
+// get (one) from categories by category_id
 // get (one) from events by title
+// get (one) from events by event_id
 // get (one) from registrations by registration_id
-
-// get all registrations by user_id
+// get (all) registrations by user_id
+// get (all) registrations for user dashboard by user_id
 
 // SELECT (all)
 // get (all) from users
 // get (all) from categories
 // get (all) from events
 // get (all) from registrations
+
+// UPDATE (one)
+// update (one) user profile by user_id
+// update (one) user password by user_id
+// update (one) event by event_id
+// update (one) attendance by event_id and user_id
+
+// DELETE (one)
+// delete (one) user by user_id if role is not admin
+// delete (one) category by category_id
+// delete (one) event by event_id
+// delete (one) registration by registration_id
+
+// COUNT
+// count (all) students
+// count (all) events
+// count (all) registrations by event_id
 
 // ********** SQL scripts and functions for adding one entry **********
 
@@ -517,6 +538,13 @@ const deleteRegistrationById = db.prepare(
     `
 );
 
+const deleteRegistrationsByEventId = db.prepare(
+    `
+    DELETE FROM registrations
+    WHERE event_id = ?;
+    `
+);
+
 function deleteUser(user_id){
     const result = deleteUserById.run(id);
     return result;
@@ -532,7 +560,14 @@ function deleteEvent(event_id){
     return result;
 }
 
+function deleteRegistrationByEventId(registration_id){
+    deleteRegistrationsByEventId.run(event_id);
+    const result = deleteRegistrationById.run(registration_id);
+    return result;
+}
+
 function deleteRegistration(registration_id){
+    deleteRegistrationsByEventId.run(event_id);
     const result = deleteRegistrationById.run(registration_id);
     return result;
 }
@@ -639,6 +674,11 @@ export default{
     updateUserPassword,
     updateEvent,
     updateAttendance,
+
+    deleteUser,
+    deleteCategory,
+    deleteEvent,
+    deleteRegistration,
 
     getCountOfEvents,
     getCountOfRegistrationsByEvent,
