@@ -82,6 +82,33 @@ adminRoutes.put("/api/events/:id", (req, res) => {
     }
 });
 
+adminRoutes.delete("/api/events/:eventId", (req, res) => {
+    try {
+        const eventId = req.params.eventId;
+
+        const deletedEvent = database.deleteEvent(eventId);
+
+        if (!deletedEvent) {
+            return res.status(404).json({
+                error: "Event not found"
+            });
+        }
+
+        res.json({
+            message: "Event deleted successfully",
+            event_id: eventId
+        });
+
+    } catch (error) {
+        console.error("DELETE EVENT ERROR:", error);
+
+        res.status(500).json({
+            error: "Failed to delete event",
+            details: error.message
+        });
+    }
+});
+
 // Change attendance by event_id
 adminRoutes.put("/api/attendance/:eventId/:userId", (req, res) => {
     const eventId = req.params.eventId;

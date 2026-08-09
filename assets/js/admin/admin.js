@@ -240,7 +240,7 @@ function renderEvents(){
             attendanceTableBody.innerHTML = attendees
                 .map((attendee) => `
                     <tr data-user-id="${attendee.user_id}">
-                        <td>${attendee.user_id}</td>
+                        <td>${attendee.full_name}</td>
                         <td class="attendance-status">${attendee.attended}</td>
                         <td>
                             <button type="button" class="manage-student-attendance" data-id="${attendee.user_id}">Manage</button>
@@ -349,6 +349,7 @@ function renderEvents(){
         const editDescription = document.getElementById("editDescription");
         const editEventLocation = document.getElementById("editEventLocation");
         const editStatus = document.getElementById("editStatus");
+        const deleteBtn = document.getElementById("deleteBtn");
 
         const saveBtn = document.getElementById("saveBtn");
         const cancelBtn = document.getElementById("cancelBtn");
@@ -375,6 +376,7 @@ function renderEvents(){
             modal.style.display = "flex";
         });
 
+        //Save
         saveBtn?.addEventListener("click", async () => {
             if (!currentEvent) return;
 
@@ -419,6 +421,53 @@ function renderEvents(){
                 alert("Failed to save event.");
             }
         });
+
+        //Delete
+        deleteBtn?.addEventListener("click", async () => {
+            if (!currentEvent) return;
+
+            const confirmed = confirm(
+                `Are you sure you want to delete "${currentEvent.title}"?`
+            );
+
+            if (!confirmed) return;
+
+            try {
+                const response = await fetch(
+                    `/admin/api/events/${currentEvent.event_id}`,
+                    {
+                        method: "DELETE"
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error("Failed to delete event");
+                }
+
+                // Remove the event from the local events array
+                const index = events.findIndex(
+                    (event) => event.event_id == currentEvent.event_id
+                );
+
+                if (index !== -1) {
+                    events.splice(index, 1);
+                }
+
+                // Clear the current event
+                currentEvent = null;
+
+                // Refresh the table
+                renderTable();
+
+                // Close the modal
+                modal.style.display = "none";
+
+            } catch (error) {
+                console.error(error);
+                alert("Failed to delete event.");
+            }
+        });
+
 
         //close modal
         cancelBtn?.addEventListener("click", () => {
