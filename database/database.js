@@ -525,6 +525,17 @@ function getRegistrationsForUser(userId) {
     return data;
 }
 
+function getCountOfRegistrationsByEvent(event_id){
+    const result = db.prepare(
+        `
+        SELECT COUNT(*) AS registration_count
+        FROM registrations
+        WHERE event_id = ?
+        `
+    ).get(event_id);
+    return result;
+}
+
 // ********** Exports **********
 export default{
     addUser,
