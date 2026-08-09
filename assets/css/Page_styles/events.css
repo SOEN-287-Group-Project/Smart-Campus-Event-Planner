@@ -78,6 +78,10 @@ button.filter-buttons{
 
 }
 
+.event-card.hidden {
+  display: none;
+}
+
 .event-card-header {
     background-size: 100% 100%;
     background-color: rgb(185, 180, 180);
@@ -165,15 +169,15 @@ background-color:blue;
                
 }
 /* Allows animation only on buttons that have event_status = Open */
-.btn-Open:hover{
+.btn-open:hover{
     scale: 120%;
 }
 
-.btn-Open:active{
+.btn-open:active{
   background-color: rgb(241, 245, 249);
 }
 /* Changes and shows user that you can't click register button when event_status = Full */
-.btn-Full{
+.btn-full{
   background-color: rgba(128, 128, 128, 0.341);
   cursor:  not-allowed;
 }
@@ -189,3 +193,7 @@ background-color:blue;
   transition: transform 0.1s ease-in-out;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
+
+
+/* Event card details section */
+

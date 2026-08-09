@@ -3,9 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="StyleSheet" href="/css/events-details/events-details.css">
         <link rel="StyleSheet" href="/css/global_styles.css">
         <link rel="Stylesheet" href="/css/Page_styles/events.css">
-
+        <link rel="Sylesheet" href="/css/events-details/events-details.css">
         <script src="/js/student/events.js" defer></script>
         <script src="/js/admin/admin.js" defer></script>
         
@@ -42,14 +43,7 @@
         <search class="search-bar-container">
             <form>
                 <div>
-                    <input class="search-bar" type="search" placeholder="Search"></input>
-                </div>
-                <div class="filter-buttons-container">
-                    <button type="button" class="filter-buttons">Available</button>
-                    <button type="button" class="filter-buttons">Registered</button>
-                    <button type="button" class="filter-buttons">Location</button>
-                    <button type="button" class="filter-buttons">Dates</button>
-                    <button type="button" class="filter-buttons">Type</button>
+                    <input id ="searchBar"class="search-bar" type="search" placeholder="Search"></input>
                 </div>
             </form>
         </search>
@@ -57,6 +51,44 @@
         <section class="event-card-container">
         </section>
 
+        <div id="eventDetailsModal" class="event-details-page hidden">
+         <section class="event-details-card">
+            <div class="event-information">
+                <p id="modalCategory" class="event-category">Student Activity</p>
+
+                <h1 id="modalTitle">(event name)</h1>
+
+                <p id="modalDescription" class="event-description">(event description)</p>
+
+            <div class="event-facts">
+                <div class="event-fact">
+                    <strong>Date</strong>
+                    <span id="modalDate">(date)</span>
+                </div>  
+
+                <div class="event-fact">
+                    <strong>Time</strong>
+                    <span id="modalTime">(time)</span>
+                </div>
+
+                <div class="event-fact">
+                    <strong>Location</strong>
+                    <span id="modalLocation">(location)</span>
+                </div>
+
+                <div class="event-fact">
+                    <strong>Available Spaces</strong>
+                    <span id="modalCapacity">(spaces remaining)</span>
+                </div>
+            </div>
+
+            <div class="event-actions">
+                <button type="button" class="btn-register">Register for Event</button>
+                <button type="button" id="closeModalBtn" class="btn-close">Close</button>
+            </div>
+        </div>
+     </section>
+    </div>
         
     <footer class="footer-generic">
         <p>&copy; 2026 Smart Campus Event Planner</p>

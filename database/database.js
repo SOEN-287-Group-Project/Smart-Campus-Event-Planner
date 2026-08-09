@@ -194,8 +194,24 @@ const selectAllFromUsers = db.prepare(
 // sql script for getting all events
 const selectAllFromEvents = db.prepare(
     `
-    SELECT *
-    FROM events;
+    SELECT 
+        events.event_id,
+        events.organizer_id,
+        users.full_name,
+        events.category_id,
+        categories.category_name,
+        events.title,
+        events.description,
+        events.event_date,
+        events.start_time,
+        events.end_time,
+        events.location,
+        events.capacity,
+        events.status,
+        events.created_on
+    FROM events
+    JOIN users ON events.organizer_id = users.user_id
+    JOIN categories ON events.category_id = categories.category_id
     `
 );
 
@@ -210,8 +226,15 @@ const selectAllFromCategories = db.prepare(
 // sql script for getting all registration
 const selectAllFromRegistrations = db.prepare(
     `
-    SELECT *
-    FROM registrations;
+    SELECT 
+        registrations.registration_id,
+        registrations.user_id,
+        users.full_name,
+        registrations.event_id,
+        registrations.registration_date,
+        registrations.attended
+    FROM registrations
+    JOIN users ON registrations.user_id = users.user_id;
     `
 );
 // ********** SQL Scripts for UPDATE **********
@@ -244,7 +267,8 @@ const updateAttendanceById = db.prepare(`
 
 // adding new user to the users table
 function addUser(
-    full_name, email, 
+    full_name, 
+    email, 
     password_hash
 ){
     const result = insertIntoUsers.run(
@@ -369,7 +393,6 @@ function getRegistrationByStudent(registration_id){
     return result;
 }
 
-
 // ********** API Functions for getting all entries **********
 
 // getting all the users from the users table
@@ -463,6 +486,78 @@ function updateAttendance(
           AND user_id = ?
     `).get(event_id, user_id);
 }
+/* ------------- STUDENT API FUNCTIONS ------------- */
+
+function getRegistrationRowsForUser(userId) {
+    return db
+      .prepare(`SELECT * FROM registrations WHERE user_id = ?`)
+      .all(String(userId));
+  }
+
+function getCategoryById(categoryId) {
+    return db
+      .prepare(`SELECT * FROM categories WHERE category_id = ?`)
+      .get(categoryId);
+  }
+
+function getEventById(eventId) {
+    return db
+        .prepare(`SELECT * FROM events WHERE event_id = ?`)
+        .get(eventId);
+}
+
+function getRegistrationsForUser(userId) {
+    const registrations = getRegistrationRowsForUser(userId); //get all registrations for a user
+    const data = registrations.map((registration) => { //map through the registrations and return the registration id, user id, event id, attended, title, date, status, and category name
+        const event = getEventById(registration.event_id); // search through event table for the event javascript object
+        const category = getCategoryById(event.category_id); // search through category table for the category javascript object
+        return {
+            registration_id: registration.registration_id,
+            user_id: registration.user_id,
+            event_id: registration.event_id,
+            attended: registration.attended,
+            title: event.title, 
+            date: event.event_date,
+            status: event.status,
+            category_name: category.category_name
+        };
+    });
+    return data;
+}
+
+// ********** Get counts **********
+
+function getCountOfStudents(){
+    const result = db.prepare(
+        `
+        SELECT COUNT(*) AS student_count
+        FROM users
+        WHERE role = 'student'
+        `
+    ).get();
+    return result;
+}
+
+function getCountOfEvents(){
+    const result = db.prepare(
+        `
+        SELECT COUNT(*) AS event_count
+        FROM events
+        `
+    ).get();
+    return result;
+}
+
+function getCountOfRegistrationsByEvent(event_id){
+    const result = db.prepare(
+        `
+        SELECT COUNT(*) AS registration_count
+        FROM registrations
+        WHERE event_id = ?
+        `
+    ).get(event_id);
+    return result;
+}
 
 // ********** Exports **********
 export default{
@@ -487,5 +582,11 @@ export default{
     getAllRegistrations,
 
     updateEvent,
-    updateAttendance
+    updateAttendance,
+
+    getRegistrationsForUser,
+
+    getCountOfEvents,
+    getCountOfRegistrationsByEvent,
+    getCountOfStudents
 }
