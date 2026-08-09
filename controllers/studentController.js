@@ -177,8 +177,44 @@ function updatePassword(req, res) {
         });
     }
 }
+
+// --------------STUDENT DASHBOARD FUNCTIONS--------------
+function getStudentDashboard(req, res) {
+    if (!req.session.userId) 
+    {
+        return res.status(401).json({
+            message: "You must log in first."
+        });
+    }
+    
+    try {
+        const user = database.getUserById(req.session.userId);
+    
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found."
+            });
+        }
+    
+        const registrations = database.getRegistrationsForUser(
+            req.session.userId
+        );
+    
+        return res.json({
+            name: user.full_name,
+            registrations: registrations
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            message: "Unable to load dashboard."
+        });
+    }
+}
+
 export default {
     getProfile,
     updateProfile,
-    updatePassword
+    updatePassword,
+    getStudentDashboard
 };

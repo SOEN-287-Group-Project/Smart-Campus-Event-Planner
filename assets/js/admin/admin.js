@@ -216,67 +216,125 @@ function renderEvents(){
 
 
     function attendanceModal() {
-
         const modal = document.getElementById("attendanceModal");
         const attendanceTableBody = document.getElementById("attendanceTableBody");
         const eventTitle = document.getElementById("currentEventTitle");
+        const saveBtn = document.getElementById("AttendanceSaveBtn");
+        const cancelBtn = document.getElementById("AttendanceCancelBtn");
 
+        if (!modal || !attendanceTableBody) return;
+
+        // Open modal when clicking the Attendance button in the events table
         tbody.addEventListener("click", (e) => {
+            const target = e.target;
+            if (!target.classList.contains("Manage-Attendance")) return;
 
-            if (!e.target.classList.contains("Manage-Attendance")) return;
-
-            const id = e.target.dataset.id;
-
-            currentEvent = events.find(
-                (event) => event.event_id == id
-            );
-
+            const id = target.dataset.id;
+            currentEvent = events.find((event) => event.event_id == id);
             if (!currentEvent) return;
 
-            eventTitle.textContent = currentEvent.title;
+            if (eventTitle) eventTitle.textContent = currentEvent.title || "";
 
-            // Remove attendees from previous event
-            attendanceTableBody.innerHTML = "";
-
-            // Get attendees belonging to this event
+            // Render attendees for the selected event
             const attendees = attendanceData[id] || [];
-
-            
-            attendees.forEach((attendee) => {
-
-                attendanceTableBody.innerHTML += `
-                    <tr>
+            attendanceTableBody.innerHTML = attendees
+                .map((attendee) => `
+                    <tr data-user-id="${attendee.user_id}">
                         <td>${attendee.user_id}</td>
-                        <td>${attendee.attended}</td>
+                        <td class="attendance-status">${attendee.attended}</td>
                         <td>
-                            <button
-                                class="manage-student-attendance"
-                                data-id="${attendee.user_id}">
-                                Manage
-                            </button>
+                            <button type="button" class="manage-student-attendance" data-id="${attendee.user_id}">Manage</button>
                         </td>
                     </tr>
-                `;
+                `)
+                .join("");
 
-            });
-
-            modal.style.display = 'flex';
+            modal.style.display = "flex";
         });
 
+        
+        attendanceTableBody.addEventListener("click", (e) => {
+            const button = e.target.closest(".manage-student-attendance");
+            if (!button) return;
+            if (!currentEvent) return;
 
-    // Close modal
-    AttendanceCancelBtn?.addEventListener("click", () => {
-            modal.style.display = "none";
+            const userId = button.dataset.id;
+            const row = button.closest("tr");
+            const statusCell = row && row.querySelector(".attendance-status");
+            if (!statusCell) return;
+
+            const attendees = attendanceData[currentEvent.event_id] || [];
+            const attendee = attendees.find((a) => String(a.user_id) === String(userId));
+            if (!attendee) return;
+
+            if (statusCell.querySelector("select")) return; // already editing
+
+            statusCell.innerHTML = `
+                <select class="attendance-status-select">
+                    <option value="yes" ${attendee.attended === "yes" ? "selected" : ""}>Yes</option>
+                    <option value="no" ${attendee.attended === "no" ? "selected" : ""}>No</option>
+                </select>
+            `;
+
+            const select = statusCell.querySelector(".attendance-status-select");
+            select.addEventListener(
+                "change",
+                () => {
+                    attendee.attended = select.value;
+                    statusCell.textContent = select.value;
+                },
+                { once: true }
+            );
         });
 
-    modal.addEventListener("click", (e) => {
+        // Save attendance for the current event
+        saveBtn?.addEventListener("click", async () => {
+            if (!currentEvent) return;
 
-        if (e.target === modal) {
-            modal.style.display = "none";
-        }
+            const attendees = attendanceData[currentEvent.event_id] || [];
 
-    });
-}
+            try {
+                for (const attendee of attendees) {
+                    const response = await fetch(
+                        `/admin/api/attendance/${currentEvent.event_id}/${attendee.user_id}`,
+                        {
+                            method: "PUT",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                attended: attendee.attended
+                            })
+                        }
+                    );
+
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        console.error(
+                            `Failed to update ${currentEvent.event_id}/${attendee.user_id}:`,
+                            errorText
+                        );
+
+                        throw new Error(
+                            `Failed to update attendance for user ${attendee.user_id}`
+                        );
+                    }
+                }
+
+                modal.style.display = "none";
+
+            } catch (error) {
+                console.error("Failed to save attendance:", error);
+                alert("Could not save attendance.");
+            }
+        });
+
+        // Close modal handlers
+        cancelBtn?.addEventListener("click", () => (modal.style.display = "none"));
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) modal.style.display = "none";
+        });
+    }
 
     function editEventModal() {
         //locate edit button

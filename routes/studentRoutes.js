@@ -38,6 +38,11 @@ studentRoutes.put(
 
 );
 
+studentRoutes.get(
+    '/api/dashboard',
+    studentController.getStudentDashboard
+);
+
 studentRoutes.get('/student-dashboard', (req, res)=>{
     res.sendFile('student-dashboard.html', {root: studentRoot});
 });

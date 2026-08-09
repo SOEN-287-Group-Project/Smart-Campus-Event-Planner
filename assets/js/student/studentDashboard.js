@@ -150,12 +150,91 @@ function renderStudentCalendar(upcomingEvents) {
   updateCalendar();
 }
 
-function initStudentDashboard() {
-  renderStudentHeader(studentDashboardData);
-  renderStats(studentDashboardData);
-  renderUpcomingTable(studentDashboardData);
-  renderStudentAttendanceChart(studentDashboardData);
-  renderStudentCalendar(studentDashboardData.upcomingEvents);
+// ----------------Preparing data for the dashboard--------------
+
+//this is a helper function to filter out registrations that are not upcoming
+function isUpcomingRegistration(registration) { // we pass in the registration objects from the getRegistrationsForUser function from the DB
+  const today = new Date().toISOString().slice(0, 10);
+
+  if (!registration.date || registration.date < today) { // if the registration date is not set or is in the past, return false
+    return false;
+  }
+
+  if (
+    registration.status === "cancelled" || // if the registration status is cancelled, completed, or disabled, return false
+    registration.status === "completed" ||
+    registration.status === "disabled"
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
+function getUpcomingEvents(registrations) {
+  return registrations.filter(isUpcomingRegistration).map((registration) => ({
+      title: registration.title,
+      date: registration.date,
+    })).sort((a, b) => a.date.localeCompare(b.date)); // sort the registrations by date, can do so with string comparison since dates are in ISO format
+}
+
+function getAttendanceByCategory(registrations) {
+  const attended = registrations.filter(
+    (registration) => registration.attended === "yes" // filter out registrations that are not attended
+  );
+
+  const counts = {};
+  for (const registration of attended) {
+    const label = registration.category_name || "Other"; // if the registration category is not set, set it to "Other"
+    counts[label] = (counts[label] || 0) + 1; // count the number of registrations for each category
+  }
+
+  const labels = Object.keys(counts).sort(); // sort the categories alphabetically
+  const data = labels.map((label) => counts[label]); // map the categories to the number of registrations for each category
+
+  return { labels, data }; // return the categories and the number of registrations for each category
+}
+
+function buildStudentDashboardData(name, registrations) {
+  const upcomingEvents = getUpcomingEvents(registrations);
+
+  return {
+    name: name.trim().split(" ")[0], // get the first name of the student
+    stats: {
+      totalRegistrations: registrations.length,
+      upcoming: upcomingEvents.length,
+      attended: registrations.filter((r) => r.attended === "yes").length,
+      cancelled: registrations.filter((r) => r.status === "cancelled").length,
+    },
+    upcomingEvents: upcomingEvents,
+    attendanceByCategory: getAttendanceByCategory(registrations),
+  };
+}
+
+async function initStudentDashboard() {
+  try {
+    const response = await fetch("/student/api/dashboard");
+    const payload = await response.json();
+
+    if (!response.ok) {
+      alert(payload.message || "Unable to load dashboard.");
+      return;
+    }
+
+    const data = buildStudentDashboardData(
+      payload.name,
+      payload.registrations
+    );
+
+    renderStudentHeader(data);
+    renderStats(data);
+    renderUpcomingTable(data);
+    renderStudentAttendanceChart(data);
+    renderStudentCalendar(data.upcomingEvents);
+  } catch (error) {
+    console.error(error);
+    alert("Unable to load dashboard.");
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
