@@ -182,7 +182,7 @@ if (modal) {
 if (searchInput) {
     searchInput.addEventListener("input", (e) => {  // Using inputs event so it checks after every keystroke
         const query = e.target.value.toLowerCase().trim(); // Makes every search lowercase and trim removes whitespaces
-
+       // loops on all events
         events.forEach((event) => { 
             const cardElement = document.getElementById(String(event.event_id));
 
@@ -190,7 +190,7 @@ if (searchInput) {
             // Creates a single string with each Event attributes
             const searchableText = `${event.title} ${event.description} ${event.location} ${event.category} ${event.organizer}`.toLowerCase();
 
-            
+
             const isMatch = searchableText.includes(query);
             if (isMatch) {
               cardElement.classList.remove("hidden"); // Show card
