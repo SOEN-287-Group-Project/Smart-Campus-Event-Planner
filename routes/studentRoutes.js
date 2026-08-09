@@ -43,9 +43,12 @@ studentRoutes.get(
     studentController.getStudentDashboard
 );
 
-studentRoutes.get('/student-dashboard', (req, res)=>{
-    res.sendFile('student-dashboard.html', {root: studentRoot});
-});
+studentRoutes.get('/student-dashboard', (req, res) => {
+    if (!req.session.userId) {
+      return res.redirect('/public/index');
+    }
+    res.sendFile('student-dashboard.html', { root: studentRoot });
+  });
 
 studentRoutes.get('/api/events', (req, res) => {
     const events = database.getAllEvent();
