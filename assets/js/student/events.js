@@ -187,11 +187,17 @@ if (searchInput) {
             const cardElement = document.getElementById(String(event.event_id));
 
             // Search across title, description, location, category, and organizer
+            // Creates a single string with each Event attributes
             const searchableText = `${event.title} ${event.description} ${event.location} ${event.category} ${event.organizer}`.toLowerCase();
 
-            // Toggle .hidden: adds 'hidden' if false, removes 'hidden' if true
+            
             const isMatch = searchableText.includes(query);
-            cardElement.classList.toggle("hidden", !isMatch);
+            if (isMatch) {
+              cardElement.classList.remove("hidden"); // Show card
+             } 
+             else {
+              cardElement.classList.add("hidden");    // Hide card
+            }
         });
     });
 }
