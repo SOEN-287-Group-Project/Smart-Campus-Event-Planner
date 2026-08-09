@@ -194,8 +194,24 @@ const selectAllFromUsers = db.prepare(
 // sql script for getting all events
 const selectAllFromEvents = db.prepare(
     `
-    SELECT *
-    FROM events;
+    SELECT 
+        events.event_id,
+        events.organizer_id,
+        users.full_name,
+        events.category_id,
+        categories.category_name,
+        events.title,
+        events.description,
+        events.event_date,
+        events.start_time,
+        events.end_time,
+        events.location,
+        events.capacity,
+        events.status,
+        events.created_on
+    FROM events
+    JOIN users ON events.organizer_id = users.user_id
+    JOIN categories ON events.category_id = categories.category_id
     `
 );
 
@@ -218,8 +234,7 @@ const selectAllFromRegistrations = db.prepare(
         registrations.registration_date,
         registrations.attended
     FROM registrations
-    JOIN users
-    ON registrations.user_id = users.user_id;
+    JOIN users ON registrations.user_id = users.user_id;
     `
 );
 // ********** SQL Scripts for UPDATE **********
