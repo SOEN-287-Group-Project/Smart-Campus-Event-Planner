@@ -463,6 +463,44 @@ function updateAttendance(
           AND user_id = ?
     `).get(event_id, user_id);
 }
+/* ------------- STUDENT API FUNCTIONS ------------- */
+
+function getRegistrationRowsForUser(userId) {
+    return db
+      .prepare(`SELECT * FROM registrations WHERE user_id = ?`)
+      .all(String(userId));
+  }
+
+function getCategoryById(categoryId) {
+    return db
+      .prepare(`SELECT * FROM categories WHERE category_id = ?`)
+      .get(categoryId);
+  }
+
+function getEventById(eventId) {
+    return db
+        .prepare(`SELECT * FROM events WHERE event_id = ?`)
+        .get(eventId);
+}
+
+function getRegistrationsForUser(userId) {
+    const registrations = getRegistrationRowsForUser(userId); //get all registrations for a user
+    const data = registrations.map((registration) => { //map through the registrations and return the registration id, user id, event id, attended, title, date, status, and category name
+        const event = getEventById(registration.event_id); // search through event table for the event javascript object
+        const category = getCategoryById(event.category_id); // search through category table for the category javascript object
+        return {
+            registration_id: registration.registration_id,
+            user_id: registration.user_id,
+            event_id: registration.event_id,
+            attended: registration.attended,
+            title: event.title, 
+            date: event.event_date,
+            status: event.status,
+            category_name: category.category_name
+        };
+    });
+    return data;
+}
 
 // ********** Exports **********
 export default{
@@ -487,5 +525,8 @@ export default{
     getAllRegistrations,
 
     updateEvent,
-    updateAttendance
+    updateAttendance,
+    updateEvent,
+
+    getRegistrationsForUser
 }
