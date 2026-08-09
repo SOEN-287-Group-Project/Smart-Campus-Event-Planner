@@ -210,8 +210,16 @@ const selectAllFromCategories = db.prepare(
 // sql script for getting all registration
 const selectAllFromRegistrations = db.prepare(
     `
-    SELECT *
-    FROM registrations;
+    SELECT 
+        registrations.registration_id,
+        registrations.user_id,
+        users.full_name,
+        registrations.event_id,
+        registrations.registration_date,
+        registrations.attended
+    FROM registrations
+    JOIN users
+    ON registrations.user_id = users.user_id;
     `
 );
 // ********** SQL Scripts for UPDATE **********
@@ -244,7 +252,8 @@ const updateAttendanceById = db.prepare(`
 
 // adding new user to the users table
 function addUser(
-    full_name, email, 
+    full_name, 
+    email, 
     password_hash
 ){
     const result = insertIntoUsers.run(
@@ -368,7 +377,6 @@ function getRegistrationByStudent(registration_id){
     );
     return result;
 }
-
 
 // ********** API Functions for getting all entries **********
 
