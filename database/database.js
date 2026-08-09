@@ -529,6 +529,40 @@ function getRegistrationsForUser(userId) {
     return data;
 }
 
+// ********** Get counts **********
+
+function getCountOfStudents(){
+    const result = db.prepare(
+        `
+        SELECT COUNT(*) AS student_count
+        FROM users
+        WHERE role = 'student'
+        `
+    ).get();
+    return result;
+}
+
+function getCountOfEvents(){
+    const result = db.prepare(
+        `
+        SELECT COUNT(*) AS event_count
+        FROM events
+        `
+    ).get();
+    return result;
+}
+
+function getCountOfRegistrationsByEvent(event_id){
+    const result = db.prepare(
+        `
+        SELECT COUNT(*) AS registration_count
+        FROM registrations
+        WHERE event_id = ?
+        `
+    ).get(event_id);
+    return result;
+}
+
 // ********** Exports **********
 export default{
     addUser,
@@ -553,7 +587,10 @@ export default{
 
     updateEvent,
     updateAttendance,
-    updateEvent,
 
-    getRegistrationsForUser
+    getRegistrationsForUser,
+
+    getCountOfEvents,
+    getCountOfRegistrationsByEvent,
+    getCountOfStudents
 }
