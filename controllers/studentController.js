@@ -211,10 +211,44 @@ function getStudentDashboard(req, res) {
         });
     }
 }
+// -------- My-regisrations --------------------------------
+function getMyRegistrations(req, res) {
+    if (!req.session.userId) {
+        return res.status(401).json({
+            message: "You must log in first."
+        });
+    }
+    
+    try {
+        const user = database.getUserById(req.session.userId);
+    
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found."
+            });
+        }
+    
+        // Calls the join function in database.js that returns formatted event data
+        const registrations = database.getRegistrationsForUser(
+            req.session.userId
+        );
+    
+        return res.json({
+            name: user.full_name,
+            registrations: registrations
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            message: "Unable to load my registrations."
+        });
+    }
+}
 
 export default {
     getProfile,
     updateProfile,
     updatePassword,
-    getStudentDashboard
+    getStudentDashboard,
+    getMyRegistrations
 };

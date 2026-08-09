@@ -1,60 +1,76 @@
-/*import Event from "../../models/Event.js";*/
 // Creates a lookup table with links to an image for each categories
-class Event{
-    constructor(
-        event_id,
-        title,
-        description,
-        category, 
-            /*
-            Academic workshops
-            Career events
-            Club activities
-            Sports events
-            Cultural events
-            Volunteering events
-            Social events
-            Guest lectures
-            Networking events
-            Other
-            */
-        event_date,
-        start_time,
-        end_time,
-        location,
-        capacity,
-        status, // open, full, cancelled, completed, disabled
-        organizer_id,
-        created_on
-    ){
-        this.event_id = event_id;
-        this.title = title;
-        this.description = description;
-        this.category = category;
-        this.event_date = event_date;
-        this.start_time = start_time;
-        this.end_time = end_time;
-        this.location = location;
-        this.capacity = capacity;
-        this.status = status;
-        this.organizer_id = organizer_id;
-        this.created_on = created_on;
-    }
+const CATEGORY_NAMES = {
+    1: "Academic workshops",
+    2: "Career events",
+    3: "Club activities",
+    4: "Sports events",
+    5: "Cultural events",
+    6: "Volunteering events",
+    7: "Social events",
+    8: "Guest lectures",
+    9: "Networking events",
+    10: "Other"
+};
 
-}
+let myRegistrations = [];
+const container = document.getElementById("myRegistrationsContainer");
+
+// Runs directly on page load just like fetch('/student/api/events')
+fetch('/student/api/my-registrations')
+    .then((response) => {
+        if (response.status === 401) {
+            window.location.href = '/auth/login'; // Sends them back to login page
+            return;
+        }
+        if (!response.ok) {
+            throw new Error("Failed to load my registrations");
+        }
+        return response.json();
+    })
+    .then((data) => {
+      // Creates an array myRegistrations to access everywhere 
+      // Since im sending username also I need to use data.registrations to access the events attributes
+        myRegistrations = data.registrations.map(rawEvent => {
+            return {
+                ...rawEvent,
+                category: CATEGORY_NAMES[rawEvent.category_id] || rawEvent.category || "Other",
+                status: rawEvent.status || (rawEvent.capacity > 0 ? "Open" : "Full")
+            };
+        });
+
+        
+        const article_elements = myRegistrations.map(formattedEvent => {
+            return create_event(formattedEvent);
+        });
+
+        // Populate the page with event cards from Student
+        if (container) {
+            if (myRegistrations.length === 0) {
+                container.innerHTML = `<p class="no-events">You are not registered for any events yet.</p>`;
+                return;
+            }
+            container.replaceChildren(...article_elements);
+        }
+    })
+    .catch((error) => {
+        console.error("Error fetching my registrations:", error);
+        if (container) {
+            container.innerHTML = `<p class="error">Unable to load registrations.</p>`;
+        }
+    });
 
 function get_category_image_url(category){
     const category_images= {
-     "Academic workshops" : "../assets/images/image_project/image_project.jpg",
-     "Career events" : "assets/images/image_project/image2.jpg",
-     "Club activities": "assets/images/image_project/image3.jpg",
-     "Sports events": "assets/images/image_project/image4.jpg",
-     "Cultural event": "assets/images/image_project/image5.jpg",
-     "Volunteering events": "assets/images/image_project/image6.jpg",
-     "Social events": "assets/images/image_project/image7.jpg",
-     "Guest lectures": "assets/images/image_project/image8.jpg",
-     "Networking events": "assets/images/image_project/image9.jpg",
-     "Other": "assets/images/image_project/image10.jpg"
+     "Academic workshops" : "/images/image_project/image_project.jpg",
+     "Career events" : "/images/image_project/image2.jpg",
+     "Club activities": "/images/image_project/image3.jpg",
+     "Sports events": "/images/image_project/image4.jpg",
+     "Cultural events": "/images/image_project/image5.jpg",
+     "Volunteering events": "/images/image_project/image6.jpg",
+     "Social events": "/images/image_project/image7.jpg",
+     "Guest lectures": "/images/image_project/image8.jpg",
+     "Networking events": "/images/image_project/image9.jpg",
+     "Other": "/images/image_project/image10.jpg"
     }
 
     return category_images[category] || category_images["Other"];  // Return the url depending on the category
@@ -103,85 +119,3 @@ function create_event(event){
                         return article;
 
 }
-// FAKE EVENTS FOR ****  TESTING ****
-const fake_events = [
-  new Event(
-    4,
-    "Intramural Basketball Tournament",
-    "5v5 tournament for student teams of all skill levels.",
-    "Sports events",
-    "Nov 15",
-    "1:00 PM",
-    "6:00 PM",
-    "Loyola Gymnasium",
-    8,
-    "Open",
-    104,
-    "2026-07-22"
-  ),
-  new Event(
-    2,
-    "Fall Career & Co-op Fair",
-    "Meet top tech employers, network, and submit your resume.",
-    "Career events",
-    "Nov 02",
-    "10:00 AM",
-    "3:00 PM",
-    "EV Building Atrium",
-    45,
-    "Open",
-    102,
-    "2026-07-21"
-  ),
-  new Event(
-    3,
-    "Hackathon Kickoff Night",
-    "Form teams, pitch ideas, and start building your weekend projects.",
-    "Club activities",
-    "Nov 10",
-    "5:00 PM",
-    "9:00 PM",
-    "H-Building 8th Floor",
-    0,
-    "Full",
-    103,
-    "2026-07-22"
-  ),
-  new Event(
-    1,
-    "Web Development Workshop",
-    "Learn HTML & CSS Basics from scratch with hands-on practice.",
-    "Academic workshops",
-    "Oct 24",
-    "6:00 PM",
-    "8:00 PM",
-    "Downtown Auditorium",
-    12,
-    "Open",
-    101,
-    "2026-07-20"
-  ),
-  new Event(
-    5,
-    "Annual Holiday Symphony",
-    "A night of classical music featuring the university orchestra.",
-    "Cultural event",
-    "Dec 05",
-    "7:30 PM",
-    "9:30 PM",
-    "Oscar Peterson Concert Hall",
-    20,
-    "Open",
-    105,
-    "2026-07-23"
-  )
-  ];
-
-
-const container = document.querySelector(".event-card-container");
-
-// Goes through the whole Event fake_events array
-const article_elements = fake_events.map(event => create_event(event));
-// Appends all of the events one after the other to make it easier then hardcoding
-// with append.child()
-container.append(...article_elements);

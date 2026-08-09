@@ -203,6 +203,3 @@ if (searchInput) {
 }
 
 
-// Appends all of the events one after the other to make it easier then hardcoding
-// with append.child()  
-container.append(...article_elements);

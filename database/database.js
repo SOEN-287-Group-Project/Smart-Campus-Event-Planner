@@ -25,7 +25,7 @@ db.exec(schemas);
 db.exec(users);
 db.exec(categories);
 db.exec(events);
-db.exec(registrations);
+//db.exec(registrations);
 
 // ********** SQL Scripts summary **********
 
@@ -516,9 +516,13 @@ function getRegistrationsForUser(userId) {
             user_id: registration.user_id,
             event_id: registration.event_id,
             attended: registration.attended,
-            title: event.title, 
-            date: event.event_date,
+            title: event.title,
+            event_date: event.event_date,
+            start_time: event.start_time,
+            location: event.location,
+            capacity: event.capacity,
             status: event.status,
+            category_id: event.category_id,
             category_name: category.category_name
         };
     });

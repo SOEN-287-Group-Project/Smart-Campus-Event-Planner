@@ -52,4 +52,8 @@ studentRoutes.get('/api/events', (req, res) => {
     res.json(events);
 });
 
+studentRoutes.get('/api/my-registrations',
+studentController.getMyRegistrations
+);
+
 export default studentRoutes;
