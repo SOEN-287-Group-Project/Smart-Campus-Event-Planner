@@ -20,12 +20,14 @@ const events = fs.readFileSync("./database/events.sql", "utf8");
 // initialize the registrations
 const registrations = fs.readFileSync("./database/registrations.sql", "utf8");
 
-// execute the sql scripts
-db.exec(schemas);
-db.exec(users);
-db.exec(categories);
-db.exec(events);
-//db.exec(registrations);
+// execute the sql scripts (for initialization only)
+// if the database is already initialized and populated,
+// then no need to run the lines below
+// db.exec(schemas);
+// db.exec(users);
+// db.exec(categories);
+// db.exec(events);
+// db.exec(registrations);
 
 // ********** SQL Scripts summary **********
 
@@ -49,7 +51,7 @@ db.exec(events);
 // get (all) from events
 // get (all) from registrations
 
-// ********** SQL Scripts for INSERT **********
+// ********** SQL scripts and functions for adding one entry **********
 
 // sql script for inserting to users
 const insertIntoUsers = db.prepare(
@@ -102,168 +104,6 @@ const insertIntoRegistrations = db.prepare(
     VALUES (?, ?)
     `
 );
-
-// ********** SQL Scripts for SELECT with condition **********
-
-// sql script for getting a user by unique email
-const selectFromUsersByEmail = db.prepare(
-    `
-    SELECT *
-    FROM users
-    WHERE email = ?;
-    `
-);
-const selectUserById = db.prepare(
-    `
-    SELECT user_id, full_name, email, role
-    FROM users
-    WHERE user_id = ?;
-    `
-);
-
-const updateUserProfileById = db.prepare(
-    `
-    UPDATE users
-    SET full_name = ?, email = ?
-    WHERE user_id = ?;
-    `
-);
-
-const selectUserPasswordById = db.prepare(
-    `
-    SELECT password_hash
-    FROM users
-    WHERE user_id = ?;
-    `
-);
-
-const updateUserPasswordById = db.prepare(
-    `
-    UPDATE users
-    SET password_hash = ?
-    WHERE user_id = ?;
-    `
-);
-
-// sql script for getting a category by unique category name
-const selectFromCategoryByCategoryName = db.prepare(
-    `
-    SELECT *
-    FROM categories
-    WHERE category_name = ?;
-    `
-);
-
-// sql script for getting a user by unique email
-const selectFromEventsByEventTitle = db.prepare(
-    `
-    SELECT *
-    FROM events
-    WHERE title = ?;
-    `
-);
-
-// sql script for getting a user by unique email
-const selectFromRegistrationByEvents = db.prepare(
-    `
-    SELECT *
-    FROM registrations
-    WHERE registration_id = ?;
-    `
-);
-
-// sql script for getting registrations by user_id
-const selectFromRegistrationByUserId = db.prepare(
-    `
-    SELECT *
-    FROM registrations
-    JOIN users USING (user_id)
-    `
-);
-
-// ********** SQL Scripts for SELECT all **********
-
-// sql script for getting all users
-const selectAllFromUsers = db.prepare(
-    `
-    SELECT *
-    FROM users
-    `
-);
-
-// sql script for getting all events
-const selectAllFromEvents = db.prepare(
-    `
-    SELECT 
-        events.event_id,
-        events.organizer_id,
-        users.full_name,
-        events.category_id,
-        categories.category_name,
-        events.title,
-        events.description,
-        events.event_date,
-        events.start_time,
-        events.end_time,
-        events.location,
-        events.capacity,
-        events.status,
-        events.created_on
-    FROM events
-    JOIN users ON events.organizer_id = users.user_id
-    JOIN categories ON events.category_id = categories.category_id
-    `
-);
-
-// sql script for getting all categories
-const selectAllFromCategories = db.prepare(
-    `
-    SELECT *
-    FROM categories;
-    `
-);
-
-// sql script for getting all registration
-const selectAllFromRegistrations = db.prepare(
-    `
-    SELECT 
-        registrations.registration_id,
-        registrations.user_id,
-        users.full_name,
-        registrations.event_id,
-        registrations.registration_date,
-        registrations.attended
-    FROM registrations
-    JOIN users ON registrations.user_id = users.user_id;
-    `
-);
-// ********** SQL Scripts for UPDATE **********
-
-// sql script for updating an event by id
-const updateEventById = db.prepare(`
-    UPDATE events
-    SET
-        category_id = ?,
-        title = ?,
-        description = ?,
-        event_date = ?,
-        start_time = ?,
-        end_time = ?,
-        capacity = ?,
-        location = ?,
-        status = ?
-    WHERE event_id = ?
-`);
-
-// sql script for update attendance by id
-const updateAttendanceById = db.prepare(`
-    UPDATE registrations
-    SET attended = ?
-    WHERE event_id = ?
-      AND user_id = ?
-`);
-
-// ********** API Functions for adding one entry **********
 
 // adding new user to the users table
 function addUser(
@@ -333,7 +173,67 @@ function addRegistration(
     return result;
 }
 
-// ********** API Functions for getting one entry  **********
+// ********** SQL scripts and functions for getting one entry **********
+
+// sql script for getting a user by unique email
+const selectFromUsersByEmail = db.prepare(
+    `
+    SELECT *
+    FROM users
+    WHERE email = ?;
+    `
+);
+const selectUserById = db.prepare(
+    `
+    SELECT user_id, full_name, email, role
+    FROM users
+    WHERE user_id = ?;
+    `
+);
+
+const selectUserPasswordById = db.prepare(
+    `
+    SELECT password_hash
+    FROM users
+    WHERE user_id = ?;
+    `
+);
+
+// sql script for getting a category by unique category name
+const selectFromCategoryByCategoryName = db.prepare(
+    `
+    SELECT *
+    FROM categories
+    WHERE category_name = ?;
+    `
+);
+
+// sql script for getting a user by unique email
+const selectFromEventsByEventTitle = db.prepare(
+    `
+    SELECT *
+    FROM events
+    WHERE title = ?;
+    `
+);
+
+// sql script for getting a user by unique email
+const selectFromRegistrationByEvents = db.prepare(
+    `
+    SELECT *
+    FROM registrations
+    WHERE registration_id = ?;
+    `
+);
+
+// sql script for getting registrations by user_id
+const selectFromRegistrationByUserId = db.prepare(
+    `
+    SELECT *
+    FROM registrations
+    JOIN users USING (user_id)
+    `
+);
 
 function getUser(email, password){
     const result = selectFromUsersByEmail.get(
@@ -393,7 +293,62 @@ function getRegistrationByStudent(registration_id){
     return result;
 }
 
-// ********** API Functions for getting all entries **********
+// ********** SQL scripts and functions for getting all entries **********
+
+// sql script for getting all users
+const selectAllFromUsers = db.prepare(
+    `
+    SELECT *
+    FROM users
+    `
+);
+
+// sql script for getting all events
+const selectAllFromEvents = db.prepare(
+    `
+    SELECT 
+        events.event_id,
+        events.organizer_id,
+        users.full_name,
+        events.category_id,
+        categories.category_name,
+        events.title,
+        events.description,
+        events.event_date,
+        events.start_time,
+        events.end_time,
+        events.location,
+        events.capacity,
+        events.status,
+        events.created_on
+    FROM events
+    JOIN users ON events.organizer_id = users.user_id
+    JOIN categories ON events.category_id = categories.category_id
+    `
+);
+
+// sql script for getting all categories
+const selectAllFromCategories = db.prepare(
+    `
+    SELECT *
+    FROM categories;
+    `
+);
+
+// sql script for getting all registration
+const selectAllFromRegistrations = db.prepare(
+    `
+    SELECT 
+        registrations.registration_id,
+        registrations.user_id,
+        users.full_name,
+        registrations.event_id,
+        registrations.registration_date,
+        registrations.attended
+    FROM registrations
+    JOIN users ON registrations.user_id = users.user_id;
+    `
+);
 
 // getting all the users from the users table
 function getAllUsers(){
@@ -419,7 +374,49 @@ function getAllRegistrations(){
     return result;
 }
 
-// ********** API Functions for updating  **********
+// ********** SQL scripts and functions for updating an entry **********
+
+// sql script for updating an user's full name and email by id
+const updateUserProfileById = db.prepare(
+    `
+    UPDATE users
+    SET full_name = ?, email = ?
+    WHERE user_id = ?;
+    `
+);
+
+// sql script for updating an user's password by id
+const updateUserPasswordById = db.prepare(
+    `
+    UPDATE users
+    SET password_hash = ?
+    WHERE user_id = ?;
+    `
+);
+
+// sql script for updating an event by id
+const updateEventById = db.prepare(`
+    UPDATE events
+    SET
+        category_id = ?,
+        title = ?,
+        description = ?,
+        event_date = ?,
+        start_time = ?,
+        end_time = ?,
+        capacity = ?,
+        location = ?,
+        status = ?
+    WHERE event_id = ?
+`);
+
+// sql script for update attendance by id
+const updateAttendanceById = db.prepare(`
+    UPDATE registrations
+    SET attended = ?
+    WHERE event_id = ?
+      AND user_id = ?
+`);
 
 // updating an event by id
 function updateEvent(
@@ -460,7 +457,6 @@ function updateEvent(
     `).get(event_id);
 }
 
-
 // Update a student's attendance for an event
 function updateAttendance(
     event_id,
@@ -486,47 +482,59 @@ function updateAttendance(
           AND user_id = ?
     `).get(event_id, user_id);
 }
-/* ------------- STUDENT API FUNCTIONS ------------- */
 
-function getRegistrationRowsForUser(userId) {
-    return db
-      .prepare(`SELECT * FROM registrations WHERE user_id = ?`)
-      .all(String(userId));
-  }
+// ********** SQL scripts and functions for updating an entry **********
 
-function getCategoryById(categoryId) {
-    return db
-      .prepare(`SELECT * FROM categories WHERE category_id = ?`)
-      .get(categoryId);
-  }
+// sql script for delete an user by id
+const deleteUserById = db.prepare(
+    `
+    DELETE FROM users
+    WHERE user_id = ? AND role <> 'admin';
+    `
+);
 
-function getEventById(eventId) {
-    return db
-        .prepare(`SELECT * FROM events WHERE event_id = ?`)
-        .get(eventId);
+// sql script for delete a category by id
+const deleteCategoryById = db.prepare(
+    `
+    DELETE FROM categories
+    WHERE category_id = ?;
+    `
+);
+
+// sql script for delete a event by id
+const deleteEventById = db.prepare(
+    `
+    DELETE FROM events
+    WHERE event_id = ?;
+    `
+);
+
+// sql script for delete an registration
+const deleteRegistrationById = db.prepare(
+    `
+    DELETE FROM registrations
+    WHERE registration_id = ?;
+    `
+);
+
+function deleteUser(user_id){
+    const result = deleteUserById.run(id);
+    return result;
 }
 
-function getRegistrationsForUser(userId) {
-    const registrations = getRegistrationRowsForUser(userId); //get all registrations for a user
-    const data = registrations.map((registration) => { //map through the registrations and return the registration id, user id, event id, attended, title, date, status, and category name
-        const event = getEventById(registration.event_id); // search through event table for the event javascript object
-        const category = getCategoryById(event.category_id); // search through category table for the category javascript object
-        return {
-            registration_id: registration.registration_id,
-            user_id: registration.user_id,
-            event_id: registration.event_id,
-            attended: registration.attended,
-            title: event.title,
-            event_date: event.event_date,
-            start_time: event.start_time,
-            location: event.location,
-            capacity: event.capacity,
-            status: event.status,
-            category_id: event.category_id,
-            category_name: category.category_name
-        };
-    });
-    return data;
+function deleteCategory(category_id){
+    const result = deleteCategoryById.run(category_id);
+    return result;
+}
+
+function deleteEvent(event_id){
+    const result = deleteEventById.run(event_id);
+    return result;
+}
+
+function deleteRegistration(registration_id){
+    const result = deleteRegistrationById.run(registration_id);
+    return result;
 }
 
 // ********** Get counts **********
@@ -563,32 +571,74 @@ function getCountOfRegistrationsByEvent(event_id){
     return result;
 }
 
+/* ------------- STUDENT API FUNCTIONS ------------- */
+
+function getRegistrationRowsForUser(userId) {
+    return db
+      .prepare(`SELECT * FROM registrations WHERE user_id = ?`)
+      .all(String(userId));
+}
+
+function getCategoryById(categoryId) {
+    return db
+      .prepare(`SELECT * FROM categories WHERE category_id = ?`)
+      .get(categoryId);
+}
+
+function getEventById(eventId) {
+    return db
+        .prepare(`SELECT * FROM events WHERE event_id = ?`)
+        .get(eventId);
+}
+
+function getRegistrationsForUser(userId) {
+    const registrations = getRegistrationRowsForUser(userId); //get all registrations for a user
+    const data = registrations.map((registration) => { //map through the registrations and return the registration id, user id, event id, attended, title, date, status, and category name
+        const event = getEventById(registration.event_id); // search through event table for the event javascript object
+        const category = getCategoryById(event.category_id); // search through category table for the category javascript object
+        return {
+            registration_id: registration.registration_id,
+            user_id: registration.user_id,
+            event_id: registration.event_id,
+            attended: registration.attended,
+            title: event.title,
+            event_date: event.event_date,
+            start_time: event.start_time,
+            location: event.location,
+            capacity: event.capacity,
+            status: event.status,
+            category_id: event.category_id,
+            category_name: category.category_name
+        };
+    });
+    return data;
+}
+
 // ********** Exports **********
 export default{
     addUser,
     addCategory,
     addEvents,
     addRegistration,
-    getUser,
-    
-    getUserById,
-    updateUserProfile,
-    getUserPasswordById,
-    updateUserPassword,
 
+    getUser,
+    getUserById,
+    getUserPasswordById,
     getCategory,
     getEvent,
     getRegistration,
     getRegistrationByStudent,
+    getRegistrationsForUser,
+
     getAllUsers,
     getAllCategories,
     getAllEvent,
     getAllRegistrations,
 
+    updateUserProfile,
+    updateUserPassword,
     updateEvent,
     updateAttendance,
-
-    getRegistrationsForUser,
 
     getCountOfEvents,
     getCountOfRegistrationsByEvent,
