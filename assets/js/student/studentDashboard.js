@@ -156,7 +156,7 @@ function renderStudentCalendar(upcomingEvents) {
 function isUpcomingRegistration(registration) { // we pass in the registration objects from the getRegistrationsForUser function from the DB
   const today = new Date().toISOString().slice(0, 10);
 
-  if (!registration.date || registration.date < today) { // if the registration date is not set or is in the past, return false
+  if (!registration.event_date || registration.event_date < today) { // if the event date is not set or is in the past, return false
     return false;
   }
 
@@ -174,7 +174,7 @@ function isUpcomingRegistration(registration) { // we pass in the registration o
 function getUpcomingEvents(registrations) {
   return registrations.filter(isUpcomingRegistration).map((registration) => ({
       title: registration.title,
-      date: registration.date,
+      date: registration.event_date,
     })).sort((a, b) => a.date.localeCompare(b.date)); // sort the registrations by date, can do so with string comparison since dates are in ISO format
 }
 
