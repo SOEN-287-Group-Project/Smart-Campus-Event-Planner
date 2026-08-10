@@ -202,7 +202,7 @@ function create_event(event){
     container.addEventListener("click", (e) => {
     // Fixed a bug where sometimes the click would be detected on the SVG and not the button itself
     const registerBtn = e.target.closest(".register-button");
-    if (!registerBtn || registerBtn.classList.contains("btn-full")) return; // Exit if the user clicked somewhere else on the card
+    if (!registerBtn || registerBtn.classList.contains("btn-full") || registerBtn.classList.contains("btn-cancelled") || registerBtn.classList.contains("btn-completed")) return; // Exit if the user clicked somewhere else on the card
 
     //  Goes up to the parent all the way to the root and stops when it finds <article class="event-card">
     // Used to make sure you are clicking on an event card

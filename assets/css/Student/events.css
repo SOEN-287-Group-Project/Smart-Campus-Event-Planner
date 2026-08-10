@@ -113,6 +113,7 @@ button.filter-buttons{
 
 .event-card-status{
     background-color: var(--bg-panel);
+    color: var(--text-color);
     font-weight: bolder;
     font-size: large;
     border-radius: 20px;
@@ -141,6 +142,10 @@ background-color:blue;
 
 .status-dot-status-full{
   background-color:var(--status-full);
+}
+
+.status-dot-status-cancelled{
+  background-color:var(--status-cancelled);
 }
 
 .event-card-footer {
@@ -185,8 +190,8 @@ background-color:blue;
 .btn-open:active{
   background-color: rgb(241, 245, 249);
 }
-/* Changes and shows user that you can't click register button when event_status = Full */
-.btn-full{
+/* Changes and shows user that you can't click register button when event_status = Full,completed or cancelled */
+.btn-full, .btn-cancelled, .btn-completed{
   background-color: rgba(128, 128, 128, 0.341);
   cursor:  not-allowed;
 }

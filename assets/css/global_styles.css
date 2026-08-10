@@ -29,6 +29,7 @@
   --border-graph:#fff; /*analytics*/
   --status-open: rgba(11, 129, 11, 0.995); /*events page*/
   --status-full: rgb(123, 9, 9); /*events page*/
+  --status-cancelled: rgb(243, 255, 11); /*events page*/
 }
 
 
@@ -59,7 +60,9 @@ body.darkmode{
   --border-graph:#334155; /*analytics*/
   --status-open: rgb(21 255 21 / 100%); /*events page*/
   --status-full: rgb(255 33 33); /*events page*/
+  --status-cancelled: rgb(243, 255, 11); /*events page*/
 }
+
 
 .bg-grey-theme {
     background-color:#c7c7c7;
