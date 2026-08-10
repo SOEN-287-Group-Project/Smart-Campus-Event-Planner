@@ -567,7 +567,6 @@ function deleteRegistrationByEventId(registration_id){
 }
 
 function deleteRegistration(registration_id){
-    deleteRegistrationsByEventId.run(event_id);
     const result = deleteRegistrationById.run(registration_id);
     return result;
 }
