@@ -183,13 +183,11 @@ function addEvents(
 // adding new category to the category table
 function addRegistration(
     user_id,
-    event_id,
-    attended
+    event_id
 ){
     const result = insertIntoRegistrations.run(
         user_id,
-        event_id,
-        attended
+        event_id
     );
     return result;
 }
@@ -605,7 +603,7 @@ function getCountOfRegistrationsByEvent(event_id){
 function getRegistrationRowsForUser(userId) {
     return db
       .prepare(`SELECT * FROM registrations WHERE user_id = ?`)
-      .all(String(userId));
+      .all(userId);
 }
 
 function getCategoryById(categoryId) {

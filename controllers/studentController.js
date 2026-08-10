@@ -276,6 +276,47 @@ function deleteMyRegistration(req, res) {
     }
 }
 
+function registerForEvent(req, res) {
+    if (!req.session.userId) {
+        return res.status(401).json({
+            message: "You must log in first."
+        });
+    }
+
+    const eventId = req.params.eventId;
+
+    if (!eventId) {
+        return res.status(400).json({
+            message: "Event id is required."
+        });
+    }
+
+    try {
+        const result = database.addRegistration(
+            req.session.userId,
+            eventId
+        );
+
+        return res.status(201).json({
+            message: "Registered successfully.",
+            registration_id: result.lastInsertRowid,
+            event_id: eventId
+        });
+    } catch (error) {
+        if (error.code === "SQLITE_CONSTRAINT_UNIQUE") {
+            return res.status(409).json({
+                message: "You are already registered for this event."
+            });
+        }
+
+        console.error("REGISTER EVENT ERROR:", error);
+
+        return res.status(500).json({
+            message: "Unable to register for this event."
+        });
+    }
+}
+
 
 export default {
     getProfile,
@@ -283,5 +324,6 @@ export default {
     updatePassword,
     getStudentDashboard,
     getMyRegistrations,
-    deleteMyRegistration
+    deleteMyRegistration,
+    registerForEvent
 };

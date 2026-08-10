@@ -18,17 +18,43 @@ const container = document.querySelector(".event-card-container");
 const modal = document.getElementById("eventDetailsModal");
 const article_elements = events.map(event => create_event(event));
 const searchInput = document.getElementById("searchBar");
+const modalRegisterButton = document.querySelector(".btn-register");
 
-fetch('/student/api/events')
-    .then((response) => {
-        if (!response.ok) {
+Promise.all([
+    fetch('/student/api/events'),
+    fetch('/student/api/my-registrations')
+])
+    .then(([eventsResponse, registrationsResponse]) => {
+        if (!eventsResponse.ok) {
             throw new Error("Failed to load events");
         }
-        return response.json();
+
+        if (registrationsResponse.status === 401) {
+            window.location.href = '/auth/login';
+            return;
+        }
+
+        if (!registrationsResponse.ok) {
+            throw new Error("Failed to load registrations");
+        }
+
+        return Promise.all([
+            eventsResponse.json(),
+            registrationsResponse.json()
+        ]);
     })
     .then((data) => {
+        if (!data) return;
+
+        const [eventData, registrationData] = data;
+        const registeredEventIds = new Set(
+            registrationData.registrations.map((registration) => String(registration.event_id))
+        );
+
         // 1. Format the raw database data FIRST and store it in global `events`
-        events = data.map(rawEvent => {
+        events = eventData.filter((rawEvent) => {
+            return !registeredEventIds.has(String(rawEvent.event_id));
+        }).map(rawEvent => {
             return {
                 ...rawEvent,
                 category: CATEGORY_NAMES[rawEvent.category_id] || rawEvent.category || "Other",
@@ -65,9 +91,44 @@ fetch('/student/api/events')
     document.getElementById("modalTime").textContent = formattedTime;
     document.getElementById("modalLocation").textContent = event.location;
     document.getElementById("modalCapacity").textContent = event.capacity;
+    modalElement.dataset.eventId = event.event_id;
 
     // Makes the popup visible
     modalElement.classList.remove("hidden");
+}
+
+function registerForSelectedEvent() {
+    const eventId = modal.dataset.eventId;
+
+    if (!eventId) {
+        alert("Please select an event first.");
+        return;
+    }
+
+    fetch(`/student/api/events/${eventId}/register`, {
+        method: "POST"
+    })
+        .then((response) => {
+            return response.json().then((data) => {
+                if (!response.ok) {
+                    throw new Error(data.message || "Unable to register for this event.");
+                }
+
+                return data;
+            });
+        })
+        .then((data) => {
+            alert(data.message);
+            const eventCard = document.getElementById(String(eventId));
+            if (eventCard) {
+                eventCard.remove();
+            }
+            events = events.filter((event) => String(event.event_id) !== String(eventId));
+            modal.classList.add("hidden");
+        })
+        .catch((error) => {
+            alert(error.message);
+        });
 }
 
 function get_category_image_url(category){
@@ -178,6 +239,10 @@ if (modal) {
       
     });
 }
+
+if (modalRegisterButton) {
+    modalRegisterButton.addEventListener("click", registerForSelectedEvent);
+}
 // Search bar functionality
 if (searchInput) {
     searchInput.addEventListener("input", (e) => {  // Using inputs event so it checks after every keystroke
@@ -201,5 +266,3 @@ if (searchInput) {
         });
     });
 }
-
-

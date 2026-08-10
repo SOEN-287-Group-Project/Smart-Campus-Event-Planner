@@ -35,7 +35,7 @@
             myRegistrations = data.registrations.map(rawEvent => {
                 return {
                     ...rawEvent,
-                    category: CATEGORY_NAMES[rawEvent.category_id] || rawEvent.category || "Other",
+                    category: rawEvent.category_name || CATEGORY_NAMES[rawEvent.category_id] || rawEvent.category || "Other",
                     status: rawEvent.status || (rawEvent.capacity > 0 ? "Open" : "Full")
                 };
             });
@@ -74,6 +74,7 @@
         })
         .then((data) => {
             console.log("Server response:", data);
+            alert(data.message);
 
             // 2. Remove the event from the user interface
             cardElement.remove();
@@ -158,6 +159,7 @@
     container.addEventListener("click", (e) => {
         // Fixed a bug where sometimes the click would be detected on the SVG and not the button itself
         const registerBtn = e.target.closest(".register-button");
+        if (!registerBtn) return;
 
         //  Goes up to the parent all the way to the root and stops when it finds <article class="event-card">
         // Used to make sure you are clicking on an event card
@@ -172,6 +174,9 @@
 
         // If it finds a match in the events array it opens the event details.
         if (matchedEvent) {
+            const confirmed = confirm(`Cancel registration for ${matchedEvent.title}?`);
+            if (!confirmed) return;
+
             deleteRegistration(matchedEvent.registration_id, card);
         }
         });
