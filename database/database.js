@@ -23,11 +23,11 @@ const registrations = fs.readFileSync("./database/registrations.sql", "utf8");
 // execute the sql scripts (for initialization only)
 // if the database is already initialized and populated,
 // then no need to run the lines below
-// db.exec(schemas);
-// db.exec(users);
-// db.exec(categories);
-// db.exec(events);
-//db.exec(registrations);
+ db.exec(schemas);
+ db.exec(users);
+ db.exec(categories);
+ db.exec(events);
+db.exec(registrations);
 
 // ********** SQL Scripts summary **********
 
