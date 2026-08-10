@@ -232,6 +232,10 @@ button.Manage-Attendance{
     top: 0;
 }
 
+.event-table tbody tr.hidden{
+    display:none;
+}
+
 .event-table tbody tr:hover {
     background: #f8fafc;
 }
