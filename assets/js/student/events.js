@@ -87,6 +87,7 @@ Promise.all([
     document.getElementById("modalTitle").textContent = event.title;
     document.getElementById("modalCategory").textContent = event.category;
     document.getElementById("modalDescription").textContent = event.description;
+    document.getElementById("modalOrganiser").textContent = event.full_name;
     document.getElementById("modalDate").textContent = event.event_date;
     document.getElementById("modalTime").textContent = formattedTime;
     document.getElementById("modalLocation").textContent = event.location;
@@ -253,7 +254,7 @@ if (searchInput) {
 
             // Search across title, description, location, category, and organizer
             // Creates a single string with each Event attributes
-            const searchableText = `${event.title} ${event.description} ${event.location} ${event.category} ${event.organizer}`.toLowerCase();
+            const searchableText = `${event.title} ${event.description} ${event.location} ${event.category} ${event.full_name}`.toLowerCase();
 
 
             const isMatch = searchableText.includes(query);
