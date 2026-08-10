@@ -59,4 +59,6 @@ studentRoutes.get('/api/my-registrations',
 studentController.getMyRegistrations
 );
 
+studentRoutes.delete('/api/my-registrations/:registrationId', studentController.deleteMyRegistration);
+
 export default studentRoutes;

@@ -245,10 +245,43 @@ function getMyRegistrations(req, res) {
     }
 }
 
+function deleteMyRegistration(req, res) {
+    try {
+        // 1. Grab registrationId from the URL path parameter
+        const registrationId = req.params.registrationId;
+
+        // 3. Call your database function
+        const result = database.deleteRegistration(registrationId);
+
+        // 4. Check if a database row was actually modified
+        if (!result || result.changes === 0) {
+            return res.status(404).json({
+                error: "Registration not found"
+            });
+        }
+
+        // 5. Return success response
+        return res.json({
+            message: "Registration deleted successfully",
+            registration_id: registrationId
+        });
+
+    } catch (error) {
+        console.error("DELETE REGISTRATION ERROR:", error);
+
+        return res.status(500).json({
+            error: "Failed to delete registration",
+            details: error.message
+        });
+    }
+}
+
+
 export default {
     getProfile,
     updateProfile,
     updatePassword,
     getStudentDashboard,
-    getMyRegistrations
+    getMyRegistrations,
+    deleteMyRegistration
 };

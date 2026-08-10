@@ -77,6 +77,10 @@ button.filter-buttons{
 
 }
 
+.event-card.hidden {
+  display: none;
+}
+
 .event-card-header {
     background-size: 100% 100%;
     background-color: rgb(185, 180, 180);

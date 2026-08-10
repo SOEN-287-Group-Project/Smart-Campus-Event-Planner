@@ -196,7 +196,7 @@ if (searchInput) {
               cardElement.classList.remove("hidden"); // Show card
              } 
              else {
-              cardElement.classList.add("hidden");    // Hide card
+              cardElement.classList.add("hidden");// Hide card
             }
         });
     });

@@ -27,7 +27,7 @@ const registrations = fs.readFileSync("./database/registrations.sql", "utf8");
 // db.exec(users);
 // db.exec(categories);
 // db.exec(events);
-// db.exec(registrations);
+//db.exec(registrations);
 
 // ********** SQL Scripts summary **********
 
