@@ -3,23 +3,33 @@
 
 :root {
   /* Theme Base Colors */
+  
   --bg-main: rgb(241, 245, 249); /* Body*/
   --bg-panel: #ffffff;
   --bg-card: #c7c7c713;
   --dashboard-text-color:white;
   --text-color: black;
-  --arrow-button: grey;
+  --arrow-button: grey; /* overview */
   --disabled-text-color: #d2d2d2;
+  --disabled-text-color-form: #d2d2d2;
   --button: #2563eb;
+  --secondary-button:#7c7c7c; /*manage-event*/
   --border-color: #cccccc18;
   --border-input: #ccc;
   --upcoming-events-even: lightcyan;
   --dropmenu-hover:#dbeaff;
   --dropdown-arrow:white;
   --scrollbar: grey;
+  --border-searchbar: #ccc;
+  --border-searchbar-active:#202121;
+  --table-border:#ccc; /* manage-event*/
+  --table-hover:#f8fafc; /*manage-event*/
+  --table-header:#eff6ff; /*manage-event*/
+  --table-header-text:#0f172a;
 }
 
 body.darkmode{
+    
  --bg-main: #0b0f19;
   --bg-panel: #1e293b;
   --bg-card: #1e293b;
@@ -27,13 +37,21 @@ body.darkmode{
   --text-color: #cbd9f4;
   --arrow-button:rgb(7, 37, 113) ;
   --disabled-text-color: #0b0101aa;
+  --disabled-text-color-form: #7f8a9fa8;
   --button: rgb(7, 37, 113);
+  --secondary-button:#475569; /*manage-event*/
   --border-color: #334155;
   --border-input: #475569;
   --upcoming-events-even: rgb(7, 37, 113);
   --dropmenu-hover:rgb(7, 37, 113);
   --dropdown-arrow:#cbd9f4;
   --scrollbar: #475569 transparent;
+  --border-searchbar:#28364e;
+  --border-searchbar-active:#cbd9f4;
+  --table-border:#cbd9f4; /* manage-event*/
+  --table-hover:rgb(1, 19, 64); /*manage-event*/
+  --table-header:rgb(7, 37, 113); /*manage-event*/
+  --table-header-text:#cbd9f4;
 }
 .bg-grey-theme {
     background-color:#c7c7c7;
@@ -46,7 +64,7 @@ body {
     font-family: 'Inter';
     margin: 0;   
 }
-h1 h2 h3 h4 h5 h6{
+h1, h2, h3, h4, h5, h6{
     color:var(--text-color);
 }
 header {
@@ -117,7 +135,7 @@ button {
 
 .nav-links a:hover,
 .nav-links a.active-page {
-    background: #2563eb;
+    background: var(--button);
     transform: scale(1.05);
 }
 
