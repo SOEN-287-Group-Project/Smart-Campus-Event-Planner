@@ -1,61 +1,71 @@
 /* Makes all buttons scale and change background color when hovered*/
+/* Base Button Styles */
 button {
-    transition: scale 0.3s ease-in-out, background-color 0.3s ease-in-out;
-    border: none;
-    border-radius: 50%;
-    color: white;
-    background-color: #2563eb;
-    font-size: large;
-    font-weight: bold;
+  transition: scale 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  border: none;
+  border-radius: 50%;
+  color: var(--dropdown-arrow);
+  background-color: var(--button);
+  font-size: large;
+  font-weight: bold;
 }
 
-
+/* Search Bar Section */
 .search-bar-container {
-    display : flex;
-    flex-direction: column;
-    flex-shrink: 0;
-    margin: 0 auto;
-    width: 90%;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  margin: 0 auto;
+  width: 90%;
 }
+
 input.search-bar {
-    width: 100%;
-    flex-grow: 1;
-    font-size: 20px;
-    border: 3px solid #ccc;
-    border-radius: 0.875rem;
-    padding: 20px 20px;
+  width: 100%;
+  flex-grow: 1;
+  font-size: 20px;
+  background-color: var(--bg-panel);
+  color: var(--text-color);
+  border: 3px solid var(--border-searchbar);
+  border-radius: 0.875rem;
+  padding: 20px 20px;
 }
 
-/*Gives placeholder text transparency*/
+input.search-bar:focus {
+  outline: none; 
+  border-color: var(--border-searchbar-active);
+}
+
+/* Placeholder transparency */
 input.search-bar::placeholder {
-    color: rgba(32, 1, 1, 0.599);
+  color: var(--disabled-text-color-form);
 }
 
+/* Filter Section */
 .filter-buttons-container {
-    display: flex;
-    margin-top: 0.5rem;
-    gap: 1.5rem;
+  display: flex;
+  margin-top: 0.5rem;
+  gap: 1.5rem;
 }
 
-button.filter-buttons{
-    flex-grow: 1;
-    color:rgb(95, 91, 91);
-    background-color: transparent;
-    padding: 0.5rem 0;
-    border: 3px solid #ccc;
-    border-radius: 0.875rem;
-    box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
+button.filter-buttons {
+  flex-grow: 1;
+  color: rgb(95, 91, 91);
+  background-color: transparent;
+  padding: 0.5rem 0;
+  border: 3px solid #ccc;
+  border-radius: 0.875rem;
+  box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
 }
 
-.filter-buttons:hover{
+.filter-buttons:hover {
   scale: 110%;
 }
 
-.filter-buttons:active{
+.filter-buttons:active {
   background-color: #2563eb;
 }
 
-/* Created a grid to make it easier to align cards*/
+/* Grid Container for Event Cards */
 .event-card-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
@@ -64,7 +74,7 @@ button.filter-buttons{
   padding: 0 1.5rem;
 }
 
-
+/* Event Card Component */
 .event-card {
   max-width: 40rem;
   display: grid;
@@ -73,8 +83,13 @@ button.filter-buttons{
   padding: 0.4rem 0.7rem;
   border-radius: 0.875em;
   border: 3px solid #cccccc18;
-  background-color:#c7c7c713;
+  background-color: var(--bg-card);
+}
 
+.event-card:hover {
+  transform: translateY(-4px); 
+  transition: transform 0.1s ease-in-out;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
 .event-card.hidden {
@@ -82,64 +97,65 @@ button.filter-buttons{
 }
 
 .event-card-header {
-    background-size: 100% 100%;
-    background-color: rgb(185, 180, 180);
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    height: 19rem;
-
+  background-size: 100% 100%;
+  background-color: rgb(185, 180, 180);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  height: 19rem;
 }
 
-.event-card-category{
-    background-color: rgb(241, 245, 249); 
-    font-weight: bolder;
-    font-size: large;
-    border-radius: 20px;
-    padding: 0.4rem 0.7rem;
-    
+.event-card-category {
+  background-color: var(--bg-panel); 
+  color: var(--text-color);
+  font-weight: bolder;
+  font-size: large;
+  border-radius: 20px;
+  padding: 0.4rem 0.7rem;
 }
 
-.event-card-status{
-    background-color: rgb(241, 245, 249);
-    font-weight: bolder;
-    font-size: large;
-    border-radius: 20px;
-    padding: 0.4rem 0.7rem;
-}
-/* Changes color of the status depending on the event_status*/
-.status-dot{
-width: 10px;
-height: 10px;
-border-radius: 50%; 
-display: inline-block;
-background-color:blue;
+.event-card-status {
+  background-color: var(--bg-panel);
+  font-weight: bolder;
+  font-size: large;
+  border-radius: 20px;
+  padding: 0.4rem 0.7rem;
 }
 
-.status-open{
-  color:rgba(11, 129, 11, 0.995);
+/* Event Status Indicators */
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%; 
+  display: inline-block;
+  background-color: blue;
 }
 
-.status-full{
- color:rgb(123, 9, 9);
+.status-open {
+  color: var(--status-open);
 }
 
-.status-dot-status-open{
-  background-color:rgba(11, 129, 11, 0.995);
+.status-full {
+  color: var(--status-full);
 }
 
-.status-dot-status-full{
-  background-color:rgb(123, 9, 9);
+.status-dot-status-open {
+  background-color: var(--status-open);
 }
 
+.status-dot-status-full {
+  background-color: var(--status-full);
+}
+
+/* Event Card Footer Section */
 .event-card-footer {
   display: grid;
   grid-template-columns: 1fr auto;
-  row-gap: 0.4rem;    /* Small vertical gap between text rows */
-  column-gap: 0.75rem; /* Gap between Date and Spots on same row */
-  color: rgb(1, 0, 0); /* Text color from mockup */
+  row-gap: 0.4rem;
+  column-gap: 0.75rem;
+  color: var(--text-color);
   font-size: 0.9rem;
   margin-top: -1rem;
 }
@@ -149,43 +165,37 @@ background-color:blue;
   margin-top: 1rem;
   flex-direction: column;
   font-weight: bold;
-  gap: .75rem; 
+  gap: 0.75rem; 
 }
 
-
+/* Registration Button */
 .register-button {
-  width: 4.8rem;                  
-  height: 4.8rem;                
-  border-radius: 50%;           
-  color: #ffffff;
+  width: 4.8rem;
+  height: 4.8rem;
+  border-radius: 50%;
+  color: var(--dropdown-arrow);
+  background-color: red;
   display: flex;
   margin-bottom: 1rem;
   margin-right: 2rem;
-  background-color: #df0404;
-
-  /* creates the "+" in the middle */
   align-items: center;
   justify-content: center;
-               
-}
-/* Allows animation only on buttons that have event_status = Open */
-.register-button:hover{
-    scale: 120%;
 }
 
-.register-button:active{
+.register-button:hover {
+  scale: 120%;
+}
+
+.register-button:active {
   background-color: rgb(241, 245, 249);
 }
 
-/* Controls the length of the "+" */
+.register-button.btn-full {
+  background-color: rgba(128, 128, 128, 0.341);
+  cursor: not-allowed;
+}
+
 .register-button svg {
   width: 95%; 
   height: 95%;
-}
-
-/* Gives animation when hovering card */
-.event-card:hover {
-  transform:  translateY(-4px); 
-  transition: transform 0.1s ease-in-out;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
