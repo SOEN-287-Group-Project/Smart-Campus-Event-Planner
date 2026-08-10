@@ -12,18 +12,18 @@
 
 
 /* Importing the CSS for the My Registrations page */ 
-@import "./my-registrations/my-registrations.css";
+@import "./Student/my-registrations.css";
 
 /* Importing the CSS for the profile */
-@import url("./profile/profile.css");
+@import url("./Public/profile.css");
 
 /* Importing the CSS for the event details */
-@import url("./events-details/events-details.css");
+@import url("./Student/events-details.css");
 /**/
 @import url("./Admin/styles2.css");
 
 
-@import url("./Public_Pages/public_pages.css");
+@import url("./Public/authPages.css");
 
 
 

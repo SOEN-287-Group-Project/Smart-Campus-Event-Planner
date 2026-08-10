@@ -1,6 +1,40 @@
 @import url('https://fonts.googleapis.com/css?family=Inter');
 @import url('https://fonts.googleapis.com/css?family=Bebas+Neue');
 
+:root {
+  /* Theme Base Colors */
+  --bg-main: rgb(241, 245, 249); /* Body*/
+  --bg-panel: #ffffff;
+  --bg-card: #c7c7c713;
+  --dashboard-text-color:white;
+  --text-color: black;
+  --arrow-button: grey;
+  --disabled-text-color: #d2d2d2;
+  --button: #2563eb;
+  --border-color: #cccccc18;
+  --border-input: #ccc;
+  --upcoming-events-even: lightcyan;
+  --dropmenu-hover:#dbeaff;
+  --dropdown-arrow:white;
+  --scrollbar: grey;
+}
+
+body.darkmode{
+ --bg-main: #0b0f19;
+  --bg-panel: #1e293b;
+  --bg-card: #1e293b;
+  --dashboard-text-color:#cbd9f4;
+  --text-color: #cbd9f4;
+  --arrow-button:rgb(7, 37, 113) ;
+  --disabled-text-color: #0b0101aa;
+  --button: rgb(7, 37, 113);
+  --border-color: #334155;
+  --border-input: #475569;
+  --upcoming-events-even: rgb(7, 37, 113);
+  --dropmenu-hover:rgb(7, 37, 113);
+  --dropdown-arrow:#cbd9f4;
+  --scrollbar: #475569 transparent;
+}
 .bg-grey-theme {
     background-color:#c7c7c7;
     color: rgb(0, 0, 0);
@@ -8,11 +42,13 @@
 
 
 body {
-    background: rgb(241, 245, 249);
+    background: var(--bg-main);
     font-family: 'Inter';
     margin: 0;   
 }
-
+h1 h2 h3 h4 h5 h6{
+    color:var(--text-color);
+}
 header {
     margin-bottom: 1.5rem;
 }
@@ -37,12 +73,14 @@ button {
 
 .topbar h1{
     justify-self: start;
+    color:var(--dashboard-text-color);
     font-family: 'Bebas Neue';
     font-size: 2.3rem;
 }
 
 .topbar h2 {
     text-align: center;
+    color:var(--dashboard-text-color);
     justify-self: center;
     font-family: 'Bebas Neue';
     font-size: 2.3rem;
@@ -95,7 +133,7 @@ button {
     align-items: center;
     border: none;
     border-radius: 0.875rem;
-    background: #7c7c7c;   
+    background: var(--arrow-button);   
     cursor: pointer;
     width: 2.5rem;
     height: 2rem;
@@ -120,8 +158,8 @@ button {
     display: block;
     box-sizing: border-box;
     font-size: 15px;
-    color:black;
-    background: #f1f5f9; 
+    color: var(--text-color);
+    background: var(--bg-main); 
     border-radius:0;
 
 }
@@ -130,7 +168,7 @@ button {
 .studentDropdown a:hover {
     transition:none;
     transform:none;
-    background-color: #dbeaff;
+    background-color: var(--dropmenu-hover);
 }
 
 .hidden {
@@ -145,7 +183,7 @@ button {
     text-align: center;
     line-height: 2rem;
     border-radius: inherit;
-    color:white;
+    color: var(--dropdown-arrow);
     font-size: large;
     font-weight: bold;
 }
