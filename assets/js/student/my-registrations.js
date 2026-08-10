@@ -33,9 +33,10 @@
         // Creates an array myRegistrations to access everywhere 
         // Since im sending username also I need to use data.registrations to access the events attributes
             myRegistrations = data.registrations.map(rawEvent => {
+                const categoryName = CATEGORY_NAMES[rawEvent.category_id] || rawEvent.category || "Other"; 
                 return {
                     ...rawEvent,
-                    category: rawEvent.category_name || CATEGORY_NAMES[rawEvent.category_id] || rawEvent.category || "Other",
+                    category: categoryName,
                     status: rawEvent.status || (rawEvent.capacity > 0 ? "Open" : "Full")
                 };
             });
