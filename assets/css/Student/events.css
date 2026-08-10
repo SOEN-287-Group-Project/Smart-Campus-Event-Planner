@@ -1,10 +1,11 @@
+
 /* Makes all buttons scale and change background color when hovered*/
 button {
     transition: scale 0.3s ease-in-out, background-color 0.3s ease-in-out;
     border: none;
     border-radius: 50%;
-    color: white;
-    background-color: #2563eb;
+    color: var(--drop-arrow);
+    background-color: var(--button);
     font-size: large;
     font-weight: bold;
 }
@@ -21,14 +22,21 @@ input.search-bar {
     width: 100%;
     flex-grow: 1;
     font-size: 20px;
-    border: 3px solid #ccc;
+    background-color:var(--bg-panel);
+    color:var(--text-color);
+    border: 3px solid var(--border-searchbar);
     border-radius: 0.875rem;
     padding: 20px 20px;
 }
 
+input.search-bar:focus{
+  outline: none; 
+  border-color: var(--border-searchbar-active);
+}
+
 /*Gives placeholder text transparency*/
 input.search-bar::placeholder {
-    color: rgba(32, 1, 1, 0.599);
+    color: var(--disabled-text-color-form);
 }
 
 .filter-buttons-container {
@@ -58,7 +66,7 @@ button.filter-buttons{
 /* Created a grid to make it easier to align cards*/
 .event-card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr)); 
   justify-content: center; 
   gap: 2rem 2.5rem;
   padding: 0 1.5rem;
@@ -73,7 +81,7 @@ button.filter-buttons{
   padding: 0.4rem 0.7rem;
   border-radius: 0.875em;
   border: 3px solid #cccccc18;
-  background-color:#c7c7c713;
+  background-color:var(--bg-card);
 
 }
 
@@ -94,7 +102,8 @@ button.filter-buttons{
 }
 
 .event-card-category{
-    background-color: rgb(241, 245, 249); 
+    background-color: var(--bg-panel); 
+    color:var(--text-color);
     font-weight: bolder;
     font-size: large;
     border-radius: 20px;
@@ -103,7 +112,7 @@ button.filter-buttons{
 }
 
 .event-card-status{
-    background-color: rgb(241, 245, 249);
+    background-color: var(--bg-panel);
     font-weight: bolder;
     font-size: large;
     border-radius: 20px;
@@ -119,19 +128,19 @@ background-color:blue;
 }
 
 .status-open{
-  color:rgba(11, 129, 11, 0.995);
+  color:var(--status-open);
 }
 
 .status-full{
- color:rgb(123, 9, 9);
+ color: var(--status-full);
 }
 
 .status-dot-status-open{
-  background-color:rgba(11, 129, 11, 0.995);
+  background-color: var(--status-open);
 }
 
 .status-dot-status-full{
-  background-color:rgb(123, 9, 9);
+  background-color:var(--status-full);
 }
 
 .event-card-footer {
@@ -139,7 +148,7 @@ background-color:blue;
   grid-template-columns: 1fr auto;
   row-gap: 0.4rem;    /* Small vertical gap between text rows */
   column-gap: 0.75rem; /* Gap between Date and Spots on same row */
-  color: rgb(1, 0, 0); /* Text color from mockup */
+  color: var(--text-color);
   font-size: 0.9rem;
   margin-top: -1rem;
 }
@@ -154,14 +163,14 @@ background-color:blue;
 
 
 .register-button {
-  width: 4.8rem;                  
+  width: 4.8rem;
+  background-color: var(--button);                  
   height: 4.8rem;                
   border-radius: 50%;           
-  color: #ffffff;
+  color: var(--dropdown-arrow);
   display: flex;
   margin-bottom: 1rem;
   margin-right: 2rem;
-  background-color: #df0404;
 
   /* creates the "+" in the middle */
   align-items: center;
@@ -169,14 +178,18 @@ background-color:blue;
                
 }
 /* Allows animation only on buttons that have event_status = Open */
-.register-button:hover{
+.btn-open:hover{
     scale: 120%;
 }
 
-.register-button:active{
+.btn-open:active{
   background-color: rgb(241, 245, 249);
 }
-
+/* Changes and shows user that you can't click register button when event_status = Full */
+.btn-full{
+  background-color: rgba(128, 128, 128, 0.341);
+  cursor:  not-allowed;
+}
 /* Controls the length of the "+" */
 .register-button svg {
   width: 95%; 
@@ -189,3 +202,7 @@ background-color:blue;
   transition: transform 0.1s ease-in-out;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
+
+
+/* Event card details section */
+

@@ -30,11 +30,12 @@ table.stat-card{
   }
   
   .upcoming-events-table tbody tr:nth-child(even) td {
-    background-color: lightcyan;
+    background-color: var(--upcoming-events-even);
   }
   
   .upcoming-events-scroll {
     max-height: 300px;
+    scrollbar-color:var(--scrollbar);
     overflow-y: auto;
   }
 
@@ -44,10 +45,11 @@ table.stat-card{
     margin-bottom: 1.5rem;
     margin-left: 1.5rem;
     margin-right: 1.5rem;
-    background: white;
+    background: var(--bg-panel);
     border-radius: 0.875rem;
     padding: 1.25rem;
     box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
+    color: var(--text-color);
 }
 
 /*charts*/
@@ -60,13 +62,14 @@ table.stat-card{
 .chart-card {
     position: relative;
     height: 600px;
-    border: 3px solid #ccc;
+    border: 3px solid var(--table-border);
     border-radius: 0.875em;
     padding: 10px;
-    background: #fff;
+    background: var(--border-graph);
 }
 
 .chart-card canvas {
+    background-color:var(--bg-panel);
     width: 100% !important;
     height: 100% !important;
 }
@@ -121,7 +124,9 @@ form.panel {
 
 .search-event-admin {
     display: block;
-    border: 3px solid #ccc;
+    background-color:var(--bg-panel);
+    border: 3px solid var(--border-searchbar);
+    color:var(--text-color);
     border-radius: 0.875rem;
     padding: 0.5rem 1rem;
     width: 100%;
@@ -129,14 +134,34 @@ form.panel {
     margin: 0 auto 1.5rem;
 }
 
+.search-event-admin::placeholder{
+    color:var(--text-color);
+}
+
+.search-event-admin:focus {
+  outline: none; 
+  border-color: var(--border-searchbar-active); /* Highlights the border smoothly instead */
+}
+
 .event-creation-input,
 select {
     width: 100%;
+    color:var(--text-color);
     padding: .6rem;
+    background-color : var(--bg-panel);
     border: 3px solid #ccc;
     border-radius: .875rem;
     box-sizing: border-box;
     box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
+}
+
+select option {
+     color:var(--text-color);
+     background-color: var(--dropmenu-hover);
+}
+
+.event-creation-input::placeholder {
+    color:var(--disabled-text-color-form);
 }
 
 .submit-event-button {
@@ -149,7 +174,8 @@ select {
     padding: .9rem 1.2rem;
     font-size: 1.2rem;
     font-family:'inter';
-    background: #7c7c7c;
+    background: var(--secondary-button);
+    color:var(--dropdown-arrow);
     border: none;
     border-radius: .875rem;
     cursor: pointer;
@@ -168,8 +194,8 @@ button.Manage-Attendance
 {
     border: none;
     border-radius: .875rem;
-    background: #2563eb;
-    color: white;
+    background: var(--button);
+    color: var(--dropdown-arrow);
     cursor: pointer;
     box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
     transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
@@ -190,7 +216,7 @@ button.Manage-Attendance:hover {
     border: 3px solid #ccc;
     border-radius: .875rem;
     box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
-    background-color: white;
+    background-color:var(--bg-panel);
     cursor: pointer;
 }
 
@@ -209,7 +235,7 @@ button.Manage-Attendance:hover {
 }
 
 button.Manage-Attendance{
-    background: #7c7c7c;
+    background: var(--secondary-button);
 }
 
 .event-table {
@@ -225,8 +251,8 @@ button.Manage-Attendance{
 }
 
 .event-table th {
-    background: #eff6ff;
-    color: #0f172a;
+    background: var(--table-header);
+    color: var(--table-header-text);
     font-weight: 600;
     position: sticky;
     top: 0;
@@ -237,7 +263,7 @@ button.Manage-Attendance{
 }
 
 .event-table tbody tr:hover {
-    background: #f8fafc;
+    background: var(--table-hover);
 }
 
 .event-table td:last-child {
@@ -247,7 +273,8 @@ button.Manage-Attendance{
 section.scroll-container {
   height: 39rem;
   overflow-y: auto;    
-  border: 3px solid #ccc;
+  border: 3px solid var(--table-border);
+  scrollbar-color: var(--scrollbar);
   padding-top: 0;
   padding-right: 0;
   padding-left:0;
@@ -271,7 +298,7 @@ section.scroll-container {
     display: flex;
     flex-direction: column;
     padding: 10px;
-    background:#fff
+    background: var(--bg-panel);
 }
 
 .cal-header{
@@ -287,7 +314,7 @@ section.scroll-container {
     justify-content: center;
     border:none;
     border-radius: 50%;
-    background: #7c7c7c;
+    background: var(--arrow-button);
     cursor: pointer;
     width: 40px;
     height: 40px;
@@ -329,12 +356,12 @@ section.scroll-container {
 
 .date:hover,
 .date.active{
-    background-color: #2563eb;
+    background-color: var(--button);
     color:white;
 }
 
 .date.inactive{
-    color:#d2d2d2;
+    color: var(--disabled-text-color);
 }
 
 .date.inactive:hover{
@@ -362,7 +389,7 @@ section.scroll-container {
 }
 
 .modal-content {
-    background: white;
+    background: var(--bg-panel);
     border-radius: 0.875rem;
     padding: 1.5rem;
     width: min(90%, 700px);
@@ -379,6 +406,7 @@ section.scroll-container {
 }
 
 .modal-content label {
+    color: var(--text-color);
     font-weight: 600;
     margin-bottom: .25rem;
     display: block;
@@ -387,7 +415,7 @@ section.scroll-container {
 
 .attendance-field {
     grid-column: 1 / -1;
-    border: 3px solid #ccc;
+    border: 3px solid var(--table-border);
     border-radius: 0.875rem;
     overflow: hidden;
     z-index: 11;
@@ -395,6 +423,7 @@ section.scroll-container {
 
 .attendance-table {
     grid-column: 1 / -1;
+    color:var(--text-color);
     width: 100%;
     border-collapse: collapse;
     text-align: left;
@@ -403,14 +432,15 @@ section.scroll-container {
 
 .attendance-table th,
 .attendance-table td {
-    text-align: center;    
+    text-align: center; 
+    color:var(--text-color);   
     padding: 1rem;
-    border-bottom: 1px solid #dbe4f0;
+    border-bottom: 1px solid var(--table-border);
 }
 
 .attendance-table th {
 
-    background: #eff6ff;
+    background: var(--table-header);
     color: #0f172a;
     font-weight: 600;
     position: sticky;
@@ -418,7 +448,7 @@ section.scroll-container {
 }
 
 .attendance-table tbody tr:hover {
-    background: #f8fafc;
+    background: var(--table-hover);
 }
 
 .attendance-table td:last-child {
@@ -428,12 +458,19 @@ section.scroll-container {
 
 .modal-content input,
 .modal-content select {
+    background-color: var(--bg-panel);
+    color:var(--text-color);
     width: 100%;
     padding: .6rem;
     border: 3px solid #ccc;
     border-radius: .875rem;
     box-sizing: border-box;
     box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
+}
+
+.modal-content input::placeholder,
+.modal-content select::placeholder{
+    color:var(--disabled-text-color-form);
 }
 
 #saveBtn,
@@ -462,16 +499,16 @@ section.scroll-container {
 
 #saveBtn,
 #AttendanceSaveBtn {
-    background: #2563eb;
-    color: white;
+    background: var(--button);
+    color: var(--dropdown-arrow);
     padding: 0.75rem 2rem;
 }
 
 #cancelBtn,
 #AttendanceCancelBtn,
 .manage-student-attendance {
-    background: #e5e7eb;
-    color: #111827;
+    background: var(--secondary-button);
+    color: var(--dropdown-arrow);
     padding: 0.75rem 2rem;
 }
 
@@ -482,8 +519,8 @@ section.scroll-container {
 }
 
 .manage-student-attendance{
-    background: #7c7c7c;
-    color: white;
+    background: var(--secondary-button);
+    color: var(--dropdown-arrow);
     padding: 0.75rem 2rem;
 }
 
@@ -551,6 +588,7 @@ section.scroll-container {
 
 #attendanceModal .attendance-table th,
 #attendanceModal .attendance-table td {
+    color:var(--text-color);
     overflow-wrap: break-word;
     word-break: break-word;
 }
