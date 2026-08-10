@@ -26,6 +26,7 @@
   --table-hover:#f8fafc; /*manage-event*/
   --table-header:#eff6ff; /*manage-event*/
   --table-header-text:#0f172a;
+  --border-graph:#fff; /*analytics*/
 }
 
 body.darkmode{
@@ -52,6 +53,7 @@ body.darkmode{
   --table-hover:rgb(1, 19, 64); /*manage-event*/
   --table-header:rgb(7, 37, 113); /*manage-event*/
   --table-header-text:#cbd9f4;
+  --border-graph:#334155; /*analytics*/
 }
 .bg-grey-theme {
     background-color:#c7c7c7;
@@ -227,7 +229,7 @@ button {
 .footer-generic a {
     margin-top: .25em;
     text-align: center;
-    color: black;
+    color: var(--text-color);
 }
 .footer-generic{
     margin-bottom: 1.5em;

@@ -62,13 +62,14 @@ table.stat-card{
 .chart-card {
     position: relative;
     height: 600px;
-    border: 3px solid #ccc;
+    border: 3px solid var(--table-border);
     border-radius: 0.875em;
     padding: 10px;
-    background: #fff;
+    background: var(--border-graph);
 }
 
 .chart-card canvas {
+    background-color:var(--bg-panel);
     width: 100% !important;
     height: 100% !important;
 }
@@ -405,6 +406,7 @@ section.scroll-container {
 }
 
 .modal-content label {
+    color: var(--text-color);
     font-weight: 600;
     margin-bottom: .25rem;
     display: block;
@@ -456,12 +458,19 @@ section.scroll-container {
 
 .modal-content input,
 .modal-content select {
+    background-color: var(--bg-panel);
+    color:var(--text-color);
     width: 100%;
     padding: .6rem;
     border: 3px solid #ccc;
     border-radius: .875rem;
     box-sizing: border-box;
     box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
+}
+
+.modal-content input::placeholder,
+.modal-content select::placeholder{
+    color:var(--disabled-text-color-form);
 }
 
 #saveBtn,
