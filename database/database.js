@@ -23,10 +23,10 @@ const registrations = fs.readFileSync("./database/registrations.sql", "utf8");
 // execute the sql scripts (for initialization only)
 // if the database is already initialized and populated,
 // then no need to run the lines below
- //db.exec(schemas);
- //db.exec(users);
- //db.exec(categories);
- //db.exec(events);
+//db.exec(schemas);
+//db.exec(users);
+//db.exec(categories);
+//db.exec(events);
 //db.exec(registrations);
 
 // ********** SQL Scripts summary **********
@@ -186,8 +186,8 @@ function addRegistration(
     event_id
 ){
     const result = insertIntoRegistrations.run(
-        user_id,
-        event_id
+        String(user_id),
+        String(event_id)
     );
     return result;
 }
@@ -603,7 +603,7 @@ function getCountOfRegistrationsByEvent(event_id){
 function getRegistrationRowsForUser(userId) {
     return db
       .prepare(`SELECT * FROM registrations WHERE user_id = ?`)
-      .all(userId);
+      .all(String(userId));
 }
 
 function getCategoryById(categoryId) {
@@ -631,6 +631,7 @@ function getRegistrationsForUser(userId) {
             title: event.title,
             event_date: event.event_date,
             start_time: event.start_time,
+            end_time: event.end_time,
             location: event.location,
             capacity: event.capacity,
             status: event.status,

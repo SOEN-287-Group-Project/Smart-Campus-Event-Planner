@@ -1,25 +1,3 @@
-const studentDashboardData = {
-  // hardcoded data for the dashboard
-  name: "Caroline",
-  stats: {
-    totalRegistrations: 24,
-    upcoming: 3,
-    attended: 21,
-    cancelled: 1,
-  },
-  upcomingEvents: [
-    { title: "Career Fair", date: "2026-08-10" },
-    { title: "AI and Machine Learning Workshop", date: "2026-08-23" },
-    { title: "Campus Networking Night", date: "2026-09-05" },
-    { title: "Aerospace Engineering Conference", date: "2026-09-10" },
-    { title: "Starry Night Dinner", date: "2026-09-10" },
-  ],
-  attendanceByCategory: {
-    labels: ["Academic", "Career", "Club", "Sports", "Cultural", "Social"],
-    data: [5, 4, 3, 2, 4, 3],
-  },
-};
-
 function handleLogin() {
   const email = document.getElementById("email").value.trim().toLowerCase();
   if (email === "admin" || email === "admin@concordia.ca") {
@@ -85,6 +63,82 @@ function renderStudentAttendanceChart(data) {
   });
 }
 
+function openEventModal(dayEvents, index = 0) {
+  const modal = document.getElementById("event-modal");
+  modal._dayEvents = dayEvents;
+  modal._dayIndex = index;
+  showDayEvent();
+  modal.style.display = "flex";
+}
+
+function showDayEvent() {
+  const modal = document.getElementById("event-modal");
+  const dayEvents = modal._dayEvents || [];
+  const index = modal._dayIndex ?? 0; // if the day index is not set,ie is null or undefined, set it to 0
+  const event = dayEvents[index]; // get the event for the current day index
+  if (!event) return;
+
+  modal.dataset.registrationId = event.registration_id; // set the registration id for the event
+  modal.dataset.eventTitle = event.title; // set the event title for the event
+
+  document.getElementById("modal-title").textContent = event.title;
+  document.getElementById("modal-date").textContent = event.date;
+  document.getElementById("modal-time").textContent =
+    `${event.start_time} – ${event.end_time}`;
+  document.getElementById("modal-location").textContent = event.location;
+
+  document.getElementById("modal-location").textContent = event.location;
+
+  const nav = document.getElementById("modal-day-nav");
+  const pos = document.getElementById("modal-day-position");
+  const prevBtn = document.getElementById("modal-prev-event");
+  const nextBtn = document.getElementById("modal-next-event");
+  const multi = dayEvents.length > 1;
+
+  if (nav) {
+    nav.hidden = !multi;
+    nav.style.display = multi ? "flex" : "none";
+  }
+  if (pos) pos.textContent = `Event ${index + 1} of ${dayEvents.length}`;
+  if (prevBtn) prevBtn.disabled = index === 0;
+  if (nextBtn) nextBtn.disabled = index >= dayEvents.length - 1;
+}
+
+
+function closeEventModal() {
+  const modal = document.getElementById("event-modal");
+  delete modal.dataset.registrationId;
+  delete modal.dataset.eventTitle;
+  modal.style.display = "none";
+}
+
+async function cancelRegistrationFromModal() {
+  const modal = document.getElementById("event-modal");
+  const registrationId = modal.dataset.registrationId;
+  const title = modal.dataset.eventTitle || "this event";
+
+  if (!registrationId) return;
+  if (!confirm(`Cancel registration for ${title}?`)) return;
+
+  try {
+    const response = await fetch(
+      `/student/api/my-registrations/${registrationId}`,
+      { method: "DELETE" }
+    );
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || data.message || "Cancel failed");
+    }
+
+    closeEventModal();
+    window.location.reload(); // avoids double Chart / calendar listeners
+  } catch (err) {
+    console.error(err);
+    alert("Could not cancel registration. Please try again.");
+  }
+}
+
 function renderStudentCalendar(upcomingEvents) {
   const monthYearElement = document.getElementById("monthYear");
   const datesElement = document.getElementById("dates");
@@ -126,7 +180,7 @@ function renderStudentCalendar(upcomingEvents) {
       const eventClass = dayEvents.length ? "has-event" : "";
       const title = dayEvents.map((e) => e.title).join(", ");
 
-      datesHTML += `<div class="date ${activeClass} ${eventClass}" title="${title}">${i}</div>`;
+      datesHTML += `<div class="date ${activeClass} ${eventClass}" data-date="${iso}" title="${title}">${i}</div>`;
     }
 
     for (let i = 1; i <= 7 - lastDayIndex; i++) {
@@ -135,6 +189,18 @@ function renderStudentCalendar(upcomingEvents) {
     }
 
     datesElement.innerHTML = datesHTML;
+
+    datesElement.querySelectorAll(".date.has-event").forEach((dayEl) => {
+      dayEl.style.cursor = "pointer";
+      dayEl.addEventListener("click", () => {
+        const dayEvents = upcomingEvents.filter(
+          (e) => e.date === dayEl.dataset.date
+        );
+        if (dayEvents.length > 0) {
+          openEventModal(dayEvents, 0);
+        }
+      });
+    });
   };
 
   prevBtn.addEventListener("click", () => {
@@ -172,10 +238,18 @@ function isUpcomingRegistration(registration) { // we pass in the registration o
 }
 
 function getUpcomingEvents(registrations) {
-  return registrations.filter(isUpcomingRegistration).map((registration) => ({
+  return registrations
+    .filter(isUpcomingRegistration)
+    .map((registration) => ({
+      registration_id: registration.registration_id,
+      event_id: registration.event_id,
       title: registration.title,
       date: registration.event_date,
-    })).sort((a, b) => a.date.localeCompare(b.date)); // sort the registrations by date, can do so with string comparison since dates are in ISO format
+      location: registration.location,
+      start_time: registration.start_time,
+      end_time: registration.end_time,
+    }))
+    .sort((a, b) => a.date.localeCompare(b.date));
 }
 
 function getAttendanceByCategory(registrations) {
@@ -238,7 +312,37 @@ async function initStudentDashboard() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (document.getElementById("stat-total")) { //simple check to ensure the DOM is loaded before initializing the dashboard
+  if (document.getElementById("stat-total")) {
     initStudentDashboard();
+
+    document
+      .getElementById("event-modal-close")
+      ?.addEventListener("click", closeEventModal);
+
+    document.getElementById("event-modal")?.addEventListener("click", (e) => {
+      if (e.target.id === "event-modal") {
+        closeEventModal();
+      }
+    });
+
+    document.getElementById("modal-cancel-registration")
+      ?.addEventListener("click", cancelRegistrationFromModal);
+
+      document.getElementById("modal-prev-event")?.addEventListener("click", () => {
+        const modal = document.getElementById("event-modal");
+        if (modal._dayIndex > 0) {
+          modal._dayIndex -= 1;
+          showDayEvent();
+        }
+      });
+      
+      document.getElementById("modal-next-event")?.addEventListener("click", () => {
+        const modal = document.getElementById("event-modal");
+        const last = (modal._dayEvents?.length ?? 1) - 1;
+        if (modal._dayIndex < last) {
+          modal._dayIndex += 1;
+          showDayEvent();
+        }
+      });
   }
 });

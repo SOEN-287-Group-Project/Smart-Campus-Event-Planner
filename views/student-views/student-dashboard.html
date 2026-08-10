@@ -6,7 +6,7 @@
         <title>Student Dashboard</title>
         <link rel="stylesheet" href="/css/main.css" />
         <link rel="stylesheet" href="/css/global_styles.css" />
-        <link rel="stylesheet" href="/css/Public_Pages/student-dashboard.css" />
+        <link rel="stylesheet" href="/css/Student/student-dashboard.css"/>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <script src="/js/student/studentDashboard.js"></script>
@@ -109,6 +109,32 @@
                 <div class="dates" id="dates"></div>
             </div>
         </section>
+
+        <div id="event-modal">
+            <div class="modal-content">
+              <h3 id="modal-title"></h3>
+              <p><strong>Date:</strong> <span id="modal-date"></span></p>
+              <p><strong>Time:</strong> <span id="modal-time"></span></p>
+              <p><strong>Location:</strong> <span id="modal-location"></span></p>
+
+                <div id="modal-day-nav" class="modal-nav cal-header" hidden>
+                    <button type="button" id="modal-prev-event">
+                      <h2>‹</h2>
+                    </button>
+                    <p id="modal-day-position" class="monthYear"></p>
+                    <button type="button" id="modal-next-event">
+                      <h2>›</h2>
+                    </button>
+                </div>
+          
+              <button
+                type="button"
+                id="modal-cancel-registration"
+                class="login-or-create-account-buttons cancel-registration-button">
+                Cancel registration
+              </button>
+            </div>
+        </div>
 
         <footer class="footer-generic">
             <p>&copy; 2026 Smart Campus Event Planner</p>
