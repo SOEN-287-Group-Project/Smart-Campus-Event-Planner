@@ -1,6 +1,66 @@
 @import url('https://fonts.googleapis.com/css?family=Inter');
 @import url('https://fonts.googleapis.com/css?family=Bebas+Neue');
 
+:root {
+  /* Theme Base Colors */
+  
+  --bg-main: rgb(241, 245, 249); /* Body*/
+  --bg-panel: #ffffff;
+  --bg-card: #c7c7c713;
+  --dashboard-text-color:white;
+  --text-color: black;
+  --arrow-button: grey; /* overview */
+  --disabled-text-color: #d2d2d2;
+  --disabled-text-color-form: #999595;
+  --button: #2563eb;
+  --secondary-button:#7c7c7c; /*manage-event*/
+  --border-color: #cccccc18;
+  --border-input: #ccc;
+  --upcoming-events-even: lightcyan;
+  --dropmenu-hover:#dbeaff;
+  --dropdown-arrow:white;
+  --scrollbar: grey;
+  --border-searchbar: #ccc;
+  --border-searchbar-active:#202121;
+  --table-border:#ccc; /* manage-event*/
+  --table-hover:#f8fafc; /*manage-event*/
+  --table-header:#eff6ff; /*manage-event*/
+  --table-header-text:#0f172a;
+  --border-graph:#fff; /*analytics*/
+  --status-open: rgba(11, 129, 11, 0.995); /*events page*/
+  --status-full: rgb(123, 9, 9); /*events page*/
+}
+
+
+body.darkmode{
+    
+ --bg-main: #0b0f19;
+  --bg-panel: #1e293b;
+  --bg-card: #1e293b;
+  --dashboard-text-color:#cbd9f4;
+  --text-color: #cbd9f4;
+  --arrow-button:rgb(7, 37, 113) ;
+  --disabled-text-color: #0b0101aa;
+  --disabled-text-color-form: #7f8a9fa8;
+  --button: rgb(7, 37, 113);
+  --secondary-button:#475569; /*manage-event*/
+  --border-color: #334155;
+  --border-input: #475569;
+  --upcoming-events-even: rgb(7, 37, 113);
+  --dropmenu-hover:rgb(7, 37, 113);
+  --dropdown-arrow:#cbd9f4;
+  --scrollbar: #475569 transparent;
+  --border-searchbar:#28364e;
+  --border-searchbar-active:#cbd9f4;
+  --table-border:#cbd9f4; /* manage-event*/
+  --table-hover:rgb(1, 19, 64); /*manage-event*/
+  --table-header:rgb(7, 37, 113); /*manage-event*/
+  --table-header-text:#cbd9f4;
+  --border-graph:#334155; /*analytics*/
+  --status-open: rgb(21 255 21 / 100%); /*events page*/
+  --status-full: rgb(255 33 33); /*events page*/
+}
+
 .bg-grey-theme {
     background-color:#c7c7c7;
     color: rgb(0, 0, 0);
@@ -8,11 +68,13 @@
 
 
 body {
-    background: rgb(241, 245, 249);
+    background: var(--bg-main);
     font-family: 'Inter';
     margin: 0;   
 }
-
+h1, h2, h3, h4, h5, h6{
+    color:var(--text-color);
+}
 header {
     margin-bottom: 1.5rem;
 }
@@ -21,8 +83,8 @@ button {
     transition: scale 0.3s ease-in-out, background-color 0.3s ease-in-out;
     border: none;
     border-radius: 50%;
-    color: white;
-    background-color: #2563eb;
+    color: var(--dropdown-arrow);
+    background-color: var(--button);
     font-size: large;
     font-weight: bold;
 }
@@ -37,12 +99,14 @@ button {
 
 .topbar h1{
     justify-self: start;
+    color:var(--dashboard-text-color);
     font-family: 'Bebas Neue';
     font-size: 2.3rem;
 }
 
 .topbar h2 {
     text-align: center;
+    color:var(--dashboard-text-color);
     justify-self: center;
     font-family: 'Bebas Neue';
     font-size: 2.3rem;
@@ -79,7 +143,7 @@ button {
 
 .nav-links a:hover,
 .nav-links a.active-page {
-    background: #2563eb;
+    background: var(--button);
     transform: scale(1.05);
 }
 
@@ -95,7 +159,7 @@ button {
     align-items: center;
     border: none;
     border-radius: 0.875rem;
-    background: #7c7c7c;   
+    background: var(--arrow-button);   
     cursor: pointer;
     width: 2.5rem;
     height: 2rem;
@@ -120,8 +184,8 @@ button {
     display: block;
     box-sizing: border-box;
     font-size: 15px;
-    color:black;
-    background: #f1f5f9; 
+    color: var(--text-color);
+    background: var(--bg-main); 
     border-radius:0;
 
 }
@@ -130,7 +194,7 @@ button {
 .studentDropdown a:hover {
     transition:none;
     transform:none;
-    background-color: #dbeaff;
+    background-color: var(--dropmenu-hover);
 }
 
 .hidden {
@@ -145,7 +209,7 @@ button {
     text-align: center;
     line-height: 2rem;
     border-radius: inherit;
-    color:white;
+    color: var(--dropdown-arrow);
     font-size: large;
     font-weight: bold;
 }
@@ -160,7 +224,7 @@ button {
     margin-bottom: 1.5rem;
     margin-left: 1.5rem;
     margin-right: 1.5rem;
-    background: white;
+    background: var(--bg-panel);
     border-radius: 0.875rem;
     padding: 1.25rem;
     box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.08);
@@ -171,7 +235,7 @@ button {
 .footer-generic a {
     margin-top: .25em;
     text-align: center;
-    color: black;
+    color: var(--text-color);
 }
 .footer-generic{
     margin-bottom: 1.5em;

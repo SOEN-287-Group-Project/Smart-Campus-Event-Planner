@@ -10,8 +10,8 @@
     display: inline-block;
     padding: 0.75em 1.5em;
     margin: 0.5em;
-    background-color: #2563eb;
-    color: white;
+    background-color: var(--button);
+    color: var(--dropdown-arrow);
     text-decoration: none;
     border-radius: .35em;
     transition: transform 0.2s ease; /* 0.2 is the duration of the animation, ease is the type of animation, which starts slow, speeds up in the middle, and slows down at the end*/
@@ -42,7 +42,8 @@
     max-width: 420px; /* This ensures that the card-box is not too wide for the screen*/
     padding: 2em; /* This is really a matter of taste, but I think 2em is a good compromise between too much and too little padding*/
     text-align: center; /* This ensures that the text inside the card-box is centered*/
-    background-color: white;
+    background-color: var(--bg-panel);
+    color:var(--text-color);
     border-radius: 0.875em;
     box-shadow: 0 0.5rem 1.875rem rgba(15, 23, 42, 0.25);
     font-family: 'Inter';
@@ -51,6 +52,7 @@
  .home-card header {
     font-family: 'Bebas Neue';
     font-size: 1.25em;
+    color: var(--text-color);
  }
 
 .home-actions {
@@ -63,6 +65,8 @@
 
 .form-field input, textarea {
     display: flex;
+    background-color: var(--bg-panel);
+    color: var(--text-color);
     flex-direction: column;
     align-items: stretch;
     text-align: left;
@@ -70,13 +74,17 @@
     width: 100%;
     max-width: 250px;
     padding: 0.75em 0.5em;
-    border: 1px solid lightgray;      /* light grey outline */
+    border: 1px solid var(--table-border);      /* light grey outline */
     border-radius: 4px;
     font-size: 1rem;
     box-sizing: border-box;
     transition: transform 0.2s ease;
     resize: vertical;
     font-family: inherit;
+}
+
+.form-field::placeholder, input::placeholder, textarea::placeholder{
+    color:var(--disabled-text-color-form);
 }
 
 
@@ -100,7 +108,7 @@
 }
 .back-to-home-link:visited{
     text-decoration: none;
-    color: grey;
+    color: var(--text-color);
     font-size: 0.8em;
     text-align: center;
 }
@@ -119,5 +127,5 @@
 .footer a {
     margin-top: .25em;
     text-align: center;
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--dropdown-arrow);
 }
