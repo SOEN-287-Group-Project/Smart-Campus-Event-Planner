@@ -217,6 +217,40 @@ button {
   transform: rotate(180deg);
 }
 
+#theme-switch{
+ position: absolute;
+ background-color: var(--button);
+  right: 20px;            /* Match the right padding of the header container */
+  top: 3.2%;
+  transform: translateY(-50%); /* Centered vertically relative to the header height */
+  z-index: 10;
+  height: 35px;
+  width: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+#theme-switch:hover{
+    scale: 120%;
+}
+#theme-switch svg{
+    fill: var(--dropdown-arrow);
+}
+
+#theme-switch svg:last-child{
+    display: none;
+}
+
+.darkmode #theme-switch svg:first-child {
+    display: none;
+}
+
+.darkmode #theme-switch svg:last-child {
+    display: block;
+}
+
 
 /**End of header styles, subject to change**/
 
@@ -240,5 +274,7 @@ button {
 .footer-generic{
     margin-bottom: 1.5em;
 }
+
+
 
 
