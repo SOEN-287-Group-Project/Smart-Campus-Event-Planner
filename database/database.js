@@ -556,13 +556,8 @@ function deleteCategory(category_id){
 }
 
 function deleteEvent(event_id){
-    const result = deleteEventById.run(event_id);
-    return result;
-}
-
-function deleteRegistrationByEventId(registration_id){
     deleteRegistrationsByEventId.run(event_id);
-    const result = deleteRegistrationById.run(registration_id);
+    const result = deleteEventById.run(event_id);
     return result;
 }
 
