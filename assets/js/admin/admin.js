@@ -1,3 +1,6 @@
+let event = []; //search array
+
+
 function rendercharts() {
     if (typeof Chart === 'undefined') {
         const container = document.querySelector('.chart-grid');
@@ -195,6 +198,66 @@ function getStudentNavDropdown() {
                                 `;
     }
 
+
+function searchEvents(){
+
+
+    const searchInput = document.getElementById("event-search-function");
+
+    
+    fetch("/admin/api/events") //fetch events
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Failed to load events");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            event = data.map(rawEvent => {
+            return {
+                    ...rawEvent,
+                    status: rawEvent.status || (rawEvent.capacity > 0 ? "Open" : "Full")
+                };
+            });
+            console.log(event);
+        })
+        .catch((error) => {
+            console.error(error);
+            tbody.innerHTML = `<tr><td colspan="7">Unable to load events from the server.</td></tr>`;
+        });
+
+    // Search bar functionality
+    if (searchInput) {
+
+        searchInput.addEventListener("input", (e) => {  // Using inputs event so it checks after every keystroke
+            const query = e.target.value.toLowerCase().trim(); // Makes every search lowercase and trim removes whitespaces
+        
+            // loops on all events
+            event.forEach((event) => { 
+                const tableRow = document.getElementById(String(event.event_id));
+
+                // Search across title, description, location, category, and organizer
+                // Creates a single string with each Event attributes
+                const searchableText = `${event.title} ${event.description} ${event.location} ${event.category_name} ${event.organizer_id}`.toLowerCase();
+
+
+                const isMatch = searchableText.includes(query);
+                if (isMatch) {
+                tableRow.classList.remove("hidden"); // Show card
+                } 
+                else {
+                tableRow.classList.add("hidden");    // Hide card
+                }
+            });
+        });
+    }
+
+
+
+    
+}
+
+    
 /*****Rendering events table from database*****/ 
 
 //Attendace modal()
@@ -204,6 +267,7 @@ function getStudentNavDropdown() {
 //Table rendering()
 
 //fetch APIs
+
 
 function renderEvents(){
     const tbody = document.getElementById("eventTableBody"); //locate the table body
@@ -486,12 +550,12 @@ function renderEvents(){
 
         events.forEach((event) => {
             tbody.innerHTML += `
-                <tr>
+                <tr id = "${event.event_id}">
                     <td>${event.title}</td>
-                    <td>${event.organizer_id || ""}</td>
+                    <td>${event.full_name || ""}</td>
                     <td>${(event.event_date && event.start_time) ? `${event.event_date}<br>${event.start_time}` : ""}</td>
                     <td>${event.end_time || ""}</td>
-                    <td>${event.category_id || ""}</td>
+                    <td>${event.category_name || ""}</td>
                     <td>${event.capacity || ""}</td>
                     <td>${event.location || ""}</td>
                     <td>${event.status || ""}</td>
@@ -567,18 +631,72 @@ function renderEvents(){
 
 
 }
+
+
 /**********************************************/
+
+
+/******CreateEvent******/
+
+function createEvents(){
+
+
+    const eventForm = document.getElementById("createEventForm");
+
+    const createEventName = document.getElementById("createEventName");
+    const createEventDescription = document.getElementById("createEventDescription");
+    const createEventLocation = document.getElementById("createEventLocation");
+    const createEventOrganizer = document.getElementById("createEventOrganizer");
+    const createEventCapacity = document.getElementById("createEventCapacity");
+    const createEventCategory = document.getElementById("createEventCategory");
+    const createEventStartDate = document.getElementById("createEventStartDate");
+    const createEventStartTime = document.getElementById("createEventStartTime");
+    const createEventEndTime = document.getElementById("createEventEndTime");
+    const createEventStatus = document.getElementById("createEventStatus");
+
+    const sumbitNewEvent = document.getElementById("createEventSubmit");
+    
+
+    eventForm.addEventListener("submit" , (e) => {
+        e.preventDefault();
+        
+        /*const newEvent = {
+            title: createEventName.value,
+            description: createEventDescription.value,
+            full_name: createEventOrganizer.value,
+            capacity:
+            category_id:
+            event_date:
+            start_time:
+            end_time:
+            location:
+            status:
+
+        }*/
+    });
+
+
+
+
+
+
+}
+/***********************/
+
 
 /*Element checking before function calls*/
 function initializeAdminPage() {
     if (document.getElementById("menuButton") && document.getElementById("dropdown")) {
         toggleDropdown();
     }
-
+    
     if (document.getElementById("menuButton") && document.getElementById("studentDropdown")) {
         toggleDropdown();
     }
     
+    if (document.getElementById("event-search-function")){
+        searchEvents();
+    }
 
     if (document.querySelector(".arrow")) {
         rotateMenuArrow();
@@ -610,3 +728,5 @@ if (document.readyState === "loading") {
 } else {
     initializeAdminPage();
 }
+
+
