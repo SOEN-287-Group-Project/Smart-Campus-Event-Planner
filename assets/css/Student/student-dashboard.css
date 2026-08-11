@@ -30,7 +30,7 @@
 }
 
 .date.has-event {
-  background-color: lightblue;
+  background-color: var(--upcoming-events-even);
   border: 1px solid #64748b;
   font-weight: 600;
 }
@@ -46,7 +46,8 @@
 }
 
 #event-modal .modal-content {
-  background: white;
+  background: var(--bg-panel);
+  color: var(--text-color);
   border-radius: 0.875rem;
   padding: 1.5rem;
   width: min(90%, 400px); 
