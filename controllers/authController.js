@@ -15,9 +15,13 @@ function login(req, res){
         const user = database.getUser(email);
 
         if (!user || !bcrypt.compareSync(password, user.password_hash)) {
-            return res.status(401).send("Invalid email or password.");
+            return res.status(401).send(`
+              <script>
+                alert("Invalid email or password.");
+                window.location = "/auth/login";
+              </script>
+            `);
         }
-        
         req.session.userId = user.user_id;
         req.session.role = user.role;
         req.session.fullName = user.full_name;
@@ -57,11 +61,21 @@ function register(req, res){
     } = req.body || {};
 
     if (!first_name || !last_name || !email || !password || !confirmed_password) {
-        return res.status(400).send("All fields are required.");
+        return res.status(400).send(`
+          <script>
+            alert("All fields are required.");
+            window.location = "/auth/register";
+          </script>
+        `);
     }
-
+    
     if (password !== confirmed_password) {
-        return res.status(400).send("Passwords do not match.");
+        return res.status(400).send(`
+          <script>
+            alert("Passwords do not match.");
+            window.location = "/auth/register";
+          </script>
+        `);
     }
 
     try {
@@ -79,7 +93,12 @@ function register(req, res){
     } 
     catch (error) {
         if (error.code === "SQLITE_CONSTRAINT_UNIQUE") {
-            return res.status(409).send("An account with this email already exists.");
+            return res.status(409).send(`
+              <script>
+                alert("An account with this email already exists.");
+                window.location = "/auth/register";
+              </script>
+            `);
         }
         console.error(error);
         return res.status(500).send("Unable to create account.");

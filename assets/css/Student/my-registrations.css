@@ -118,6 +118,7 @@ button.filter-buttons {
 
 .event-card-status {
   background-color: var(--bg-panel);
+  color: var(--text-color);
   font-weight: bolder;
   font-size: large;
   border-radius: 20px;
@@ -147,6 +148,10 @@ button.filter-buttons {
 
 .status-dot-status-full {
   background-color: var(--status-full);
+}
+
+.status-dot-status-cancelled{
+  background-color:var(--status-cancelled);
 }
 
 /* Event Card Footer Section */
