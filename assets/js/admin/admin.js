@@ -657,23 +657,54 @@ function createEvents(){
     const sumbitNewEvent = document.getElementById("createEventSubmit");
     
 
-    eventForm.addEventListener("submit" , (e) => {
+    eventForm.addEventListener("submit" , async (e) => {
         e.preventDefault();
         
-        /*const newEvent = {
+        const newEvent = {
             title: createEventName.value,
             description: createEventDescription.value,
-            full_name: createEventOrganizer.value,
-            capacity:
-            category_id:
-            event_date:
-            start_time:
-            end_time:
-            location:
-            status:
+            organizer_id: createEventOrganizer.value,
+            capacity: createEventCapacity.value,
+            category_id: createEventCategory.value,
+            event_date: createEventStartDate.value,
+            start_time: createEventStartTime.value,
+            end_time: createEventEndTime.value,
+            location: createEventLocation.value,
+            status: createEventStatus.value
 
-        }*/
-    });
+        };
+
+        if (createEventEndTime.value <= createEventStartTime.value) {
+            alert("End time must be later than start time.");
+            return;
+        }
+
+        try {
+            console.log("Submitting event...", newEvent);
+            const response = await fetch("/admin/new_event", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(newEvent)
+            });
+
+            const result = await response.json();
+            console.log("Server response:", result);
+
+            if (!response.ok) {
+                throw new Error(result.message);
+            }
+
+            alert("Event created successfully!");
+
+            eventForm.reset();
+
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Failed to create event: " + error.message);
+        }
+});
 
 
 
@@ -696,6 +727,10 @@ function initializeAdminPage() {
     
     if (document.getElementById("event-search-function")){
         searchEvents();
+    }
+
+    if (document.getElementById("createEventForm")) {
+        createEvents();
     }
 
     if (document.querySelector(".arrow")) {

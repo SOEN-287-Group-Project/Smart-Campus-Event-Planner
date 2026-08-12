@@ -142,4 +142,67 @@ adminRoutes.put("/api/attendance/:eventId/:userId", (req, res) => {
 
 
 
+adminRoutes.post("/new_event", (req, res) => {
+    try {
+        const {
+            organizer_id,
+            category_id,
+            title,
+            description,
+            event_date,
+            start_time,
+            end_time,
+            location,
+            capacity,
+            status
+        } = req.body;
+
+        // Basic validation
+        if (
+            !organizer_id ||
+            !category_id ||
+            !title ||
+            !description ||
+            !event_date ||
+            !start_time ||
+            !end_time ||
+            !capacity ||
+            !location ||
+            !status
+        ) {
+            return res.status(400).json({
+                success: false,
+                message: "Missing required event information."
+            });
+        }
+
+        const result = database.addEvents(
+            organizer_id,
+            category_id,
+            title,
+            description,
+            event_date,
+            start_time,
+            end_time,
+            location,
+            capacity,
+            status
+        );
+
+        res.status(201).json({
+            success: true,
+            message: "Event created successfully.",
+            eventId: result.lastInsertRowid
+        });
+
+    } catch (error) {
+        console.error("Error creating event:", error);
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to create event."
+        });
+    }
+});
+
 export default adminRoutes;

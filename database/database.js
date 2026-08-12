@@ -100,7 +100,6 @@ const insertIntoCategories = db.prepare(
 const insertIntoEvents = db.prepare(
     `
     INSERT INTO events(
-        event_id,
         organizer_id,
         category_id,
         title, 
@@ -109,7 +108,8 @@ const insertIntoEvents = db.prepare(
         start_time,
         end_time,
         location,
-        capacity
+        capacity,
+        status
     )
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `
