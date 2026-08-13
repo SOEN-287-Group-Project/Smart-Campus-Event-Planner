@@ -4,7 +4,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: .5rem;
-    background: #eff6ff;
+    background: var(--bg-panel);
     padding: 1.875em;
     border-radius: 0.875em;
     border: 3px solid #ccc;
