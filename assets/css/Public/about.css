@@ -130,7 +130,13 @@ h1 {
     
     
 }
-
+.footer,
+.footer a {
+    margin-top: .25em;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
 .footer {
-    color:var(--text-color);
+    font-size: 1rem;
+    padding: 20px 0 30px;
 }
