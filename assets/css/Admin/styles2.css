@@ -52,6 +52,17 @@ table.stat-card{
     color: var(--text-color);
 }
 
+.analytics-event-table th{
+    text-align: left;
+    color: var(--table-header-text);
+    padding: 12px 16px;
+    position: sticky;
+    top: 0;
+    background-color: var(--table-header);
+    z-index: 10;
+    border-color: var(--border-color);
+}
+
 /*charts*/
 .chart-grid {
     display: grid;

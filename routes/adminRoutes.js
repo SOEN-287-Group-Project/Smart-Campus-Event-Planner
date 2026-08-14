@@ -1,11 +1,11 @@
 import express from "express";
 import database from "../database/database.js";
-/*import requireAdmin from "../controllers/adminController.js";*/
+import requireAdmin from "../controllers/adminController.js";
 
 const adminRoutes = express.Router();
 const adminRoot = "views/admin-views";
 
-/*adminRoutes.use(requireAdmin);*/ //Admin routes are protected by the requireAdmin middleware
+adminRoutes.use(requireAdmin); //Admin routes are protected by the requireAdmin middleware
 
 adminRoutes.get('/admin-dashboard', (req, res)=>{
     res.sendFile('admin-dashboard.html', {root: adminRoot});

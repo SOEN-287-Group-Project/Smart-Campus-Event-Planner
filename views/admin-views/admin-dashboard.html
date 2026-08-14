@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/css/global_styles.css"/>
     <link rel="stylesheet" href="/css/Admin/styles2.css"/>
     <script src="/js/admin/admin.js" defer></script>
+    <script src="/js/admin/dashboard.js" defer></script>
     <script src="/js/darkmode.js" defer></script>
 
 </head>
@@ -47,18 +48,18 @@
 
             <div class="stats-grid">
                 <div class="stat-card">
-                    <span>Total Events</span>
-                    <strong>128</strong>
+                    <span>Total Events:</span>
+                    <strong id = "totalEventsCount"></strong>
                 </div>
 
                 <div class="stat-card">
-                    <span>Upcoming Events</span>
-                    <strong>20</strong>
+                    <span>Upcoming Events:</span>
+                    <strong id = "upcomingEvent"></strong>
                 </div>
 
                 <div class="stat-card">
-                    <span>Registrations</span>
-                    <strong>3,018</strong>
+                    <span>Capacity:</span>
+                    <strong id = "totalCapacity"></strong>
                 </div>
             </div>
 
@@ -71,92 +72,8 @@
             <div class="stats-grid">
                 <div class="upcoming-events-scroll">
                     <table class="upcoming-events-table">
-                        <tbody>
-                            <tr>
-                                <td>Spring Tech Summit</td>
-                                <td><strong>185</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Volunteer Fair</td>
-                                <td><strong>143</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Campus Networking Night</td>
-                                <td><strong>92</strong></td>
-                            </tr>
-
-                            <tr>
-                                <td>Volunteer Fair</td>
-                                <td><strong>143</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Career Networking Night</td>
-                                <td><strong>120</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Basketball Tournament</td>
-                                <td><strong>200</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Coding Bootcamp</td>
-                                <td><strong>75</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Spring Music Festival</td>
-                                <td><strong>500</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Academic Success Seminar</td>
-                                <td><strong>90</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Community Food Drive</td>
-                                <td><strong>80</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Chess Club Meetup</td>
-                                <td><strong>40</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Entrepreneurship Workshop</td>
-                                <td><strong>65</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Soccer Friendly Match</td>
-                                <td><strong>180</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Photography Walk</td>
-                                <td><strong>55</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Resume Building Workshop</td>
-                                <td><strong>70</strong></td>
-                            </tr>
-                            <tr>
-                                <td>International Food Fair</td>
-                                <td><strong>350</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Math Competition</td>
-                                <td><strong>110</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Park Cleanup</td>
-                                <td><strong>100</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Gaming Club Tournament</td>
-                                <td><strong>90</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Research Symposium</td>
-                                <td><strong>250</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Leadership Conference</td>
-                                <td><strong>300</strong></td>
-                            </tr>
+                        <tbody id = "topEventsTable">
+                            
 
                             
                         </tbody>

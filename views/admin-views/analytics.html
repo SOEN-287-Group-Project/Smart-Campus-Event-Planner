@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/Admin/styles2.css"/>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/js/admin/admin.js" defer></script>
+    <script src="/js/admin/analytics.js" defer></script>
     <script src="/js/darkmode.js" defer></script>
 </head>
 
@@ -42,12 +43,71 @@
         </button>
     </header>
 
+    <section class="overview-grid">
+        <div class="panel overview-title">
+
+            <h1>Overview</h1>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span>Total Events:</span>
+                    <strong id = "totalEventsCount"></strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>Upcoming Events:</span>
+                    <strong id = "upcomingEventsCount"></strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>Full Events:</span>
+                    <strong id = "fullEventsCount"></strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>Cancelled Events:</span>
+                    <strong id = "cancelledEventsCount"></strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>Completed Events:</span>
+                    <strong id = "completedEventsCount"></strong>
+                </div>
+
+            </div>
+
+            
+            
+
+        </div>
+
+        <div class="panel overview-title">
+
+            <h1>Events capacity / registrations</h1>
+
+            <div class="stats-grid">
+                <div class="upcoming-events-scroll">
+                    <table class="upcoming-events-table">
+                        <thead>
+                            <tr class = "analytics-event-table">
+                                <th>Event</th>
+                                <th>Capacity</th>
+                                <th>Registrations</th>
+                            </tr>
+                        </thead>
+                        <tbody id = "registrations/capacityPerEvent"></tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </section>    
+
     <section class="panel">
         
         <div class="chart-grid">
             
             <div class="chart-card">
-                
                 <canvas id="bar-chart"></canvas>
             </div>
 
