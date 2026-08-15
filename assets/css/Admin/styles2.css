@@ -428,7 +428,8 @@ section.scroll-container {
     grid-column: 1 / -1;
     border: 3px solid var(--table-border);
     border-radius: 0.875rem;
-    overflow: hidden;
+    overflow-y: auto;
+    max-height: 400px;
     z-index: 11;
 }
 

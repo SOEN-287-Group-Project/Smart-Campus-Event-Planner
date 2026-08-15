@@ -22,9 +22,6 @@ function rotateMenuArrow(){
         arrow.classList.toggle("open");
     });
 }
-/**********************************************/
-
-/*Calendar rendering*/
 
 
 /***dynamically populate the admin navigation menu***/
@@ -54,16 +51,6 @@ function getStudentNavDropdown() {
                                 `;
     }
     
-
-
-/**********************************************/
-
-
-
-/******CreateEvent******/
-
-
-/***********************/
 
 
 /*Element checking before function calls*/
