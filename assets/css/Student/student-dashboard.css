@@ -24,6 +24,10 @@
   background-color: lightcyan;
 }
 
+body.darkmode .upcoming-events-table tbody tr:nth-child(even) td {
+  color: #0f172a;
+}
+
 .upcoming-events-scroll {
   max-height: 105px;
   overflow-y: auto;
