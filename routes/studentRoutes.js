@@ -55,6 +55,11 @@ studentRoutes.get('/api/events', (req, res) => {
     res.json(events);
 });
 
+studentRoutes.get('/api/events/:event_id', (req, res) => {
+    const attendance = spotsLeft(event_id);
+    res.json(attendanceStudents);
+});
+
 studentRoutes.get('/api/my-registrations',
 studentController.getMyRegistrations
 );

@@ -41,6 +41,8 @@ Promise.all([
         return Promise.all([
             eventsResponse.json(),
             registrationsResponse.json()
+            
+
         ]);
     })
     .then((data) => {
@@ -48,8 +50,7 @@ Promise.all([
 
         const [eventData, registrationData] = data;
         const registeredEventIds = new Set(
-            registrationData.registrations.map((registration) => String(registration.event_id))
-        );
+            registrationData.registrations.map((registration) => String(registration.event_id)));
 
         // 1. Format the raw database data FIRST and store it in global `events`
         events = eventData.filter((rawEvent) => {
@@ -174,7 +175,7 @@ function create_event(event){
                              <div class="footer-details">
                                 <span class="date-time">${event.start_time} ${event.event_date}</span>
                                 <span class="location">${event.location}</span>
-                                <span class="spots">Spots left: ${event.capacity}</span>
+                                <span class="spots">Capacity: ${event.capacity}</span>
                             </div>
                             <div class="register-container">
 
