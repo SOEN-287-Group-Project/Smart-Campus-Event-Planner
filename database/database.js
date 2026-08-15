@@ -185,6 +185,18 @@ function addRegistration(
     user_id,
     event_id
 ){
+    const event = getEventById(event_id);
+
+    if (!event) {
+        throw new Error("Event not found.");
+    }
+
+    if (event.status !== "open" || spotsLeft(event_id) <= 0) {
+        const error = new Error("This event is full or unavailable.");
+        error.code = "EVENT_UNAVAILABLE";
+        throw error;
+    }
+
     const result = insertIntoRegistrations.run(
         String(user_id),
         String(event_id)
@@ -383,7 +395,10 @@ function getAllCategories(){
 
 // get all the events from the events table
 function getAllEvent(){
-    const result = selectAllFromEvents.all();
+    const result = selectAllFromEvents.all().map((event) => ({
+        ...event,
+        spotsLeft: spotsLeft(event.event_id)
+    }));
     return result;
 }
 
@@ -598,6 +613,20 @@ function getCountOfRegistrationsByEvent(event_id){
     return result;
 }
 
+function spotsLeft(event_id){
+    const event = getEventById(event_id);
+    if (!event) {
+        return null;
+    }
+    if (event.status !== "open") {
+        return 0;
+    }
+    const registrationCount =
+        getCountOfRegistrationsByEvent(event_id).registration_count;
+
+    return Math.max(0, Number(event.capacity) - Number(registrationCount));
+}
+
 /* ------------- STUDENT API FUNCTIONS ------------- */
 
 function getRegistrationRowsForUser(userId) {
@@ -634,6 +663,7 @@ function getRegistrationsForUser(userId) {
             end_time: event.end_time,
             location: event.location,
             capacity: event.capacity,
+            spotsLeft: spotsLeft(event.event_id),
             status: event.status,
             category_id: event.category_id,
             category_name: category.category_name
@@ -675,5 +705,6 @@ export default{
 
     getCountOfEvents,
     getCountOfRegistrationsByEvent,
-    getCountOfStudents
+    getCountOfStudents,
+    spotsLeft
 }
