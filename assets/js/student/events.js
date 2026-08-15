@@ -57,8 +57,8 @@ Promise.all([
         }).map(rawEvent => {
             return {
                 ...rawEvent,
-                category: CATEGORY_NAMES[rawEvent.category_id] || rawEvent.category || "Other",
-                status: rawEvent.status || (rawEvent.capacity > 0 ? "Open" : "Full")
+                category: CATEGORY_NAMES[rawEvent.category_id] || rawEvent.category || "Other", 
+                status: rawEvent.status || (rawEvent.spotsLeft > 0 ? "open" : "full")
             };
         });
 
@@ -91,7 +91,7 @@ Promise.all([
     document.getElementById("modalDate").textContent = event.event_date;
     document.getElementById("modalTime").textContent = formattedTime;
     document.getElementById("modalLocation").textContent = event.location;
-    document.getElementById("modalCapacity").textContent = event.capacity;
+    document.getElementById("modalCapacity").textContent = event.spotsLeft;
     modalElement.dataset.eventId = event.event_id;
 
     // Makes the popup visible
@@ -174,7 +174,7 @@ function create_event(event){
                              <div class="footer-details">
                                 <span class="date-time">${event.start_time} ${event.event_date}</span>
                                 <span class="location">${event.location}</span>
-                                <span class="spots">Spots left: ${event.capacity}</span>
+                                <span class="spots">Spots left: ${event.spotsLeft ?? event.capacity}</span>
                             </div>
                             <div class="register-container">
 

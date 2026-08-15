@@ -246,9 +246,22 @@ function getMyRegistrations(req, res) {
 }
 
 function deleteMyRegistration(req, res) {
+    if (!req.session.userId) {
+        return res.status(401).json({
+            message: "You must log in first."
+        });
+    }
+
     try {
         // 1. Grab registrationId from the URL path parameter
         const registrationId = req.params.registrationId;
+        const registration = database.getRegistration(registrationId);
+
+        if (!registration || String(registration.user_id) !== String(req.session.userId)) {
+            return res.status(404).json({
+                error: "Registration not found"
+            });
+        }
 
         // 3. Call your database function
         const result = database.deleteRegistration(registrationId);
@@ -263,7 +276,9 @@ function deleteMyRegistration(req, res) {
         // 5. Return success response
         return res.json({
             message: "Registration deleted successfully",
-            registration_id: registrationId
+            registration_id: registrationId,
+            event_id: registration.event_id,
+            spotsLeft: database.spotsLeft(registration.event_id)
         });
 
     } catch (error) {
@@ -300,9 +315,16 @@ function registerForEvent(req, res) {
         return res.status(201).json({
             message: "Registered successfully.",
             registration_id: result.lastInsertRowid,
-            event_id: eventId
+            event_id: eventId,
+            spotsLeft: database.spotsLeft(eventId)
         });
     } catch (error) {
+        if (error.code === "EVENT_UNAVAILABLE") {
+            return res.status(409).json({
+                message: error.message
+            });
+        }
+
         if (error.code === "SQLITE_CONSTRAINT_UNIQUE") {
             return res.status(409).json({
                 message: "You are already registered for this event."
