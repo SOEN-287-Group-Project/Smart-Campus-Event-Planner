@@ -221,10 +221,10 @@ button {
 }
 
 #theme-switch{
- position: absolute;
- background-color: var(--button);
+  position: absolute;
+  background-color: var(--button);
   right: 26px;            /* Match the right padding of the header container */
-  top: 3.2%;
+  top: 1.5em;
   transform: translateY(-50%); /* Centered vertically relative to the header height */
   z-index: 10;
   height: 35px;
