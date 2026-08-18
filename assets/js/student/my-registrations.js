@@ -34,10 +34,16 @@
         // Since im sending username also I need to use data.registrations to access the events attributes
             myRegistrations = data.registrations.map(rawEvent => {
                 const categoryName = CATEGORY_NAMES[rawEvent.category_id] || rawEvent.category || "Other"; 
+                const spotsLeft = Number(rawEvent.spotsLeft ?? rawEvent.capacity);
+                const status = rawEvent.status === "open" && spotsLeft <= 0
+                    ? "full"
+                    : rawEvent.status || "open";
+
                 return {
                     ...rawEvent,
                     category: categoryName,
-                    status: rawEvent.status || (rawEvent.capacity > 0 ? "Open" : "Full")
+                    spotsLeft,
+                    status
                 };
             });
 
@@ -135,7 +141,7 @@
                                 <div class="footer-details">
                                     <span class="date-time">${event.start_time} ${event.event_date}</span>
                                     <span class="location">${event.location}</span>
-                                    <span class="spots">Spots left: ${event.capacity}</span>
+                                    <span class="spots">Spots left: ${event.spotsLeft}</span>
                                 </div>
                                 <div class="register-container">
 
